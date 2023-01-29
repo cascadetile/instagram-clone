@@ -3,7 +3,6 @@
 import React from 'react';
 import './style.css';
 import { Logo } from '../../assets/Logo';
-import { ToggleWithText } from '../ToggleWithText';
 
 export const Header: React.FC = () => {
   const onToggleClick = (value: boolean) => {
@@ -29,7 +28,6 @@ export const Header: React.FC = () => {
           <a href="#contacts" className="header__menu-item-link">Contacts</a>
         </div>
       </div>
-      <ToggleWithText label="My resume" toggled={false} onClick={onToggleClick} />
     </div>
   );
 };
