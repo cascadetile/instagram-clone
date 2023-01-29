@@ -3,10 +3,10 @@
 import React from 'react';
 import './style.css';
 
-export const Header: React.FC = () => {
+export const Home: React.FC = () => {
   return (
-    <div className="header" />
+    <div className="home" />
   );
 };
 
-export default Header;
+export default Home;

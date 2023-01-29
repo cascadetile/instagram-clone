@@ -3,10 +3,10 @@
 import React from 'react';
 import './style.css';
 
-export const Header: React.FC = () => {
+export const CreatePost: React.FC = () => {
   return (
-    <div className="header" />
+    <div className="create-post" />
   );
 };
 
-export default Header;
+export default CreatePost;
