@@ -10,11 +10,13 @@ import { Messages } from './pages/Messages';
 import { CreatePost } from './pages/CreatePost';
 import { Profile } from './pages/Profile';
 import { Explore } from './pages/Explore';
+import { Navigation } from './components/Navigation';
 
 function App() {
   return (
     <>
       <Header />
+      <Navigation />
       <Routes>
         <Route path="/registration" element={<Registaration />} />
         <Route path="/authentification" element={<Authentification />} />
