@@ -16,5 +16,22 @@
         "react"
     ],
     "rules": {
+        "react/jsx-no-useless-fragment": [
+            2, 
+            { 
+                "allowExpressions": true 
+            }
+        ],
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": ["arrow-function", "function-declaration"],
+                "unnamedComponents": "arrow-function"
+            }
+        ],
+        "arrow-body-style": [
+            "error", 
+            "as-needed"
+        ]
     }
 }
