@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+.sidenav {
+  position: fixed;
+  padding: 4px;
+}
+
+.sidenav__link {
+  min-width: 200px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  text-decoration: none;
+  gap: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.sidenav__link-text {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  color: #000;
+}
+
+@media screen and (max-width: 1260px) {
+  .sidenav__link {
+    min-width: max-content;
+  }
+
+  .sidenav__link-text {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .sidenav {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: max-content;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 20px;
+    padding-top: 120px;
+    border-right: 1px solid #000;
+
+    >:first-child {
+      position: absolute;
+      top: 24px;
+    }
+
+    >:last-child {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .sidenav {
+    bottom: 0;
+    height: max-content;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    border-top: 1px solid #000;
+
+    >:first-child {
+      position: static;
+    }
+
+    >:last-child {
+      position: static;
+      margin-top: 10px;
+    }
+  }
+}
