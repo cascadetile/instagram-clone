@@ -1,5 +1,5 @@
 .sidenav {
-  position: fixed;
+  width: 100%;
   padding: 4px;
 }
 
@@ -31,7 +31,6 @@
 }
 
 .sidenav__link-button {
-  $p: &;
   min-width: 200px;
   display: flex;
   flex-flow: row wrap;
@@ -65,10 +64,7 @@
 
 @media screen and (min-width: 770px) {
   .sidenav {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: max-content;
+    height: 100vh;
     display: flex;
     flex-flow: column wrap;
     gap: 20px;
@@ -89,9 +85,8 @@
 
 @media screen and (max-width: 770px) {
   .sidenav {
-    bottom: 0;
-    height: max-content;
-    width: 100%;
+    height: 100%;
+    order: 2;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;

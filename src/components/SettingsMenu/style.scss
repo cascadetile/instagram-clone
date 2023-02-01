@@ -1,6 +1,5 @@
 .settings__menu {
   position: absolute;
-  bottom: 60px;
   height: max-content;
   background: rgba(239, 239, 239, 1);
   border-radius: 6px;
@@ -32,13 +31,15 @@
 
 @media screen and (min-width: 770px) {
   .settings__menu {
+    bottom: 60px;
     left: 12px;
-    min-width: 180px;
+    min-width: 200px;
   }
 }
 
 @media screen and (max-width: 770px) {
   .settings__menu {
+    bottom: 0;
     left: 0;
     min-width: 100%;
   }
