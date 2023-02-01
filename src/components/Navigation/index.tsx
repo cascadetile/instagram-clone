@@ -1,6 +1,4 @@
-/* eslint-disable react/function-component-definition */
-/* eslint-disable arrow-body-style */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './style.scss';
@@ -12,8 +10,11 @@ import { MessagesLogo } from '../../assets/MessagesLogo';
 import { ProfileLogo } from '../../assets/ProfileLogo';
 import { SettingsLogo } from '../../assets/SettingsLogo';
 import { GitHubLogo } from '../../assets/GitHubLogo';
+import { SettingsMenu } from '../SettingsMenu';
 
 export const Navigation: React.FC = () => {
+  const [openMenu, setOpenMenu] = useState(false);
+
   return (
     <nav className="sidenav">
       <Link className="sidenav__link" to="https://github.com/cascadetile/instagram-clone">
@@ -40,7 +41,11 @@ export const Navigation: React.FC = () => {
         <ProfileLogo />
         <p className="sidenav__link-text">Profile</p>
       </Link>
-      <SettingsLogo />
+      {openMenu ? <SettingsMenu setOpenMenu={setOpenMenu} /> : <></>}
+      <button className="sidenav__link-button" type="button" onClick={() => setOpenMenu(!openMenu)}>
+        <SettingsLogo />
+        <p className="sidenav__link-text">Settings</p>
+      </button>
     </nav>
   );
 };
