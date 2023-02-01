@@ -1,20 +1,16 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "airbnb",
-        "airbnb-typescript"
-    ],
-    "overrides": [
-    ],
-    "parserOptions": {
-        "project": "./tsconfig.json"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    }
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["airbnb", "airbnb-typescript"],
+  "overrides": [],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "arrow-body-style": "off",
+    "react/function-component-definition": "off"
+  }
 }
