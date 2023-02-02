@@ -1,0 +1,25 @@
+#root {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 224px 1fr;
+}
+
+@media screen and (max-width: 1260px) {
+  #root {
+    grid-template-columns: 54px 1fr;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  #root {
+    grid-template-columns: none;
+    grid-template-rows: 1fr 50px;
+  }
+
+  /* remove when pages will be done */
+  .page-body {
+    height: calc(100vh - 50px);
+  }
+}

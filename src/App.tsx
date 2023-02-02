@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
+import './App.scss';
 import { Home } from './pages/Home';
 import { Registaration } from './pages/Registration';
 import { Authentification } from './pages/Authentification';
@@ -12,21 +10,21 @@ import { Profile } from './pages/Profile';
 import { Explore } from './pages/Explore';
 import { Navigation } from './components/Navigation';
 
-function App() {
+export function App() {
   return (
     <>
-      <Header />
       <Navigation />
-      <Routes>
-        <Route path="/registration" element={<Registaration />} />
-        <Route path="/authentification" element={<Authentification />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/explore" element={<Explore />} />
-      </Routes>
-      <Footer />
+      <div className="page-body">
+        <Routes>
+          <Route path="/registration" element={<Registaration />} />
+          <Route path="/authentification" element={<Authentification />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/explore" element={<Explore />} />
+        </Routes>
+      </div>
     </>
   );
 }
