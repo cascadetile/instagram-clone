@@ -11,6 +11,7 @@
   "plugins": ["react"],
   "rules": {
     "arrow-body-style": "off",
-    "react/function-component-definition": "off"
+    "react/function-component-definition": "off",
+    "import/prefer-default-export": "off"
   }
 }

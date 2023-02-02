@@ -1,0 +1,45 @@
+.profile {
+    &__edit {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+}
+
+.profile-edit {
+    &__btn {
+        background-color: rgba(#e1e1e1, 0.4);
+        border: 0;
+        border-radius: 7px;
+        height: 28px;
+        padding: 0;
+        color: #333;
+        width: calc(100% - 25px - 15px);
+        cursor: pointer;
+        font-weight: 700;
+    }
+
+    &__add-btn {
+        display: flex;
+        width: 28px;
+        background-color: rgba(#e1e1e1, 0.4);
+        border: 0;
+        border-radius: 7px;
+        height: 28px;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 16px;
+            height: 16px;
+            mask-image: url(../../../assets/img/user-plus.svg);
+            background-color: #333;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: 100% 100%;
+        }
+    }
+}
