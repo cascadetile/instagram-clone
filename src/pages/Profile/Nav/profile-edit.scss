@@ -1,0 +1,104 @@
+@import '../../../assets/scss/variables';
+
+.profile {
+    &__edit {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+
+        &.header {
+            display: none;
+        }
+    }
+}
+.profile-edit {
+    &__btn {
+        background-color: rgba(#e1e1e1, 0.4);
+        border: 0;
+        border-radius: 7px;
+        height: 28px;
+        padding: 0;
+        color: #333;
+        width: 100%;
+        cursor: pointer;
+        font-weight: 700;
+    }
+
+    &__settings {
+        display: none;
+    }
+
+    &__nickname {
+        display: none;
+    }
+}
+
+@media (min-width: $tablet) {
+    .profile {
+        &__edit {
+            display: none;
+
+            &.header {
+                display: flex;
+                align-items: center;
+                margin-top: 0;
+
+                .profile-edit__nickname {
+                    display: flex;
+                    font-size: 14px;
+                    margin-right: 15px;
+                }
+
+                .profile-edit__btn {
+                    margin-right: 10px;
+                    width: max-content;
+                    min-width: max-content;
+                    padding: 0 15px;
+                }
+            }
+        }
+
+        &__metrics {
+            margin-top: 15px;
+            gap: 10px
+        }
+    }
+
+    .profile-edit {
+        &__settings {
+            display: flex;
+            width: 28px;
+            min-width: 28px;
+            background-color: rgba(#e1e1e1, 0.4);
+            border: 0;
+            border-radius: 7px;
+            height: 28px;
+            min-height: 28px;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+    
+            &::after {
+                content: '';
+                display: block;
+                width: 16px;
+                height: 16px;
+                mask-image: url(../../../assets/img/gear.svg);
+                background-color: #333;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 100% 100%;
+            }
+        } 
+    }
+
+    .profile-metrics {
+        &__item {
+            flex-direction: row;
+        }
+
+        &__value {
+            margin-right: 5px;
+        }
+    }
+}
