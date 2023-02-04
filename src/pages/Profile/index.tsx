@@ -1,10 +1,10 @@
 import React from 'react';
-import ProfileInfo from './Info/index';
+import ProfileInfo from './Info/Profile-info';
 import './style.scss';
-import { ProfileEdit } from './Nav';
-import { ProfilePosts } from './Posts';
+import { ProfileEdit } from './Nav/Profile-edit';
+import { ProfilePosts } from './Posts/Profile-posts';
 import { translate } from '../../translate/translate-func';
-import { ProfileHeader } from './Header';
+import { ProfileHeader } from './Header/Profile-header';
 
 export const Profile: React.FC = () => {
   const user = {

@@ -1,6 +1,6 @@
 import React from 'react';
-import './style.scss';
-import { IProfileHeader } from './types/prodile-header';
+import './profile-header.scss';
+import { IProfileHeader } from '../types/prodile-header';
 import { BurgerButton } from '../../../components/BurgerButton/BurgerButton';
 
 export const ProfileHeader: React.FC<IProfileHeader> = (props: IProfileHeader) => {

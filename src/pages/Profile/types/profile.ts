@@ -1,4 +1,4 @@
-import { Post } from '../Posts/types/posts';
+import { Post } from './posts';
 
 export interface UserType {
   user: {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { IPostsProps } from './types/posts';
-import { PostItem } from './Post-item';
+import { IPostsProps } from '../types/posts';
+import { PostItem } from './Post-item/Post-item';
 
 export const ProfilePosts: React.FC<IPostsProps> = (props: IPostsProps) => {
   const { posts } = props;

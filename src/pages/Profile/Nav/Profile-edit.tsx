@@ -1,7 +1,7 @@
 import React from 'react';
 import { translate } from '../../../translate/translate-func';
-import './style.scss';
-import { IProfileNav } from './types/profile-nav';
+import './profile-edit.scss';
+import { IProfileNav } from '../types/profile-nav';
 
 export const ProfileEdit: React.FC<Partial<IProfileNav>> = (props: Partial<IProfileNav>) => {
   const { navProps } = props;
