@@ -1,34 +1,23 @@
 import React from 'react';
 import ProfileInfo from './Info/index';
-import './profile.scss';
-import { ProfileEdit } from './nav';
-import { ProfilePosts } from './posts';
-import Ava from '../../assets/img/7.jpeg';
-import Post1 from '../../assets/img/1.jpg';
-import Post2 from '../../assets/img/2.jpeg';
-import Post3 from '../../assets/img/3.jpeg';
-import Post4 from '../../assets/img/4.jpg';
-import Post5 from '../../assets/img/5.webp';
-import Post6 from '../../assets/img/6.webp';
+import './style.scss';
+import { ProfileEdit } from './Nav';
+import { ProfilePosts } from './Posts';
+import { translate } from '../../translate/translate-func';
+import { ProfileHeader } from './Header';
 
 export const Profile: React.FC = () => {
   const user = {
     followers: 10000,
     following: 10000,
-    posts: [
-      { id: 1, images: [Post1, Post2] },
-      { id: 20, images: [Post2] },
-      { id: 2, images: [Post3] },
-      { id: 4, images: [Post4] },
-      { id: 3, images: [Post5] },
-      { id: 5, images: [Post6] },
-    ],
-    profilePicture: Ava,
+    posts: [],
+    profilePicture: '',
     bio: 'hi there!',
+    username: 'example',
   };
 
   const {
-    following, followers, posts, profilePicture, bio,
+    following, followers, posts, profilePicture, bio, username,
   } = user;
 
   const infoProps = {
@@ -39,12 +28,19 @@ export const Profile: React.FC = () => {
 
   const userProps = {
     profilePicture,
+    username,
+    bio,
   };
 
   return (
     <div className="profile">
+      <ProfileHeader username={username} />
       <ProfileInfo info={infoProps} user={userProps} />
       <p className="profile__description">{bio}</p>
+      <span className="profile__add-post">
+        <span className="profile-add__icon" />
+        <p className="profile-add__text">{translate('Add')}</p>
+      </span>
       <ProfileEdit />
       <ProfilePosts posts={posts} />
     </div>

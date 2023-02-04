@@ -41,7 +41,7 @@ export const Navigation: React.FC = () => {
         <ProfileLogo />
         <p className="sidenav__link-text">Profile</p>
       </Link>
-      {openMenu ? <SettingsMenu setOpenMenu={setOpenMenu} /> : <></>}
+      {openMenu ? <SettingsMenu setOpenMenu={setOpenMenu} /> : ''}
       <button className="sidenav__link-button" type="button" onClick={() => setOpenMenu(!openMenu)}>
         <SettingsLogo />
         <p className="sidenav__link-text">Settings</p>

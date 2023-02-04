@@ -1,3 +1,5 @@
+@import '../../../assets/scss/variables';
+
 .profile {
     &__info {
         display: flex;
@@ -27,5 +29,25 @@
 
     &__value {
         font-weight: 700;
+    }
+
+    &__bio {
+        display: none;   
+    }
+}
+
+@media (min-width: $tablet) {
+    .profile {
+        &__info {
+            gap: 50px;
+        }
+    }
+
+    .profile-metrics {
+        &__bio {
+            display: flex;
+            margin-top: 10px;
+            font-size: 12px;
+        }
     }
 }

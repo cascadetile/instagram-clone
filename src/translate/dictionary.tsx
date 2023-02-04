@@ -5,6 +5,10 @@ export const dictionary: IDictionary = {
     ru: 'редактирование профиля',
     en: 'profile editing',
   },
+  edit_profile: {
+    ru: 'редактировать профиль',
+    en: 'edit_profile',
+  },
   publications: {
     ru: 'публикации',
     en: 'publications',
@@ -16,5 +20,9 @@ export const dictionary: IDictionary = {
   followers: {
     ru: 'Подписчики',
     en: 'followers',
+  },
+  add: {
+    ru: 'добавить',
+    en: 'add',
   },
 };

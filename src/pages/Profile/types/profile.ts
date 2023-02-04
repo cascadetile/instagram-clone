@@ -1,4 +1,4 @@
-import { Post } from '../posts/types/posts';
+import { Post } from '../Posts/types/posts';
 
 export interface UserType {
   user: {
@@ -18,5 +18,7 @@ export interface InfoProps {
   },
   user: {
     profilePicture: string;
+    username: string;
+    bio: string;
   }
 }

@@ -1,18 +1,24 @@
+@import './assets/scss/variables';
+
 #root {
-  max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
   display: grid;
   grid-template-columns: 224px 1fr;
 }
 
-@media screen and (max-width: 1260px) {
+.page-body {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: calc($desktop - 1px)) {
   #root {
     grid-template-columns: 54px 1fr;
   }
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: calc($tablet - 1px)) {
   #root {
     grid-template-columns: none;
     grid-template-rows: 1fr 50px;
