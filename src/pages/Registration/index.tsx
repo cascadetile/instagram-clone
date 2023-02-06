@@ -1,8 +1,13 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import './style.css';
 
-export const Registaration: React.FC = () => (
-  <div className="registration" />
-);
+export const Registration: React.FC = () => {
+  return (
+    <div className="registration">
+      <Outlet />
+    </div>
+  );
+};
 
-export default Registaration;
+export default Registration;

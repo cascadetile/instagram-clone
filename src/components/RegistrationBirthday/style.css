@@ -1,0 +1,78 @@
+.registration-birthday__window {
+  margin: 24px 40px 0 40px;
+  /* width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px; */
+}
+
+.registration-birthday__logo {
+  background-image: url(https://static.cdninstagram.com/rsrc.php/v3/yz/r/quLU_xi5ZD1.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  height: 96px;
+  width: 144px;
+  background-size: 553px 528px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+}
+
+.registration-birthday__title-1 {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.registration-birthday__title-2 {
+  font-weight: 600;
+  font-size: 14px;
+  color: rgb(142, 142, 142);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.registration-birthday__title-3 {
+  font-weight: 400;
+  font-size: 12px;
+  color: rgb(142, 142, 142);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.registration-birthday__birthday-form {
+  width: 100%;
+}
+
+.registration-birthday__birthday-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 8px;
+  margin-bottom: 8px;
+}
+
+.registration-birthday__month-select {
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 3px;
+  color: rgb(142, 142, 142);
+  font-size: 12px;
+  height: 36px;
+  padding: 0 24px 0 8px;
+}
+
+.registration-birthday__submit-btn {
+  display: block;
+  background-color: rgb(0, 149, 246);
+  width: 100%;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 13px 20px;
+  border-radius: 8px;
+}
+
+.registration-birthday__submit-btn:hover {
+  background-color: rgb(24, 119, 242);
+}
