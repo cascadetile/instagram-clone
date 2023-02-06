@@ -19,11 +19,11 @@ export const Authentification: React.FC = () => {
     event.preventDefault();
     try {
       await auth(email, password);
+      navigate('/');
       // TODO: write resp to variable and store it in redux
     } catch (error) {
       console.error(error);
     }
-    navigate('/');
   };
 
   useEffect(() => {
