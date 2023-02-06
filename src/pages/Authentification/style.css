@@ -1,0 +1,139 @@
+.auth__window {
+  margin: 24px 40px 0 40px;
+  /* width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px; */
+}
+
+.auth__logo {
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yV/r/KWlDlZddpGI.png");
+  background-position: 0px 0px;
+  background-size: 176px 181px;
+  width: 175px;
+  height: 51px;
+  background-repeat: no-repeat;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 85px;
+  margin-bottom: 60px;
+}
+
+.auth__form {
+  width: 100%;
+}
+
+.auth__email-wrapper {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.auth__email-input {
+  background-color: rgb(250, 250, 250);
+  border-radius: 6px;
+  border: 1px solid #DBDBDB;
+  width: 100%;
+  padding: 4px 9px;
+  outline: none;
+  height: 40px;
+}
+
+.auth__email-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: rgb(199, 199, 199);
+  font-size: 14px;
+  pointer-events: none;
+  transition: transform ease-out .1s;
+}
+
+.auth__email-input--focused {
+  padding: 8px;
+  padding-bottom: 0;
+}
+
+.auth__email-input--focused + .auth__email-label {
+  transform: scale(.714) translateY(-12px) translateX(-45px);
+}
+
+.auth__password-wrapper {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.auth__password-show-btn {
+  background-color: transparent;
+  border: 0;
+  color: rgb(38, 38, 38);
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  width: auto;
+  position: absolute;
+  right: 10px;
+  top: 13px;
+}
+
+.auth__password-input {
+  background-color: rgb(250, 250, 250);
+  border-radius: 6px;
+  border: 1px solid #DBDBDB;
+  width: 100%;
+  padding: 4px 9px;
+  outline: none;
+  height: 40px;
+}
+
+.auth__password-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: rgb(199, 199, 199);
+  font-size: 14px;
+  pointer-events: none;
+  transition: transform ease-out .1s;
+}
+
+.auth__password-input--focused {
+  padding: 8px;
+  padding-bottom: 0;
+}
+
+.auth__password-input--focused + .auth__password-label {
+  transform: scale(.714) translateY(-12px) translateX(-12px);
+}
+
+.auth__forgot-btn {
+  display: block;
+  background-color: transparent;
+  color: rgb(0, 149, 246);
+  font-weight: 400;
+  font-size: 14px;
+  border: none;
+  margin-left: auto;
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+
+.auth__submit-btn {
+  display: block;
+  background-color: rgb(0, 149, 246);
+  width: 100%;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+}
+
+.auth__submit-btn:hover {
+  background-color: rgb(24, 119, 242);
+}
