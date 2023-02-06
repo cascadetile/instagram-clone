@@ -6,10 +6,13 @@ import { sendUsername, auth, sendAgree } from '../../api';
 interface Props {
   session: string
   password: string
-  email: string
+  email: string,
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const RegistrationUsername: React.FC<Props> = ({ session, password, email }) => {
+export const RegistrationUsername: React.FC<Props> = ({
+  session, password, email, setIsAuthorized,
+}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,13 +23,19 @@ export const RegistrationUsername: React.FC<Props> = ({ session, password, email
 
   const [username, updateUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [load, setLoad] = useState(false);
+  const [loadMessage, setLoadMessage] = useState('Далее');
+
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (/^[\w](?!.*?\.{2})[\w.]{1,28}[\w]$/.test(username)) {
       try {
+        setLoad(true);
+        setLoadMessage('Данные обрабатываются');
         await sendUsername(username, session);
         await sendAgree(session);
         await auth(email, password);
+        setIsAuthorized(true);
         navigate('/');
       } catch (error) {
         console.error(error);
@@ -46,7 +55,7 @@ export const RegistrationUsername: React.FC<Props> = ({ session, password, email
           <div className="registration-username__username-label">Имя пользователя</div>
         </div>
         {errorMessage && <div className="registration-email__email-error">{ errorMessage }</div>}
-        <button className="registration-username__submit-btn" type="submit">Далее</button>
+        <button className="registration-username__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
       </form>
     </div>
   );

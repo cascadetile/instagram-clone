@@ -12,7 +12,11 @@ import { SettingsLogo } from '../../assets/SettingsLogo';
 import { GitHubLogo } from '../../assets/GitHubLogo';
 import { SettingsMenu } from '../SettingsMenu';
 
-export const Navigation: React.FC = () => {
+interface INavigation {
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Navigation: React.FC<INavigation> = ({ setIsAuthorized }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -41,7 +45,7 @@ export const Navigation: React.FC = () => {
         <ProfileLogo />
         <p className="sidenav__link-text">Profile</p>
       </Link>
-      {openMenu ? <SettingsMenu setOpenMenu={setOpenMenu} /> : ''}
+      {openMenu ? <SettingsMenu setOpenMenu={setOpenMenu} setIsAuthorized={setIsAuthorized} /> : ''}
       <button className="sidenav__link-button" type="button" onClick={() => setOpenMenu(!openMenu)}>
         <SettingsLogo />
         <p className="sidenav__link-text">Settings</p>

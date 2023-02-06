@@ -10,6 +10,8 @@ interface Props {
 
 export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
+  const [loadMessage, setLoadMessage] = useState('Далее');
 
   useEffect(() => {
     if (email === '') {
@@ -24,6 +26,8 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
     event.preventDefault();
     if (/^\d{6}$/.test(otp)) {
       try {
+        setLoad(true);
+        setLoadMessage('Данные обрабатываются');
         const resp = await sendOTP(otp, email);
         if (resp.data.session) {
           setSession(resp.data.session);
@@ -66,15 +70,17 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
             onInput={(e) => updateOtp((e.target as HTMLInputElement).value)}
             className="registration-otp__otp-input"
             type="number"
+            placeholder="Код подтверждения"
           />
           <div className="registration-otp__otp-label">Код подтверждения</div>
         </div>
         {errorMessage && <div className="registration-otp__otp-error">{ errorMessage }</div>}
         <button
+          disabled={load}
           className={`registration-otp__submit-btn ${otp.length !== 6 ? 'registration-otp__submit-btn--disabled' : ''}`}
           type="submit"
         >
-          Далее
+          {loadMessage}
         </button>
       </form>
     </div>

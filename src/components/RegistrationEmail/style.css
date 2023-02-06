@@ -1,9 +1,8 @@
 .registration-email__window {
-  margin: 24px 40px 0 40px;
-  /* width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px; */
+  max-width: 500px;
+  margin: auto;
+  margin-top: 24px;
+  padding: 20px;
 }
 
 .registration-email__tabs {
@@ -53,7 +52,8 @@
   color: rgb(199, 199, 199);
   font-size: 14px;
   pointer-events: none;
-  transition: transform ease-out .1s;
+  opacity: 0;
+  transition: all ease-out .1s;
 }
 
 .registration-email__email-error {
@@ -65,12 +65,15 @@
   margin-bottom: 8px;
 }
 
-.registration-email__email-input:focus {
+.registration-email__email-input:not(:placeholder-shown):focus,
+.registration-email__email-input:not(:placeholder-shown) {
   padding: 8px;
   padding-bottom: 0;
 }
 
-.registration-email__email-input:focus + .registration-email__email-label {
+.registration-email__email-input:not(:placeholder-shown):focus + .registration-email__email-label,
+.registration-email__email-input:not(:placeholder-shown) + .registration-email__email-label {
+  opacity: 1;
   transform: scale(.714) translateY(-12px) translateX(-25px);
 }
 

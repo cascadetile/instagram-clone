@@ -1,16 +1,21 @@
 import React, {
   useState, FormEvent, useEffect, useRef,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './style.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './style.scss';
 import { auth } from '../../api';
 
-export const Authentification: React.FC = () => {
+interface IAuthentification {
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized }) => {
   const navigate = useNavigate();
 
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
+  const [loadMessage, setLoadMessage] = useState('Войти');
 
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
@@ -19,6 +24,8 @@ export const Authentification: React.FC = () => {
     event.preventDefault();
     try {
       await auth(email, password);
+      setLoadMessage('Данные обрабатываются');
+      setIsAuthorized(true);
       navigate('/');
       // TODO: write resp to variable and store it in redux
     } catch (error) {
@@ -38,6 +45,7 @@ export const Authentification: React.FC = () => {
 
   return (
     <div className="auth">
+      <img className="login-img" src="https://static.cdninstagram.com/rsrc.php/v3/yr/r/fzBXVxs22bH.png" alt="" />
       <div className="auth__window">
         <div className="auth__logo" />
         <form onSubmit={(e) => onSubmit(e)} className="auth__form">
@@ -61,8 +69,15 @@ export const Authentification: React.FC = () => {
             <button onClick={() => setPasswordVisibility(!isPasswordVisible)} className="auth__password-show-btn" type="button">{isPasswordVisible ? 'Скрыть' : 'Показать'}</button>
           </div>
           <button className="auth__forgot-btn" type="button">Забыли пароль?</button>
-          <button className="auth__submit-btn" type="submit">Войти</button>
+          <button className="auth__submit-btn" type="submit">{loadMessage}</button>
         </form>
+        <div className="auth__separator-block">
+          <p className="auth__separator-text">или</p>
+        </div>
+        <div className="auth__login-block">
+          <p>Нет акккаунта?</p>
+          <Link className="auth__login-link" to="/registration/email">Зарегистрируйся</Link>
+        </div>
       </div>
     </div>
   );

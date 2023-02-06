@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import React, { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
@@ -19,7 +20,7 @@ const validateEmail = (email: string) => {
   return String(email)
     .toLowerCase()
     .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 };
 
@@ -28,6 +29,7 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
   const [email, updateEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [load, setLoad] = useState(false);
+  const [loadMessage, setLoadMessage] = useState('Далее');
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -35,6 +37,7 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
     if (validateEmail(email)) {
       try {
         setLoad(true);
+        setLoadMessage('Данные обрабатываются');
         await sendEmail(email);
         navigate('/registration/otp');
       } catch (error) {
@@ -62,7 +65,7 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
       </div>
       <form noValidate onSubmit={(e) => onSubmit(e)} className="registration-email__email-form">
         <div className="registration-email__email-wrapper">
-          <input onInput={(e) => updateEmail((e.target as HTMLInputElement).value)} className="registration-email__email-input" type="email" />
+          <input onInput={(e) => updateEmail((e.target as HTMLInputElement).value)} className="registration-email__email-input" type="email" placeholder="Электронный адрес" />
           <div className="registration-email__email-label">Электронный адрес</div>
         </div>
         {errorMessage && <div className="registration-email__email-error">{ errorMessage }</div>}
@@ -86,7 +89,7 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
           className={`registration-email__submit-btn ${load ? 'registration-email__submit-btn--disabled' : ''}`}
           type="submit"
         >
-          Далее
+          {loadMessage}
         </button>
       </form>
     </div>

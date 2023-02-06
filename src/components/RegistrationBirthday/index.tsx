@@ -15,6 +15,8 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
   const [month, updateMonth] = useState('');
   const [day, updateDay] = useState('');
   const [year, updateYear] = useState('');
+  const [load, setLoad] = useState(false);
+  const [loadMessage, setLoadMessage] = useState('Далее');
 
   useEffect(() => {
     if (session === '') {
@@ -28,6 +30,8 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      setLoad(true);
+      setLoadMessage('Данные обрабатываются');
       const birthday = `${year}-${month}-${day}`;
       await sendBirthday(birthday, session);
       navigate('/registration/username');
@@ -111,7 +115,7 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
           <select className="registration-birthday__month-select" onChange={(e) => updateYear(e.target.value)} ref={yearsSelect} />
         </div>
         <div className="registration-birthday__title-3">Укажите собственный день рождения, даже если вы создаете этот аккаунт для компании, домашнего животного и пр.</div>
-        <button className="registration-birthday__submit-btn" type="submit">Далее</button>
+        <button className="registration-birthday__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
       </form>
     </div>
   );

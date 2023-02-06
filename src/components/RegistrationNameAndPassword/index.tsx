@@ -21,6 +21,8 @@ export const RegistrationNameAndPassword: React.FC<Props> = ({ session, setPassw
   const [password, updatePassword] = useState('');
   const [nameErrorMessage, setNameErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [load, setLoad] = useState(false);
+  const [loadMessage, setLoadMessage] = useState('Далее');
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -33,6 +35,8 @@ export const RegistrationNameAndPassword: React.FC<Props> = ({ session, setPassw
       setNameErrorMessage('');
       setPasswordErrorMessage('');
       try {
+        setLoad(true);
+        setLoadMessage('Данные обрабатываются');
         await sendNameAndPassword(name, password, session);
         setPassword(password);
         navigate('/registration/birthday');
@@ -48,16 +52,16 @@ export const RegistrationNameAndPassword: React.FC<Props> = ({ session, setPassw
       <div className="registration-nnp__title-2">Добавьте имя, чтобы друзья могли найти вас.</div>
       <form onSubmit={(e) => onSubmit(e)} className="registration-nnp__nnp-form">
         <div className="registration-nnp__name-wrapper">
-          <input onInput={(e) => updateName((e.target as HTMLInputElement).value)} className="registration-nnp__name-input" type="text" />
+          <input onInput={(e) => updateName((e.target as HTMLInputElement).value)} className="registration-nnp__name-input" type="text" placeholder="Имя и фамилия" />
           <div className="registration-nnp__name-label">Имя и фамилия</div>
         </div>
         {nameErrorMessage && <div className="registration-otp__otp-error">{ nameErrorMessage }</div>}
         <div className="registration-nnp__password-wrapper">
-          <input onInput={(e) => updatePassword((e.target as HTMLInputElement).value)} className="registration-nnp__password-input" type="text" />
+          <input onInput={(e) => updatePassword((e.target as HTMLInputElement).value)} className="registration-nnp__password-input" type="text" placeholder="Пароль" />
           <div className="registration-nnp__password-label">Пароль</div>
         </div>
         {passwordErrorMessage && <div className="registration-otp__otp-error">{ passwordErrorMessage }</div>}
-        <button className="registration-nnp__submit-btn" type="submit">Далее</button>
+        <button className="registration-nnp__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
       </form>
     </div>
   );

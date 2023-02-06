@@ -1,9 +1,42 @@
+@import '../../assets/scss/variables';
+
+.auth {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: calc($tablet - 1px)) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .login-img {
+    display: none;
+  }
+}
+
+.login-img {
+  align-self: center;
+  justify-self: flex-end;
+  height: 580px;
+}
+
 .auth__window {
   margin: 24px 40px 0 40px;
+  padding: 0 20px;
+  max-width: 400px;
   /* width: 80%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 24px; */
+}
+
+@media screen and (max-width: calc($tablet - 1px)) {
+  .auth__window {
+    margin: 24px auto;
+    width: 100%;
+  }
 }
 
 .auth__logo {
@@ -136,4 +169,42 @@
 
 .auth__submit-btn:hover {
   background-color: rgb(24, 119, 242);
+}
+
+.auth__separator-text {
+  color: #828282;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+
+  &::before{ 
+    content: "";
+    display: block;
+    width: calc(50% - 50px);
+    height: 1px;
+    background: #828282;
+    margin-right: 10px;
+  }
+
+  &::after{ 
+    content: "";
+    display: block;
+    width: calc(50% - 50px);
+    height: 1px;
+    background: #828282;
+    margin-left: 10px;
+  }
+}
+
+.auth__login-block {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.auth__login-link {
+  text-decoration: none;
+  color: rgb(0, 149, 246);
 }

@@ -1,9 +1,8 @@
 .registration-nnp__window {
-  margin: 24px 40px 0 40px;
-  /* width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px; */
+  max-width: 500px;
+  margin: auto;
+  margin-top: 24px;
+  padding: 20px;
 }
 
 .registration-nnp__title-1 {
@@ -47,15 +46,19 @@
   color: rgb(199, 199, 199);
   font-size: 14px;
   pointer-events: none;
-  transition: transform ease-out .1s;
+  opacity: 0;
+  transition: all ease-out .1s;
 }
 
-.registration-nnp__name-input:focus {
+.registration-nnp__name-input:not(:placeholder-shown):focus,
+.registration-nnp__name-input:not(:placeholder-shown) {
   padding: 8px;
   padding-bottom: 0;
 }
 
-.registration-nnp__name-input:focus + .registration-nnp__name-label {
+.registration-nnp__name-input:not(:placeholder-shown):focus + .registration-nnp__name-label,
+.registration-nnp__name-input:not(:placeholder-shown) + .registration-nnp__name-label {
+  opacity: 1;
   transform: scale(.714) translateY(-12px) translateX(-25px);
 }
 
@@ -82,15 +85,19 @@
   color: rgb(199, 199, 199);
   font-size: 14px;
   pointer-events: none;
-  transition: transform ease-out .1s;
+  opacity: 0;
+  transition: all ease-out .1s;
 }
 
-.registration-nnp__password-input:focus {
+.registration-nnp__password-input:not(:placeholder-shown):focus,
+.registration-nnp__password-input:not(:placeholder-shown) {
   padding: 8px;
   padding-bottom: 0;
 }
 
-.registration-nnp__password-input:focus + .registration-nnp__password-label {
+.registration-nnp__password-input:not(:placeholder-shown):focus + .registration-nnp__password-label,
+.registration-nnp__password-input:not(:placeholder-shown) + .registration-nnp__password-label {
+  opacity: 1;
   transform: scale(.714) translateY(-12px) translateX(-15px);
 }
 
