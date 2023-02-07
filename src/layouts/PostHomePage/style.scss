@@ -33,12 +33,6 @@
 .insta-post__images {
   width: 468px;
   height: 468px;
-  overflow-y: hidden;
-
-  & > img {
-    width: 100%;
-    border-radius: 5px;
-  }
 }
 
 @media screen and (max-width: 500px) {

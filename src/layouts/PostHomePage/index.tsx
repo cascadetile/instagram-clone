@@ -2,7 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LikeIcon } from '../../assets/LikeIcon';
-import Avatar from '../Avatar';
+import Avatar from '../../components/Avatar';
+import { ImageSlider } from '../../components/ImageSlider';
 
 import './style.scss';
 
@@ -29,14 +30,12 @@ export const Post: React.FC<IPost> = ({
     <article className="insta-post">
       <div className="insta-post__wrapper">
         <div className="insta-post__header">
-          {/* <img src={profileImg} alt="" /> */}
           <Avatar avatar={avatar} />
           {/* TODO: сделать ссылку на аккаунт человека */}
           <Link className="insta-post__profile-link" to="/profile">{name}</Link>
         </div>
         <div className="insta-post__images">
-          {/* TODO: сделать из этого слайдер/карусель */}
-          <img src={images[0]} alt="" />
+          <ImageSlider images={images} />
         </div>
         <div className="insta-post__controls">
           {/* TODO: добавить кнопки */}
