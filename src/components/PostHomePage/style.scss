@@ -1,0 +1,87 @@
+.insta-post {
+  width: 470px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #0000001a;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .insta-post {
+    width: calc(100vw - 10px);
+  }
+}
+
+.insta-post__wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.insta-post__header {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.insta-post__profile-link {
+  font-weight: 600;
+  color: #000;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.insta-post__images {
+  width: 468px;
+  height: 468px;
+  overflow-y: hidden;
+
+  & > img {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .insta-post__images {
+    width: calc(100vw - 10px);
+    height: calc(100vw - 10px);
+  }
+}
+
+.insta-post__controls {
+  padding: 10px 0 5px;
+}
+
+.insta-post__controls-like {
+  background: none;
+  border: none;
+}
+
+.insta-post__likes-text {
+  font-weight: 600;
+  color: #000;
+  font-size: 16px;
+  display: flex;
+  align-items: end;
+  gap: 5px;
+
+   & > span {
+    font-size: 14px;
+    color: #000000ec;
+   }
+}
+
+.insta-post__caption {
+  padding-top: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: end;
+  gap: 10px;
+}
+
+.insta-post__caption-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #000000c8;
+  font-size: 14px;
+}

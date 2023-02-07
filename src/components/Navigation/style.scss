@@ -1,5 +1,6 @@
 .sidenav {
-  width: 100%;
+  position: fixed;
+  width: 224px;
   padding: 4px;
 }
 
@@ -48,6 +49,10 @@
 }
 
 @media screen and (max-width: 1260px) {
+  .sidenav {
+    width: 54px;
+  }
+
   .sidenav__link {
     min-width: max-content;
   }
@@ -85,8 +90,10 @@
 
 @media screen and (max-width: 770px) {
   .sidenav {
-    height: 100%;
-    order: 2;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    background: #fff;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
