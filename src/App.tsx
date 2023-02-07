@@ -10,7 +10,7 @@ import { Profile } from './pages/Profile';
 import { Explore } from './pages/Explore';
 import { Navigation } from './components/Navigation';
 
-export function App() {
+function App() {
   return (
     <>
       <Navigation />
