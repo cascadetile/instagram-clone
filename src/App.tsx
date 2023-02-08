@@ -15,7 +15,7 @@ import { Profile } from './pages/Profile';
 import { Explore } from './pages/Explore';
 import { Navigation } from './components/Navigation';
 
-export function App() {
+function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState('');
