@@ -43,6 +43,9 @@ export const RegistrationNameAndPassword: React.FC<Props> = ({ session, setPassw
         navigate('/registration/birthday');
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoad(false);
+        setLoadMessage('Далее');
       }
     }
   };

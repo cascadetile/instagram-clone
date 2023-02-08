@@ -40,6 +40,9 @@ export const RegistrationUsername: React.FC<Props> = ({
         navigate('/');
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoad(false);
+        setLoadMessage('Далее');
       }
     } else {
       setErrorMessage('Имя пользователя должно содержать только цифры, буквы, точки и знаки подчеркивания');

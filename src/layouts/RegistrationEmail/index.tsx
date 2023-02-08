@@ -52,6 +52,7 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
         }
       } finally {
         setLoad(false);
+        setLoadMessage('Далее');
       }
     } else {
       setErrorMessage('Укажите действительный электронный адрес.');

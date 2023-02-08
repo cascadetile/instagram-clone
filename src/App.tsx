@@ -19,8 +19,9 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  // const [isAuthorized, setIsAuthorized] = useState(true);
+  // TODO: change to false after develop stage
+  // const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
   if (!isAuthorized) {
     return (

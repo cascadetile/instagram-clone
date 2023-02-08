@@ -37,6 +37,9 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
       } catch (error) {
         console.error(error);
         setErrorMessage('Код недействителен. Можно запросить новый.');
+      } finally {
+        setLoad(false);
+        setLoadMessage('Далее');
       }
     }
   };

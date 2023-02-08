@@ -39,6 +39,9 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
       navigate('/registration/username');
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoad(false);
+      setLoadMessage('Далее');
     }
   };
 
