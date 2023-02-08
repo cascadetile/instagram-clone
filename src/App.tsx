@@ -14,6 +14,7 @@ import { CreatePost } from './pages/CreatePost';
 import { Profile } from './pages/Profile';
 import { Explore } from './pages/Explore';
 import { Navigation } from './components/Navigation';
+import { Page404 } from './pages/Page404';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -27,7 +28,7 @@ function App() {
       <div className="page page__login">
         <div className="page-body">
           <Routes>
-            <Route path="*" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
+            <Route path="/" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
             <Route path="/registration" element={<Registration />}>
               <Route path="email" element={<RegistrationEmail setEmail={setEmail} />} />
               <Route path="otp" element={<RegistrationOTP email={email} setSession={setSession} />} />
@@ -35,6 +36,7 @@ function App() {
               <Route path="birthday" element={<RegistrationBirthday session={session} />} />
               <Route path="username" element={<RegistrationUsername session={session} password={password} email={email} setIsAuthorized={setIsAuthorized} />} />
             </Route>
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </div>
       </div>
@@ -51,6 +53,7 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </div>
