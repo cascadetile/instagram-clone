@@ -1,10 +1,18 @@
 @import './assets/scss/variables';
 
-#root {
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+.page {
   margin-left: auto;
   margin-right: auto;
   display: grid;
   grid-template-columns: 224px 1fr;
+
+  &.page__login {
+    grid-template-columns: 1fr;
+  }
 }
 
 .page-body {
@@ -14,13 +22,13 @@
 }
 
 @media screen and (max-width: calc($desktop - 1px)) {
-  #root {
+  .page {
     grid-template-columns: 54px 1fr;
   }
 }
 
 @media screen and (max-width: calc($tablet - 1px)) {
-  #root {
+  .page {
     grid-template-columns: none;
     grid-template-rows: 1fr 50px;
   }
