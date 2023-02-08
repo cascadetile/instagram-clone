@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import axios from 'axios';
 
 const baseURL = 'https://registration-service-dn3x.onrender.com';
