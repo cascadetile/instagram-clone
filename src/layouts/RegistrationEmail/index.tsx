@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './style.css';
 import { AxiosError } from 'axios';
 import { sendEmail } from '../../api';
+import { RegistarationHeader } from '../../components/RegistrationHeader';
 
 // const domains = [
 //   '@gmail.com',
@@ -58,41 +59,44 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
   };
 
   return (
-    <div className="registration-email__window">
-      <div className="registration-email__tabs">
-        <button type="button" disabled className="registration-email__tabs-item registration-email__tabs-item--disabled">Телефон</button>
-        <button type="button" className="registration-email__tabs-item">Эл. адрес</button>
-      </div>
-      <form noValidate onSubmit={(e) => onSubmit(e)} className="registration-email__email-form">
-        <div className="registration-email__email-wrapper">
-          <input onInput={(e) => updateEmail((e.target as HTMLInputElement).value)} className="registration-email__email-input" type="email" placeholder="Электронный адрес" />
-          <div className="registration-email__email-label">Электронный адрес</div>
+    <>
+      <RegistarationHeader link="/" />
+      <div className="registration-email__window">
+        <div className="registration-email__tabs">
+          <button type="button" disabled className="registration-email__tabs-item registration-email__tabs-item--disabled">Телефон</button>
+          <button type="button" className="registration-email__tabs-item">Эл. адрес</button>
         </div>
-        {errorMessage && <div className="registration-email__email-error">{ errorMessage }</div>}
-        {/* <div className="registration-email__domains">
-          {
-            domains.map((domain) => {
-              return (
-                <button
-                  type="button"
-                  className="registration-email__domains-item">
-                    {domain}
-                </button>
-              );
-            })
-          }
-        </div> */}
-        {/* TODO: блокировать кнопку после отправки запроса */}
-        <button
-          disabled={load}
-          onClick={() => setEmail(email)}
-          className={`registration-email__submit-btn ${load ? 'registration-email__submit-btn--disabled' : ''}`}
-          type="submit"
-        >
-          {loadMessage}
-        </button>
-      </form>
-    </div>
+        <form noValidate onSubmit={(e) => onSubmit(e)} className="registration-email__email-form">
+          <div className="registration-email__email-wrapper">
+            <input onInput={(e) => updateEmail((e.target as HTMLInputElement).value)} className="registration-email__email-input" type="email" placeholder="Электронный адрес" />
+            <div className="registration-email__email-label">Электронный адрес</div>
+          </div>
+          {errorMessage && <div className="registration-email__email-error">{ errorMessage }</div>}
+          {/* <div className="registration-email__domains">
+            {
+              domains.map((domain) => {
+                return (
+                  <button
+                    type="button"
+                    className="registration-email__domains-item">
+                      {domain}
+                  </button>
+                );
+              })
+            }
+          </div> */}
+          {/* TODO: блокировать кнопку после отправки запроса */}
+          <button
+            disabled={load}
+            onClick={() => setEmail(email)}
+            className={`registration-email__submit-btn ${load ? 'registration-email__submit-btn--disabled' : ''}`}
+            type="submit"
+          >
+            {loadMessage}
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
