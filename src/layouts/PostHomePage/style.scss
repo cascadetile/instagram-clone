@@ -19,6 +19,12 @@
 .insta-post__header {
   padding: 10px 0;
   display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.insta-post__header-wrapper {
+  display: flex;
   align-items: center;
   gap: 10px;
 }
@@ -28,6 +34,15 @@
   color: #000;
   font-size: 18px;
   text-decoration: none;
+}
+
+.insta-post__header-link {
+  display: flex;
+  align-items: start;
+  background: none;
+  border: none;
+  padding: 0 10px;
+  font-size: 24px;
 }
 
 .insta-post__images {
@@ -46,7 +61,7 @@
   padding: 10px 0 5px;
 }
 
-.insta-post__controls-like {
+.insta-post__controls-button {
   background: none;
   border: none;
 }

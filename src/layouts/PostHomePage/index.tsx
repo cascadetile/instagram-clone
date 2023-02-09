@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CommentIcon } from '../../assets/CommentIcon';
 import { LikeIcon } from '../../assets/LikeIcon';
+import { SendIcon } from '../../assets/SendIcon';
 import Avatar from '../../components/Avatar';
 import { ImageSlider } from '../../components/ImageSlider';
 
@@ -30,16 +32,20 @@ export const Post: React.FC<IPost> = ({
     <article className="insta-post">
       <div className="insta-post__wrapper">
         <div className="insta-post__header">
-          <Avatar avatar={avatar} />
-          {/* TODO: сделать ссылку на аккаунт человека */}
-          <Link className="insta-post__profile-link" to="/profile">{name}</Link>
+          <div className="insta-post__header-wrapper">
+            <Avatar avatar={avatar} />
+            {/* TODO: сделать ссылку на аккаунт человека */}
+            <Link className="insta-post__profile-link" to="/profile">{name}</Link>
+          </div>
+          <button className="insta-post__header-link" type="button">...</button>
         </div>
         <div className="insta-post__images">
           <ImageSlider images={images} />
         </div>
         <div className="insta-post__controls">
-          {/* TODO: добавить кнопки */}
-          <button className="insta-post__controls-like" type="button"><LikeIcon /></button>
+          <button className="insta-post__controls-button" type="button"><LikeIcon /></button>
+          <button className="insta-post__controls-button" type="button"><CommentIcon /></button>
+          <button className="insta-post__controls-button" type="button"><SendIcon /></button>
         </div>
         <div className="insta-post__likes">
           <p className="insta-post__likes-text">
