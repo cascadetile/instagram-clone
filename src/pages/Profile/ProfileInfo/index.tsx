@@ -1,9 +1,9 @@
 import React from 'react';
 import Avatar from '../../../components/Avatar';
-import { InfoProps } from '../types/profile';
-import './profile-info.scss';
+import { InfoProps } from '../types';
+import './style.scss';
 import { translate } from '../../../translate/translate-func';
-import { ProfileEdit } from '../Nav/Profile-edit';
+import { ProfileEdit } from '../ProfileEdit';
 
 const ProfileInfo: React.FC<InfoProps> = (props: InfoProps) => {
   const { info, user } = props;

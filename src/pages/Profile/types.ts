@@ -1,4 +1,22 @@
-import { Post } from './posts';
+export interface IProfileHeader {
+  username: string
+}
+
+export interface Post {
+  id: number,
+  images: Array<string>,
+}
+
+export interface IPostsProps {
+  posts: Array<Post>,
+}
+
+export interface IProfileNav {
+  navProps: {
+    addedClass: string;
+    username: string;
+  }
+}
 
 export interface UserType {
   user: {

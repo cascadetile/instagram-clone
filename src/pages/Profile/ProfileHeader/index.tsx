@@ -1,6 +1,6 @@
 import React from 'react';
-import './profile-header.scss';
-import { IProfileHeader } from '../types/prodile-header';
+import './style.scss';
+import { IProfileHeader } from '../types';
 
 export const ProfileHeader: React.FC<IProfileHeader> = (props: IProfileHeader) => {
   const { username } = props;

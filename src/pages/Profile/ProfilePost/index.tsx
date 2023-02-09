@@ -1,6 +1,6 @@
 import React from 'react';
-import { Post } from '../../types/posts';
-import './post-item.scss';
+import { Post } from '../types';
+import './style.scss';
 
 export const PostItem: React.FC<{ post: Post }> = (props: { post: Post }) => {
   const { post } = props;

@@ -1,4 +1,4 @@
-@import '../../../../assets/scss/variables';
+@import '../../../assets/scss/variables';
 
 .profile-post {
   &__item {
@@ -21,7 +21,7 @@
     width: 18%;
     height: 18%;
     z-index: 1;
-    mask-image: url(../../../../assets/img/posts.svg);
+    mask-image: url(../../../assets/img/posts.svg);
     background-color: rgba(white, 0.8);
     mask-repeat: no-repeat;
     mask-position: center;
