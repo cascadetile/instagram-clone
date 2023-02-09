@@ -13,7 +13,6 @@ export const ProfileEdit: React.FC<Partial<IProfileNav>> = (props: Partial<IProf
     <div className={`profile__edit${` ${addedClass || ''}`}`}>
       <span className="profile-edit__nickname">{username}</span>
       <NavLink to="/profile-settings" className="profile-edit__btn">{translate('Edit_profile')}</NavLink>
-      <NavLink to="/profile-settings" className="profile-edit__settings" />
     </div>
   );
 };
