@@ -19,6 +19,7 @@ import { Routers } from './router/routers';
 import { getPagePath } from './hooks/use-location';
 import { useMediaQueries } from './hooks/use-media-queries';
 import { Page404 } from './pages/Page404';
+import { ProfileExplore } from './layouts/ProfileExplore';
 
 export function App() {
   const pagePath = getPagePath();
@@ -72,9 +73,17 @@ export function App() {
           <Route path={Routers.MAIN} element={<Home />} />
           <Route path={Routers.MESSAGES} element={<Messages />} />
           <Route path={Routers.CREATE_POST} element={<CreatePost />} />
-          <Route path={Routers.PROFILE} element={<Profile user={user} />} />
+          <Route
+            path={Routers.PROFILE}
+            element={<Profile user={user} setIsAuthorized={setIsAuthorized} />}
+          >
+            <Route path={`${Routers.PROFILE}/explore`} element={<ProfileExplore />} />
+          </Route>
           <Route path={Routers.EXPLORE} element={<Explore />} />
-          <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettings user={user} />} />
+          <Route
+            path={Routers.PROFILE_SETTINGS}
+            element={<ProfileSettings user={user} setIsAuthorized={setIsAuthorized} />}
+          />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </div>

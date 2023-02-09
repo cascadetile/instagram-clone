@@ -39,8 +39,12 @@
 
 @media screen and (max-width: 770px) {
   .settings__menu {
-    bottom: 50px;
+    top: 44px;
     left: 0;
     min-width: 100%;
+  }
+
+  .settings__menu-list {
+    flex-flow: column-reverse wrap;
   }
 }

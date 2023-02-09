@@ -1,5 +1,6 @@
 export interface IProfileHeader {
-  username: string
+  username: string,
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface Post {
@@ -28,7 +29,8 @@ export interface UserType {
     username: string;
     fullName: string;
     website: string;
-  }
+  },
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface InfoProps {

@@ -110,6 +110,7 @@
   }
 
   .sidenav__link-button {
-    min-width: max-content;
+    // min-width: max-content;
+    display: none;
   }
 }
