@@ -24,11 +24,10 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      await auth(email, password);
-      // const { session } = response;
-
+      auth(email, password);
       setLoadMessage(translate('Data_processed'));
       setIsAuthorized(true);
+      await auth(email, password);
       navigate('/');
       // TODO: write resp to variable and store it in redux
     } catch (error) {
