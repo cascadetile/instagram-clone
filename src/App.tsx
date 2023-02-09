@@ -18,6 +18,7 @@ import { ProfileSettings } from './pages/Settings';
 import { Routers } from './router/routers';
 import { getPagePath } from './hooks/use-location';
 import { useMediaQueries } from './hooks/use-media-queries';
+import { Page404 } from './pages/Page404';
 
 export function App() {
   const pagePath = getPagePath();
@@ -41,9 +42,9 @@ export function App() {
   if (!isAuthorized) {
     return (
       <div className="page page__login">
-        <div className="page-body">
+        <div className="page-body page-body__login">
           <Routes>
-            <Route path="*" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
+            <Route path="/" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
             <Route path="/registration" element={<Registration />}>
               <Route path="email" element={<RegistrationEmail setEmail={setEmail} />} />
               <Route path="otp" element={<RegistrationOTP email={email} setSession={setSession} />} />
@@ -51,6 +52,7 @@ export function App() {
               <Route path="birthday" element={<RegistrationBirthday session={session} />} />
               <Route path="username" element={<RegistrationUsername session={session} password={password} email={email} setIsAuthorized={setIsAuthorized} />} />
             </Route>
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </div>
       </div>
@@ -70,6 +72,7 @@ export function App() {
           <Route path={Routers.PROFILE} element={<Profile user={user} />} />
           <Route path={Routers.EXPLORE} element={<Explore />} />
           <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettings user={user} />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </div>
