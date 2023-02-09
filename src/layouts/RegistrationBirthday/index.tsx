@@ -5,6 +5,7 @@ import React, {
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { sendBirthday } from '../../api';
+import { RegistarationHeader } from '../../components/RegistrationHeader';
 
 interface Props {
   session: string
@@ -38,6 +39,9 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
       navigate('/registration/username');
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoad(false);
+      setLoadMessage('Далее');
     }
   };
 
@@ -92,33 +96,36 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
   }, [month]);
 
   return (
-    <div className="registration-birthday__window">
-      <div className="registration-birthday__logo" />
-      <div className="registration-birthday__title-1">Укажите дату вашего рождения</div>
-      <div className="registration-birthday__title-2">Эта информация не будет показываться в вашем общедоступном профиле.</div>
-      <form onSubmit={(e) => onSubmit(e)} className="registration-birthday__birthday-form">
-        <div className="registration-birthday__birthday-wrapper">
-          <select className="registration-birthday__month-select" onChange={(e) => onMonthChange(e)}>
-            <option value="01">Январь</option>
-            <option value="02">Февраль</option>
-            <option value="03">Март</option>
-            <option value="04">Апрель</option>
-            <option value="05">Май</option>
-            <option value="06">Июнь</option>
-            <option value="07">Июль</option>
-            <option value="08">Август</option>
-            <option value="09">Сентябрь</option>
-            <option value="10">Октябрь</option>
-            <option value="11">Ноябрь</option>
-            <option value="12">Декабрь</option>
-          </select>
-          <select className="registration-birthday__month-select" onChange={(e) => updateDay(e.target.value)} ref={daysSelect} />
-          <select className="registration-birthday__month-select" onChange={(e) => updateYear(e.target.value)} ref={yearsSelect} />
-        </div>
-        <div className="registration-birthday__title-3">Укажите собственный день рождения, даже если вы создаете этот аккаунт для компании, домашнего животного и пр.</div>
-        <button className="registration-birthday__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
-      </form>
-    </div>
+    <>
+      <RegistarationHeader link="/registration/name-and-password" />
+      <div className="registration-birthday__window">
+        <div className="registration-birthday__logo" />
+        <div className="registration-birthday__title-1">Укажите дату вашего рождения</div>
+        <div className="registration-birthday__title-2">Эта информация не будет показываться в вашем общедоступном профиле.</div>
+        <form onSubmit={(e) => onSubmit(e)} className="registration-birthday__birthday-form">
+          <div className="registration-birthday__birthday-wrapper">
+            <select className="registration-birthday__month-select" onChange={(e) => onMonthChange(e)}>
+              <option value="01">Январь</option>
+              <option value="02">Февраль</option>
+              <option value="03">Март</option>
+              <option value="04">Апрель</option>
+              <option value="05">Май</option>
+              <option value="06">Июнь</option>
+              <option value="07">Июль</option>
+              <option value="08">Август</option>
+              <option value="09">Сентябрь</option>
+              <option value="10">Октябрь</option>
+              <option value="11">Ноябрь</option>
+              <option value="12">Декабрь</option>
+            </select>
+            <select className="registration-birthday__month-select" onChange={(e) => updateDay(e.target.value)} ref={daysSelect} />
+            <select className="registration-birthday__month-select" onChange={(e) => updateYear(e.target.value)} ref={yearsSelect} />
+          </div>
+          <div className="registration-birthday__title-3">Укажите собственный день рождения, даже если вы создаете этот аккаунт для компании, домашнего животного и пр.</div>
+          <button className="registration-birthday__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
+        </form>
+      </div>
+    </>
   );
 };
 

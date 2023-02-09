@@ -19,13 +19,14 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState('');
+  // TODO: change to false after develop stage
   // const [isAuthorized, setIsAuthorized] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(true);
 
   if (!isAuthorized) {
     return (
       <div className="page page__login">
-        <div className="page-body">
+        <div className="page-body page-body__login">
           <Routes>
             <Route path="*" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
             <Route path="/registration" element={<Registration />}>

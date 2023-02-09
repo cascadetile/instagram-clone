@@ -16,6 +16,7 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
   const [password, updatePassword] = useState('');
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const [loadMessage, setLoadMessage] = useState('Войти');
+  const [load, setLoad] = useState(false);
 
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
@@ -24,12 +25,18 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
     event.preventDefault();
     try {
       setLoadMessage('Данные обрабатываются');
-      setIsAuthorized(true);
+      setLoad(true);
       await auth(email, password);
+      setIsAuthorized(true);
       navigate('/');
       // TODO: write resp to variable and store it in redux
     } catch (error) {
+      // TODO: change message
+      alert('Введенные данные неверные');
       console.error(error);
+    } finally {
+      setLoadMessage('Войти');
+      setLoad(false);
     }
   };
 
@@ -69,7 +76,7 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
             <button onClick={() => setPasswordVisibility(!isPasswordVisible)} className="auth__password-show-btn" type="button">{isPasswordVisible ? 'Скрыть' : 'Показать'}</button>
           </div>
           <button className="auth__forgot-btn" type="button">Забыли пароль?</button>
-          <button className="auth__submit-btn" type="submit">{loadMessage}</button>
+          <button className="auth__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
         </form>
         <div className="auth__separator-block">
           <p className="auth__separator-text">или</p>

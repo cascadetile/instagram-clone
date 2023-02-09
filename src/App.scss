@@ -20,6 +20,10 @@ button:not(:disabled) {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+
+  &.page-body__login {
+    grid-column: 1;
+  }
 }
 
 @media screen and (max-width: calc($desktop - 1px)) {
