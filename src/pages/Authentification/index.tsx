@@ -4,6 +4,7 @@ import React, {
 import { Link, useNavigate } from 'react-router-dom';
 import './style.scss';
 import { auth } from '../../api';
+import { translate } from '../../translate/translate-func';
 
 interface IAuthentification {
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,10 +25,10 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      setLoadMessage('Данные обрабатываются');
-      setLoad(true);
-      await auth(email, password);
+      auth(email, password);
+      setLoadMessage(translate('Data_processed'));
       setIsAuthorized(true);
+      setLoad(true);
       navigate('/');
       // TODO: write resp to variable and store it in redux
     } catch (error) {

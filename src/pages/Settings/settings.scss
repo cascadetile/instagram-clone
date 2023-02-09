@@ -1,0 +1,127 @@
+@import '../../assets/scss/variables';
+
+.profile-edit {
+    &__nav {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0 10px;
+        border-bottom: 1px solid black;
+    }
+
+    &__body {
+        height: calc(100vh - 100px);
+        overflow: auto;
+        padding: 0 10px 25px;
+    }
+
+    &__title {
+        font-size: 14px;
+    }
+
+    &__back-btn {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        mask: url(../../assets/img/angle.svg);
+        mask-size: 100% 100%;
+        background-color: black;
+        transform: rotate(90deg);
+        cursor: pointer;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+
+        &.avatar {
+            flex-direction: row;
+            gap: 15px
+        }
+    }
+
+    &__ava-change {
+        color: blue;
+        font-size: 12px;
+        margin-top: 5px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    &__label {
+        font-size: 13px;
+    }
+
+    &__input {
+        width: 100%;
+        height: 26px;
+        margin-top: 4px;
+        padding: 0 5px;
+    }
+
+    &__send-btn {
+        background-color: rgba(50, 190, 255);
+        padding: 7px 12px;
+        color: white;
+        border: 0;
+        font-weight: 600;
+        border-radius: 5px;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+
+    &__desc {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.profile-item {
+    &__description {
+        font-size: 12px;
+        margin-top: 7px;
+    }
+}
+
+textarea.profile-edit__input {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    resize: none;
+    height: 55px;
+    padding: 5px;
+}
+
+#upload-img {
+    width: 0;
+    height: 0;
+}
+
+@media (min-width: $tablet) {
+    .profile-edit {
+        &__item {
+            flex-direction: row;
+            margin-top: 25px;
+
+            &.avatar {
+                margin-left: 150px;
+            }
+        }
+
+        &__label {
+            margin-top: 5px;
+            min-width: 150px;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 25px;
+        }
+
+
+        &__send-btn {
+            margin-left: 150px;
+            margin-top: 25px;
+        }
+    }
+}

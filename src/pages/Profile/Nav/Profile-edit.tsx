@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { translate } from '../../../translate/translate-func';
 import './profile-edit.scss';
 import { IProfileNav } from '../types/profile-nav';
@@ -11,8 +12,7 @@ export const ProfileEdit: React.FC<Partial<IProfileNav>> = (props: Partial<IProf
   return (
     <div className={`profile__edit${` ${addedClass || ''}`}`}>
       <span className="profile-edit__nickname">{username}</span>
-      <button className="profile-edit__btn" type="button">{translate('Edit_profile')}</button>
-      <span className="profile-edit__settings" />
+      <NavLink to="/profile-settings" className="profile-edit__btn">{translate('Edit_profile')}</NavLink>
     </div>
   );
 };
