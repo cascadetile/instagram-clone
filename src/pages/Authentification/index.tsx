@@ -4,6 +4,7 @@ import React, {
 import { Link, useNavigate } from 'react-router-dom';
 import './style.scss';
 import { auth } from '../../api';
+import { translate } from '../../translate/translate-func';
 
 interface IAuthentification {
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
@@ -15,7 +16,7 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
-  const [loadMessage, setLoadMessage] = useState('Войти');
+  const [loadMessage, setLoadMessage] = useState(translate('Sign_in'));
 
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
@@ -24,7 +25,9 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
     event.preventDefault();
     try {
       await auth(email, password);
-      setLoadMessage('Данные обрабатываются');
+      // const { session } = response;
+
+      setLoadMessage(translate('Data_processed'));
       setIsAuthorized(true);
       navigate('/');
       // TODO: write resp to variable and store it in redux

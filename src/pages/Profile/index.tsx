@@ -5,17 +5,10 @@ import { ProfileEdit } from './Nav/Profile-edit';
 import { ProfilePosts } from './Posts/Profile-posts';
 import { translate } from '../../translate/translate-func';
 import { ProfileHeader } from './Header/Profile-header';
+import { UserType } from './types/profile';
 
-export const Profile: React.FC = () => {
-  const user = {
-    followers: 10000,
-    following: 10000,
-    posts: [],
-    profilePicture: '',
-    bio: 'hi there!',
-    username: 'example',
-  };
-
+export const Profile: React.FC<UserType> = (props: UserType) => {
+  const { user } = props;
   const {
     following, followers, posts, profilePicture, bio, username,
   } = user;

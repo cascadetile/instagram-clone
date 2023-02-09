@@ -7,6 +7,9 @@ export interface UserType {
     posts: Array<Post>;
     profilePicture: string;
     bio: string,
+    username: string;
+    fullName: string;
+    website: string;
   }
 }
 
