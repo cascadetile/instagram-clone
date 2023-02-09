@@ -25,7 +25,10 @@ export function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  // TODO: change sessionStorage settings
+  const valueAuthorized = sessionStorage.getItem('authorized') ? JSON.parse(sessionStorage.getItem('authorized')!) : false;
+  const [isAuthorized, setIsAuthorized] = useState(valueAuthorized);
+  sessionStorage.setItem('authorized', JSON.stringify(isAuthorized));
   const isMobile = useMediaQueries('isMobile');
 
   const user = {
