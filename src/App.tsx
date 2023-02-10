@@ -35,8 +35,15 @@ export function App() {
   const user = {
     followers: 10000,
     following: 10000,
-    posts: [],
-    profilePicture: '',
+    posts: [
+      {
+        id: 0,
+        images: ['https://images.unsplash.com/photo-1507019403270-cca502add9f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80', 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', 'https://images.unsplash.com/photo-1507019403270-cca502add9f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80'],
+        likes: 22,
+        caption: '',
+      },
+    ],
+    profilePicture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegCgK5aWTTuv_K5TPd10DcJxphcBTBct6R170EamgcCOcYs7LGKVy7ybRc-MCwOcHljg&usqp=CAU',
     bio: 'hi there!',
     username: 'example',
     website: 'example.com',
@@ -77,7 +84,7 @@ export function App() {
             path={Routers.PROFILE}
             element={<Profile user={user} setIsAuthorized={setIsAuthorized} />}
           >
-            <Route path={`${Routers.PROFILE}/explore`} element={<ProfileExplore />} />
+            <Route path={`${Routers.PROFILE}/explore`} element={<ProfileExplore user={user} setIsAuthorized={setIsAuthorized} />} />
           </Route>
           <Route path={Routers.EXPLORE} element={<Explore />} />
           <Route

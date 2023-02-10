@@ -27,7 +27,7 @@ export const Profile: React.FC<UserType> = (props: UserType) => {
   return (
     <div className="profile">
       <div className="profile__wrapper">
-        <ProfileHeader username={username} setIsAuthorized={setIsAuthorized} />
+        <ProfileHeader username={username} setIsAuthorized={setIsAuthorized!} />
         <ProfileInfo info={infoProps} user={userProps} />
         <ProfilePosts />
       </div>

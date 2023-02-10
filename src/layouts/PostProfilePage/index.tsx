@@ -1,11 +1,11 @@
 import React from 'react';
-import { Post } from '../types';
+import { IPost } from '../../pages/Profile/types';
 import './style.scss';
 
-export const PostItem: React.FC<{ post: Post }> = (props: { post: Post }) => {
+export const PostItem: React.FC<{ post: IPost }> = (props: { post: IPost }) => {
   const { post } = props;
 
-  const showPost = (postItem: Post) => {
+  const showPost = (postItem: IPost) => {
     console.log(postItem);
   };
 

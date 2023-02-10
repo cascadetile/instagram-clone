@@ -3,13 +3,15 @@ export interface IProfileHeader {
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export interface Post {
+export interface IPost {
   id: number,
   images: Array<string>,
+  likes: number,
+  caption: string,
 }
 
 export interface IPostsProps {
-  posts: Array<Post>,
+  posts: Array<IPost>,
 }
 
 export interface IProfileNav {
@@ -23,14 +25,14 @@ export interface UserType {
   user: {
     following: number;
     followers: number;
-    posts: Array<Post>;
+    posts: Array<IPost>;
     profilePicture: string;
     bio: string,
     username: string;
     fullName: string;
     website: string;
   },
-  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+  setIsAuthorized?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface InfoProps {

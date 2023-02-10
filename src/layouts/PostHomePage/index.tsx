@@ -9,22 +9,20 @@ import { ImageSlider } from '../../components/ImageSlider';
 
 import './style.scss';
 
-interface IPerson {
-  name: string,
-  profileImg: string,
-}
-
-interface IPost extends IPerson {
+export interface IPostDetailes {
+  username: string,
+  profilePicture: string,
   images: Array<string>,
   likes: number,
-  caption: string
+  caption: string,
 }
 
-export const Post: React.FC<IPost> = ({
-  name, profileImg, images, likes, caption,
-}) => {
+export const Post: React.FC<IPostDetailes> = (props: IPostDetailes) => {
+  const {
+    username, profilePicture, images, likes, caption,
+  } = props;
   const avatar = {
-    src: profileImg,
+    src: profilePicture,
     size: 32,
   };
 
@@ -35,7 +33,7 @@ export const Post: React.FC<IPost> = ({
           <div className="insta-post__header-wrapper">
             <Avatar avatar={avatar} />
             {/* TODO: сделать ссылку на аккаунт человека */}
-            <Link className="insta-post__profile-link" to="/profile">{name}</Link>
+            <Link className="insta-post__profile-link" to="/profile">{username}</Link>
           </div>
           <button className="insta-post__header-link" type="button">...</button>
         </div>
@@ -55,7 +53,7 @@ export const Post: React.FC<IPost> = ({
         </div>
         <div className="insta-post__caption">
           {/* TODO: сделать ссылку на аккаунт человека */}
-          <Link className="insta-post__profile-link" to="/profile">{name}</Link>
+          <Link className="insta-post__profile-link" to="/profile">{username}</Link>
           <pre className="insta-post__caption-text">{caption}</pre>
         </div>
         {/* TODO: добавить возможность оставлять комментарии */}
