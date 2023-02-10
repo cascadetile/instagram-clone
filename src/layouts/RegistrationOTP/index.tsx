@@ -3,6 +3,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { sendEmail, sendOTP } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { AxiosError } from 'axios';
 
 interface Props {
   email: string
@@ -27,6 +28,7 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
     event.preventDefault();
     if (/^\d{6}$/.test(otp)) {
       try {
+        setErrorMessage('');
         setLoad(true);
         setLoadMessage('Данные обрабатываются');
         const resp = await sendOTP(otp, email);
@@ -36,7 +38,17 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
         navigate('/registration/name-and-password');
       } catch (error) {
         console.error(error);
-        setErrorMessage('Код недействителен. Можно запросить новый.');
+        if (error instanceof AxiosError) {
+          if (error?.response?.data.message === `User with email ${email} does not exist`) {
+            setErrorMessage(`Пользователя с почтой ${email} не существует`);
+          } else if (error?.response?.data.message === `User with email ${email} is already registered`) {
+            setErrorMessage(`Пользователь с почтой ${email} уже зарегистрирован`);
+          } else if (error?.response?.data.message === 'OTP expired') {
+            setErrorMessage(`Код подтверждения истек, можно запросить новый`);
+          } else if (error?.response?.data.message === 'Wrong OTP') {
+            setErrorMessage(`Введен неверный код подтверждения`);
+          }
+        }
       } finally {
         setLoad(false);
         setLoadMessage('Далее');

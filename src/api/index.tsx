@@ -42,12 +42,12 @@ const sendNameAndPassword = async (name: string, password: string, session: stri
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': session
   },
   url: `${baseURL}/registration/name-and-password`,
   data: {
     name,
     password,
-    session,
   },
 });
 
@@ -55,11 +55,11 @@ const sendBirthday = async (birthday: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': session,
   },
   url: `${baseURL}/registration/birthday`,
   data: {
     birthday,
-    session,
   },
 });
 
@@ -67,11 +67,11 @@ const sendUsername = async (username: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': session,
   },
   url: `${baseURL}/registration/username`,
   data: {
     username,
-    session,
   },
 });
 
@@ -79,11 +79,9 @@ const sendAgree = async (session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': session,
   },
   url: `${baseURL}/registration/agree`,
-  data: {
-    session,
-  },
 });
 
 export {
