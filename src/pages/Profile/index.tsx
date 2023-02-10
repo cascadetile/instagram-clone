@@ -30,8 +30,8 @@ export const Profile: React.FC<UserType> = (props: UserType) => {
         <ProfileHeader username={username} setIsAuthorized={setIsAuthorized!} />
         <ProfileInfo info={infoProps} user={userProps} />
         <ProfilePosts />
+        <Outlet />
       </div>
-      <Outlet />
     </div>
   );
 };
