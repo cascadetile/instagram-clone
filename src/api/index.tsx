@@ -84,6 +84,8 @@ const sendAgree = async (session: string) => axios({
   url: `${baseURL}/registration/agree`,
 });
 
+const getPostByID = async (id: number) => axios(`https://profile-service.onrender.com/posts/${id}`);
+
 export {
-  auth, sendEmail, sendOTP, sendNameAndPassword, sendBirthday, sendUsername, sendAgree,
+  auth, sendEmail, sendOTP, sendNameAndPassword, sendBirthday, sendUsername, sendAgree, getPostByID,
 };

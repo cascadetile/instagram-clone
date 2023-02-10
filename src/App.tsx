@@ -19,6 +19,7 @@ import { Routers } from './router/routers';
 import { getPagePath } from './hooks/use-location';
 import { useMediaQueries } from './hooks/use-media-queries';
 import { Page404 } from './pages/Page404';
+import { PostPage } from './pages/PostPage';
 
 export function App() {
   const pagePath = getPagePath();
@@ -45,6 +46,7 @@ export function App() {
         <div className="page-body page-body__login">
           <Routes>
             <Route path="/" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
+            <Route path="/p" element={<PostPage />} />
             <Route path="/registration" element={<Registration />}>
               <Route path="email" element={<RegistrationEmail setEmail={setEmail} />} />
               <Route path="otp" element={<RegistrationOTP email={email} setSession={setSession} />} />

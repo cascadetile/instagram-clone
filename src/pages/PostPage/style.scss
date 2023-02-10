@@ -1,0 +1,137 @@
+.post-page {
+  width: 100%;
+}
+
+.post-page__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 12px;
+  padding: 14px 16px 14px 16px;
+}
+
+.post-page__pfp-wrapper {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.post-page__pfp {
+  width: inherit;
+  height: inherit;
+}
+
+.post-page__username {
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.post-page__actions-menu-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.post-page__img-wrapper {
+  width: inherit;
+  height: auto;
+}
+
+.post-page__img {
+  width: inherit;
+}
+
+.post-page__bottom-wrapper {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.post-page__main-actions {
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+  align-items: center;
+  padding-bottom: 8px;
+  padding-top: 6px;
+}
+
+.post-page__save-btn {
+  margin-left: auto;
+}
+
+.post-page__likes {
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.post-page__caption {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.post-page__caption-username {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.post-page__date-created {
+  letter-spacing: .2px;
+  color: rga(168, 168, 168);
+  font-weight: 400;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.post-page__modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .65);
+  z-index: 100;
+}
+
+.post-page__modal {
+  width: calc(100% - 88px);
+  max-height: calc(100% - 40px);
+  font-size: 14px;
+  line-height: 18px;
+  border-radius: 12px;
+  background-color: rgb(38, 38, 38);
+  display: flex;
+  flex-direction: column;
+}
+
+.post-page__modal-btn:first-child {
+  border-top: none;
+}
+
+.post-page__modal-btn {
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 48px;
+  padding: 4px 8px;
+  color: white;
+  border-top: 1px solid rgb(54, 54, 54);
+}
