@@ -1,23 +1,12 @@
 @import '../../../assets/scss/variables';
 
-.profile {
-    &__edit {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 25px;
-
-        &.header {
-            display: none;
-        }
-    }
-}
 .profile-edit {
     &__btn {
         background-color: rgba(#e1e1e1, 0.4);
         border: 0;
         border-radius: 7px;
         height: 28px;
-        padding: 0;
+        padding: 0 10px;
         color: #333;
         width: 100%;
         cursor: pointer;
@@ -29,12 +18,19 @@
         font-size: 14px;
     }
 
-    &__settings {
-        display: none;
-    }
-
     &__nickname {
-        display: none;
+        font-size: 24px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    .profile__edit {
+        &.header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
     }
 }
 
@@ -44,13 +40,14 @@
             display: none;
 
             &.header {
+                width: 100%;
                 display: flex;
                 align-items: center;
                 margin-top: 0;
 
                 .profile-edit__nickname {
                     display: flex;
-                    font-size: 14px;
+                    font-size: 22px;
                     margin-right: 15px;
                 }
 

@@ -2,6 +2,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { AxiosError } from 'axios';
 import { sendUsername, auth, sendAgree } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
 import { StoreType } from '../../store/types/store';
@@ -31,6 +32,7 @@ export const RegistrationUsername: React.FC<Props> = ({
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setErrorMessage('');
     if (/^[\w](?!.*?\.{2})[\w.]{1,28}[\w]$/.test(username)) {
       try {
         setLoad(true);
@@ -41,13 +43,22 @@ export const RegistrationUsername: React.FC<Props> = ({
         toggleIsAuth(true);
         navigate('/');
       } catch (error) {
-        alert('Ошибка! Попробуйте заново');
+        console.error(error);
+        if (error instanceof AxiosError) {
+          if (error?.response?.data.message === 'This username is taken') {
+            setErrorMessage('Это имя пользователя занято. Выберите другое');
+          } else if (error?.response?.data.message === 'Database error') {
+            setErrorMessage('Ошибка сервера. Попробуйте снова');
+          } else if (error?.response?.data.message === 'The session is expired') {
+            setErrorMessage('Сессия истекла, начните сначала');
+          }
+        }
       } finally {
         setLoad(false);
         setLoadMessage('Далее');
       }
     } else {
-      setErrorMessage('Имя пользователя должно содержать только цифры, буквы, точки и знаки подчеркивания');
+      setErrorMessage('Имя пользователя должно содержать только цифры, буквы, точки и знаки подчеркивания. Минимальная длина 3 символа');
     }
   };
 

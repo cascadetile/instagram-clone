@@ -1,12 +1,11 @@
-@import '../../../../assets/scss/variables';
+@import '../../assets/scss/variables';
 
 .profile-post {
   &__item {
     display: block;
     object-fit: cover;
-    padding: 2px;
     overflow: hidden;
-    width: 33.3333%;
+    width: 100%;
     aspect-ratio: 1/1;
     position: relative;
     background: transparent;
@@ -21,7 +20,7 @@
     width: 18%;
     height: 18%;
     z-index: 1;
-    mask-image: url(../../../../assets/img/posts.svg);
+    mask-image: url(../../assets/img/posts.svg);
     background-color: rgba(white, 0.8);
     mask-repeat: no-repeat;
     mask-position: center;

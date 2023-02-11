@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import ProfileInfo from './Info/Profile-info';
 import './style.scss';
-import { ProfileEdit } from './Nav/Profile-edit';
 import { ProfilePosts } from './Posts/Profile-posts';
-import { translate } from '../../translate/translate-func';
-import { ProfileHeader } from './Header/Profile-header';
+import { ProfileHeader } from './ProfileHeader';
 import { UserType } from './types/profile';
 import { getUserThunk } from '../../store/profile-store';
 import { StoreType } from '../../store/types/store';
 
-const Profile: React.FC<{
+export const Profile: React.FC<{
   getUser: (username: string) => void,
   profile: UserType
 }> = (props) => {
-  const { getUser, profile } = props;
   const { state } = useLocation();
   const { username } = state;
+  const { getUser, profile } = props;
 
   const {
     followers,
@@ -45,15 +43,12 @@ const Profile: React.FC<{
 
   return (
     <div className="profile">
-      <ProfileHeader username={username} />
-      <ProfileInfo info={infoProps} user={userProps} />
-      <p className="profile__description">{bio}</p>
-      <span className="profile__add-post">
-        <span className="profile-add__icon" />
-        <p className="profile-add__text">{translate('Add')}</p>
-      </span>
-      <ProfileEdit />
-      <ProfilePosts posts={posts} />
+      <div className="profile__wrapper">
+        <ProfileHeader username={username} />
+        <ProfileInfo info={infoProps} user={userProps} />
+        <ProfilePosts />
+        <Outlet />
+      </div>
     </div>
   );
 };

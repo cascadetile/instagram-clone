@@ -47,9 +47,9 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail, session }) => {
       } catch (error) {
         console.error(error);
         if (error instanceof AxiosError) {
-          if (error?.response?.data.message === 'this email is already taken') {
+          if (error?.response?.data.message === 'This email is already taken') {
             setErrorMessage('Этот email уже используется');
-          } else if (error?.response?.data.message === 'we can\'t send a mail or update a database') {
+          } else if (error?.response?.data.message === 'We can\'t send a mail or update a database') {
             setErrorMessage('Не удалось отправить письмо, попробуйте снова');
           }
         }
@@ -89,7 +89,6 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail, session }) => {
               })
             }
           </div> */}
-          {/* TODO: блокировать кнопку после отправки запроса */}
           <button
             disabled={load}
             onClick={() => setEmail(email)}

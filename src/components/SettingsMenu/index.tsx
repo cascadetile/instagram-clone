@@ -1,5 +1,6 @@
 import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toggleIsAuthAC } from '../../store/auth-store';
 import { IAction } from '../../store/types/store';
 import './style.scss';
@@ -14,7 +15,16 @@ const SettingsMenu: React.FC<ISettingsMenu> = ({ setOpenMenu, toggleIsAuth }) =>
     <ul className="settings__menu-list">
       <li className="settings__menu-item">Switch Appearence</li>
       <li className="settings__menu-item">Switch Language</li>
-      <li className="settings__menu-item" onClick={() => toggleIsAuth(false)}>Log Out</li>
+      <li
+        className="settings__menu-item"
+        onClick={() => {
+          toggleIsAuth(false);
+          useNavigate()('/');
+        }}
+      >
+        Log Out
+
+      </li>
       <li className="settings__menu-item" onClick={() => setOpenMenu(false)}>Back</li>
     </ul>
   </menu>

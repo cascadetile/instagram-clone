@@ -3,6 +3,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { sendNameAndPassword } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { AxiosError } from 'axios';
 
 interface Props {
   session: string
@@ -27,14 +28,18 @@ export const RegistrationNameAndPassword: React.FC<Props> = ({ session, setPassw
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setNameErrorMessage('');
+    setPasswordErrorMessage('');
     if (name.length === 0) {
       setNameErrorMessage('Заполните поле для имени');
     }
     if (password.length === 0) {
       setPasswordErrorMessage('Заполните поле для пароля');
-    } else {
-      setNameErrorMessage('');
-      setPasswordErrorMessage('');
+    }
+    if (password.length < 8) {
+      setPasswordErrorMessage('Минимальная длина пароля 8 символов');
+    }
+    if (name.length && password.length >= 8) {
       try {
         setLoad(true);
         setLoadMessage('Данные обрабатываются');
@@ -43,6 +48,19 @@ export const RegistrationNameAndPassword: React.FC<Props> = ({ session, setPassw
         navigate('/registration/birthday');
       } catch (error) {
         console.error(error);
+        if (error instanceof AxiosError) {
+          if (error?.response?.data.message.includes('length must be greater than 7')) {
+            setPasswordErrorMessage('Минимальная длина пароля 8 символов');
+          } else if (error?.response?.data.message === 'Weak password') {
+            setPasswordErrorMessage('Слабый пароль. Придумайте другой');
+          } else if (error?.response?.data.message === 'The "name" can not be empty') {
+            setNameErrorMessage('Имя не может быть пустым');
+          } else if (error?.response?.data.message.includes('length must be less than or equal to 100')) {
+            setNameErrorMessage('Имя не может быть длинее 100 символов');
+          } else if (error?.response?.data.message === 'The session is expired') {
+            setPasswordErrorMessage('Сессия истекла, начните сначала');
+          }
+        }
       } finally {
         setLoad(false);
         setLoadMessage('Далее');

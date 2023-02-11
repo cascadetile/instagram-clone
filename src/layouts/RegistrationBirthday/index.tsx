@@ -6,6 +6,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { sendBirthday } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { AxiosError } from 'axios';
 
 interface Props {
   session: string
@@ -19,6 +20,7 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
   const [year, updateYear] = useState('');
   const [load, setLoad] = useState(false);
   const [loadMessage, setLoadMessage] = useState('Далее');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (session === '') {
@@ -31,6 +33,7 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setErrorMessage('');
     try {
       setLoad(true);
       setLoadMessage('Данные обрабатываются');
@@ -39,6 +42,15 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
       navigate('/registration/username');
     } catch (error) {
       console.error(error);
+      if (error instanceof AxiosError) {
+        if (error?.response?.data.message === 'The session is expired') {
+          setErrorMessage('Сессия истекла, начните сначала');
+        } else if (error?.response?.data.message === 'Database error') {
+          setErrorMessage('Ошибка сервера. Попробуйте снова');
+        } else if (error?.response?.data.message === 'The date can not be greater than today') {
+          setErrorMessage('Дата не может быть больше, чем сегодняшний день');
+        }
+      }
     } finally {
       setLoad(false);
       setLoadMessage('Далее');
@@ -121,6 +133,7 @@ export const RegistrationBirthday: React.FC<Props> = ({ session }) => {
             <select className="registration-birthday__month-select" onChange={(e) => updateDay(e.target.value)} ref={daysSelect} />
             <select className="registration-birthday__month-select" onChange={(e) => updateYear(e.target.value)} ref={yearsSelect} />
           </div>
+          {errorMessage && <div className="registration-birthday__birthday-error">{ errorMessage }</div>}
           <div className="registration-birthday__title-3">Укажите собственный день рождения, даже если вы создаете этот аккаунт для компании, домашнего животного и пр.</div>
           <button className="registration-birthday__submit-btn" type="submit" disabled={load}>{loadMessage}</button>
         </form>
