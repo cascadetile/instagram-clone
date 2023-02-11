@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { translate } from '../../../translate/translate-func';
-import './profile-edit.scss';
-import { IProfileNav } from '../types/profile-nav';
+import './style.scss';
+import { IProfileNav } from '../types';
 
 export const ProfileEdit: React.FC<Partial<IProfileNav>> = (props: Partial<IProfileNav>) => {
   const { navProps } = props;

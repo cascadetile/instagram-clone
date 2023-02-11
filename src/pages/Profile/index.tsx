@@ -1,14 +1,13 @@
 import React from 'react';
-import ProfileInfo from './Info/Profile-info';
+import { Outlet } from 'react-router-dom';
+import ProfileInfo from './ProfileInfo';
 import './style.scss';
-import { ProfileEdit } from './Nav/Profile-edit';
-import { ProfilePosts } from './Posts/Profile-posts';
-import { translate } from '../../translate/translate-func';
-import { ProfileHeader } from './Header/Profile-header';
-import { UserType } from './types/profile';
+import { ProfilePosts } from './ProfileControls';
+import { ProfileHeader } from './ProfileHeader';
+import { UserType } from './types';
 
 export const Profile: React.FC<UserType> = (props: UserType) => {
-  const { user } = props;
+  const { user, setIsAuthorized } = props;
   const {
     following, followers, posts, profilePicture, bio, username,
   } = user;
@@ -27,15 +26,12 @@ export const Profile: React.FC<UserType> = (props: UserType) => {
 
   return (
     <div className="profile">
-      <ProfileHeader username={username} />
-      <ProfileInfo info={infoProps} user={userProps} />
-      <p className="profile__description">{bio}</p>
-      <span className="profile__add-post">
-        <span className="profile-add__icon" />
-        <p className="profile-add__text">{translate('Add')}</p>
-      </span>
-      <ProfileEdit />
-      <ProfilePosts posts={posts} />
+      <div className="profile__wrapper">
+        <ProfileHeader username={username} setIsAuthorized={setIsAuthorized!} />
+        <ProfileInfo info={infoProps} user={userProps} />
+        <ProfilePosts />
+        <Outlet />
+      </div>
     </div>
   );
 };

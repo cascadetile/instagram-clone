@@ -1,0 +1,52 @@
+@import '../../../assets/scss/variables';
+
+.profile-controls {
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
+
+.profile-controls__button {
+  position: relative;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 10px;
+
+  &:disabled::before {
+    position: absolute;
+    top: -1px;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #000;
+  }
+}
+
+.profile-controls__text {
+  text-transform: uppercase;
+  color: #000;
+  font-size: 12px;
+}
+
+@media screen and (max-width: $tablet) {
+  .profile-controls__text {
+    display: none;
+  }
+
+  .profile-controls__button {
+    width: calc((100vw - 20px) / 4);
+    display: flex;
+    justify-content: center;
+
+    & > svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

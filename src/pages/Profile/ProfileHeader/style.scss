@@ -1,0 +1,22 @@
+@import '../../../assets/scss/variables';
+
+.profile-header {
+    height: 44px;
+    padding: 0 16px;
+    border: 1px solid rgba($color: #000000, $alpha: 0.2);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (min-width: $tablet) {
+    .profile-header {
+        display: none;
+    }
+}
+
+.profile-header__settings {
+    border: none;
+    background: none;
+}

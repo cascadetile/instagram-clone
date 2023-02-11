@@ -1,7 +1,7 @@
 import React from 'react';
 import { translate } from '../../translate/translate-func';
 import Avatar from '../../components/Avatar/index';
-import { UserType } from '../Profile/types/profile';
+import { UserType } from '../Profile/types';
 import './settings.scss';
 import { useMediaQueries } from '../../hooks/use-media-queries';
 

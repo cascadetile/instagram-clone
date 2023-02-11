@@ -19,20 +19,32 @@ import { Routers } from './router/routers';
 import { getPagePath } from './hooks/use-location';
 import { useMediaQueries } from './hooks/use-media-queries';
 import { Page404 } from './pages/Page404';
+import { ProfileExplore } from './layouts/ProfileExplore';
+import { ProfilePublications } from './layouts/ProfilePublications';
 
 export function App() {
   const pagePath = getPagePath();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  // TODO: change sessionStorage settings
+  const valueAuthorized = sessionStorage.getItem('authorized') ? JSON.parse(sessionStorage.getItem('authorized')!) : false;
+  const [isAuthorized, setIsAuthorized] = useState(valueAuthorized);
+  sessionStorage.setItem('authorized', JSON.stringify(isAuthorized));
   const isMobile = useMediaQueries('isMobile');
 
   const user = {
     followers: 10000,
     following: 10000,
-    posts: [],
-    profilePicture: '',
+    posts: [
+      {
+        id: 0,
+        images: ['https://images.unsplash.com/photo-1507019403270-cca502add9f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80', 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg', 'https://images.unsplash.com/photo-1507019403270-cca502add9f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80'],
+        likes: 22,
+        caption: '',
+      },
+    ],
+    profilePicture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegCgK5aWTTuv_K5TPd10DcJxphcBTBct6R170EamgcCOcYs7LGKVy7ybRc-MCwOcHljg&usqp=CAU',
     bio: 'hi there!',
     username: 'example',
     website: 'example.com',
@@ -69,9 +81,18 @@ export function App() {
           <Route path={Routers.MAIN} element={<Home />} />
           <Route path={Routers.MESSAGES} element={<Messages />} />
           <Route path={Routers.CREATE_POST} element={<CreatePost />} />
-          <Route path={Routers.PROFILE} element={<Profile user={user} />} />
+          <Route
+            path={Routers.PROFILE}
+            element={<Profile user={user} setIsAuthorized={setIsAuthorized} />}
+          >
+            <Route path={`${Routers.PROFILE}/`} element={<ProfilePublications posts={user.posts} />} />
+            <Route path={`${Routers.PROFILE}/explore`} element={<ProfileExplore user={user} />} />
+          </Route>
           <Route path={Routers.EXPLORE} element={<Explore />} />
-          <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettings user={user} />} />
+          <Route
+            path={Routers.PROFILE_SETTINGS}
+            element={<ProfileSettings user={user} setIsAuthorized={setIsAuthorized} />}
+          />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </div>

@@ -42,6 +42,6 @@ button:not(:disabled) {
   .page-body {
     grid-column: 1;
     grid-row: 1 / 2;
-    height: calc(100vh - 50px);
+    height: max-content;
   }
 }

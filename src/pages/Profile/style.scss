@@ -1,94 +1,13 @@
 @import '../../assets/scss/variables';
 
-.profile {
-    padding: 0 10px;
-    min-height: calc(100vh - 55px - 80px);
-    width: 100%;
-
-    &__description {
-        margin: 10px 0 0 0;
-        font-size: 14px;
-    }
-
-    &__posts {
-        margin: 15px 0 0 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    &__add-post {
-        display: none;
-    }
+.profile__wrapper {
+    max-width: 935px;
+    padding: 30px 20px 0;
+    margin: 0 auto;
 }
 
-@media (min-width: $tablet) {
-    .profile {
-        padding: 30px 5px 0;
-
-        &__description {
-            display: none;
-        }
-
-        &__add-post {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            margin-left: 35px;
-            margin-top: 25px;
-        }
-    }
-
-    .profile-add {
-        &__icon {
-            display: flex;
-            flex-direction: column;
-            width: 50px;
-            height: 50px;
-            border-radius: 100%;
-            border: 1px solid black;
-            align-items: center;
-            justify-content: center;
-
-            &::after,
-            &::before {
-                content: '';
-                display: block;
-                width: 20px;
-                height: 2px;
-                background-color: black;
-                border-radius: 3px;
-            }
-
-            &::before {
-                transform: rotate(90deg) translateX(2px);
-            }
-        }
-
-        &__text {
-            margin-top: 6px;
-            font-size: 12px;
-        }
-    }
-}
-
-@media (min-width: $desktop) {
-    .profile {
-        &__posts {
-            margin-top: 35px;
-        }
-
-        &__add-post {
-            margin-top: 45px;
-        }
-    }
-
-    .profile-add {
-        &__icon {
-            width: 60px;
-            height: 60px;
-        }
+@media screen and (max-width: $tablet) {
+    .profile__wrapper {
+        padding: 0px;
     }
 }
