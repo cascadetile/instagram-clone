@@ -7,6 +7,7 @@ import { ProfileEdit } from '../Nav/Profile-edit';
 
 const ProfileInfo: React.FC<InfoProps> = (props: InfoProps) => {
   const { info, user } = props;
+
   const { followers, following, postsCounter } = info;
   const { profilePicture, username, bio } = user;
 
@@ -43,7 +44,6 @@ const ProfileInfo: React.FC<InfoProps> = (props: InfoProps) => {
         </ul>
         <p className="profile-metrics__bio">{bio}</p>
       </div>
-
     </div>
   );
 };

@@ -1,18 +1,20 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { sendUsername, auth, sendAgree } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { StoreType } from '../../store/types/store';
 
 interface Props {
   session: string
   password: string
   email: string,
-  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+  toggleIsAuth: (isAuth: boolean) => void;
 }
 
 export const RegistrationUsername: React.FC<Props> = ({
-  session, password, email, setIsAuthorized,
+  session, password, email, toggleIsAuth,
 }) => {
   const navigate = useNavigate();
 
@@ -35,11 +37,11 @@ export const RegistrationUsername: React.FC<Props> = ({
         setLoadMessage('Данные обрабатываются');
         await sendUsername(username, session);
         await sendAgree(session);
-        await auth(email, password);
-        setIsAuthorized(true);
+        await auth(email, password, session);
+        toggleIsAuth(true);
         navigate('/');
       } catch (error) {
-        console.error(error);
+        alert('Ошибка! Попробуйте заново');
       } finally {
         setLoad(false);
         setLoadMessage('Далее');
@@ -68,4 +70,10 @@ export const RegistrationUsername: React.FC<Props> = ({
   );
 };
 
-export default RegistrationUsername;
+const MapStateToProps = (store: StoreType) => ({
+  session: store.auth.session,
+});
+
+const RegistrationUsernameContainer = connect(MapStateToProps, () => ({}))(RegistrationUsername);
+
+export default RegistrationUsernameContainer;

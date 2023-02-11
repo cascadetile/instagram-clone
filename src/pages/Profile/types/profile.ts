@@ -1,16 +1,16 @@
 import { Post } from './posts';
 
 export interface UserType {
-  user: {
-    following: number;
-    followers: number;
-    posts: Array<Post>;
-    profilePicture: string;
-    bio: string,
-    username: string;
-    fullName: string;
-    website: string;
-  }
+  following: number;
+  followers: number;
+  posts: Array<Post>;
+  profilePicture: string;
+  bio: string,
+  username: string;
+  fullName: string;
+  website: string;
+  fullname: string;
+  name: string;
 }
 
 export interface InfoProps {
@@ -24,4 +24,8 @@ export interface InfoProps {
     username: string;
     bio: string;
   }
+}
+
+export interface IProfile {
+  setUser: (profile: UserType) => void
 }

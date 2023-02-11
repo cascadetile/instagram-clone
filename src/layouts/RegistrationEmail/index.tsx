@@ -3,8 +3,10 @@ import React, { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import { AxiosError } from 'axios';
+import { connect } from 'react-redux';
 import { sendEmail } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { StoreType } from '../../store/types/store';
 
 // const domains = [
 //   '@gmail.com',
@@ -15,6 +17,7 @@ import { RegistarationHeader } from '../../components/RegistrationHeader';
 
 interface Props {
   setEmail: React.Dispatch<React.SetStateAction<string>>
+  session: string
 }
 
 const validateEmail = (email: string) => {
@@ -25,7 +28,7 @@ const validateEmail = (email: string) => {
     );
 };
 
-export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
+export const RegistrationEmail: React.FC<Props> = ({ setEmail, session }) => {
   const navigate = useNavigate();
   const [email, updateEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -39,7 +42,7 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
       try {
         setLoad(true);
         setLoadMessage('Данные обрабатываются');
-        await sendEmail(email);
+        await sendEmail(email, session);
         navigate('/registration/otp');
       } catch (error) {
         console.error(error);
@@ -101,4 +104,8 @@ export const RegistrationEmail: React.FC<Props> = ({ setEmail }) => {
   );
 };
 
-export default RegistrationEmail;
+const MapStateToProps = (store: StoreType) => ({
+  session: store.auth.session,
+});
+
+export const RegistrationEmailContainer = connect(MapStateToProps, () => ({}))(RegistrationEmail);

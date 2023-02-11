@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import './style.scss';
 
+import { connect } from 'react-redux';
 import { HomeLogo } from '../../assets/HomeLogo';
 import { ExploreLogo } from '../../assets/ExploreLogo';
 import { CreatePostLogo } from '../../assets/CreatePostLogo';
@@ -10,14 +11,15 @@ import { MessagesLogo } from '../../assets/MessagesLogo';
 import { ProfileLogo } from '../../assets/ProfileLogo';
 import { SettingsLogo } from '../../assets/SettingsLogo';
 import { GitHubLogo } from '../../assets/GitHubLogo';
-import { SettingsMenu } from '../SettingsMenu';
+import { SettignsMenuContainer } from '../SettingsMenu';
 import { translate } from '../../translate/translate-func';
+import { StoreType } from '../../store/types/store';
 
 interface INavigation {
-  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+  myUsername: string;
 }
 
-export const Navigation: React.FC<INavigation> = ({ setIsAuthorized }) => {
+const Navigation: React.FC<INavigation> = ({ myUsername }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -42,11 +44,11 @@ export const Navigation: React.FC<INavigation> = ({ setIsAuthorized }) => {
         <MessagesLogo />
         <p className="sidenav__link-text">{translate('Messages')}</p>
       </Link>
-      <Link className="sidenav__link" to="/profile">
+      <NavLink className="sidenav__link" to="/profile" state={{ username: myUsername }}>
         <ProfileLogo />
         <p className="sidenav__link-text">{translate('Profile')}</p>
-      </Link>
-      {openMenu ? <SettingsMenu setOpenMenu={setOpenMenu} setIsAuthorized={setIsAuthorized} /> : ''}
+      </NavLink>
+      {openMenu ? <SettignsMenuContainer setOpenMenu={setOpenMenu} /> : ''}
       <button className="sidenav__link-button" type="button" onClick={() => setOpenMenu(!openMenu)}>
         <SettingsLogo />
         <p className="sidenav__link-text">{translate('Settings')}</p>
@@ -55,4 +57,8 @@ export const Navigation: React.FC<INavigation> = ({ setIsAuthorized }) => {
   );
 };
 
-export default Navigation;
+const mapStateToProps = (store: StoreType) => ({
+  myUsername: store.profile.myUsername,
+});
+
+export const NavigationContainer = connect(mapStateToProps, {})(Navigation);

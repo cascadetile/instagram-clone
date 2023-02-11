@@ -1,16 +1,26 @@
 import React, {
-  useState, FormEvent, useEffect, useRef,
+  useState, FormEvent, useEffect, useRef, Dispatch,
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.scss';
+import { connect } from 'react-redux';
 import { auth } from '../../api';
 import { translate } from '../../translate/translate-func';
+import { setTokenAC, toggleIsAuthAC } from '../../store/auth-store';
+import { IAction, StoreType } from '../../store/types/store';
+import { setMyUsernameAC } from '../../store/profile-store';
 
 interface IAuthentification {
-  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
+  enableIsAuth: (isAuth: boolean) => void,
+  setToken: (auth_token: string) => void,
+  setMyUsername: (myUsername: string) => void,
+  session: string
 }
 
-export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized }) => {
+export const Authentification: React.FC<IAuthentification> = (props: IAuthentification) => {
+  const {
+    enableIsAuth, setToken, setMyUsername, session,
+  } = props;
   const navigate = useNavigate();
 
   const [email, updateEmail] = useState('');
@@ -25,9 +35,11 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      auth(email, password);
+      const res = await auth(email, password, session);
+      setToken(res.data.session);
+      setMyUsername(res.data.username);
       setLoadMessage(translate('Data_processed'));
-      setIsAuthorized(true);
+      enableIsAuth(true);
       setLoad(true);
       navigate('/');
       // TODO: write resp to variable and store it in redux
@@ -91,4 +103,22 @@ export const Authentification: React.FC<IAuthentification> = ({ setIsAuthorized 
   );
 };
 
-export default Authentification;
+const MapStateToProps = (store: StoreType) => ({
+  session: store.auth.session,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<IAction>) => ({
+  setToken(auth_token: string) {
+    dispatch(setTokenAC(auth_token));
+  },
+  setMyUsername(username: string) {
+    dispatch(setMyUsernameAC(username));
+  },
+  enableIsAuth(isAuth: boolean) {
+    dispatch(toggleIsAuthAC(isAuth));
+  },
+});
+
+const AuthentificationContainer = connect(MapStateToProps, mapDispatchToProps)(Authentification);
+
+export default AuthentificationContainer;

@@ -109,4 +109,16 @@ export const dictionary: IDictionary = {
     ru: 'отправить',
     en: 'send',
   },
+  user_upload_error: {
+    ru: 'ошибка загрузки пользователя',
+    en: 'user_upload_error',
+  },
+  upload_image_error: {
+    ru: 'ошибка загрузки изображения',
+    en: 'upload image error',
+  },
+  update_profile_info_error: {
+    ru: 'ошибка при обновлении информации о профиле',
+    en: 'update profile info error',
+  },
 };

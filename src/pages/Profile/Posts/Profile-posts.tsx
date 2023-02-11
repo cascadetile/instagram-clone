@@ -9,7 +9,7 @@ export const ProfilePosts: React.FC<IPostsProps> = (props: IPostsProps) => {
 
   return (
     <ul className="profile__posts">
-      {postsItems}
+      {postsItems || []}
     </ul>
   );
 };
