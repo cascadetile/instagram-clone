@@ -2,7 +2,7 @@
 
 .profile-edit {
     &__btn {
-        background-color: rgba(#e1e1e1, 0.4);
+        background-color: var(--button-background-color);
         border: 0;
         border-radius: 7px;
         height: 28px;
@@ -22,6 +22,10 @@
         font-size: 24px;
         margin: 0;
     }
+}
+
+.profile__edit.header {
+    color: var(--text-color);
 }
 
 @media screen and (max-width: $tablet) {
@@ -71,7 +75,7 @@
             display: flex;
             width: 28px;
             min-width: 28px;
-            background-color: rgba(#e1e1e1, 0.4);
+            background-color: var(--button-background-color);
             border: 0;
             border-radius: 7px;
             height: 28px;

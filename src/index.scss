@@ -22,8 +22,24 @@ code {
 
 html[data-theme='dark'] {
   --background-color: #000;
+  --text-color: #fff;
+  --button-background-color: rgba(225, 225, 225, 0.8);
+  --navigation-background-color: rgba(118, 118, 118, 1);
+  --avatar-border-color: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.4);
+  --icon-color: #fff;
 }
 
 html[data-theme='light'] {
   --background-color: #fff;
+  --text-color: #000;
+  --button-background-color: rgba(225, 225, 225, 0.4);
+  --navigation-background-color: rgba(239, 239, 239, 1);
+  --avatar-border-color: rgba(0, 0, 0, 0.3);
+  --border-color: rgba(0, 0, 0, 0.2);
+  --icon-color: #000;
+}
+
+html {
+  background: var(--background-color);
 }

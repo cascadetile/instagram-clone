@@ -3,6 +3,7 @@
   z-index: 99;
   width: 224px;
   padding: 4px;
+  background: var(--background-color);
 }
 
 .sidenav__link {
@@ -19,8 +20,16 @@
   background: none;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--border-color);
   }
+}
+
+.logo {
+  stroke: var(--icon-color);
+}
+
+.logo-fill {
+  fill: var(--icon-color);
 }
 
 .sidenav__link-text {
@@ -29,7 +38,7 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   font-size: 20px;
-  color: #000;
+  color: var(--text-color);
 }
 
 .sidenav__link-button {
@@ -45,7 +54,7 @@
   cursor: pointer;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--border-color);
   }
 }
 
@@ -75,7 +84,7 @@
     flex-flow: column wrap;
     gap: 20px;
     padding-top: 120px;
-    border-right: 1px solid #000;
+    border-right: 1px solid var(--border-color);
 
     >:first-child {
       position: absolute;
@@ -94,11 +103,10 @@
     bottom: 0;
     height: 50px;
     width: 100%;
-    background: #fff;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--border-color);
 
     >:first-child {
       position: static;
@@ -110,7 +118,6 @@
   }
 
   .sidenav__link-button {
-    // min-width: max-content;
     display: none;
   }
 }

@@ -1,7 +1,7 @@
 .insta-post {
   width: 470px;
   padding-bottom: 40px;
-  border-bottom: 1px solid #0000001a;
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 20px;
 }
 
@@ -36,7 +36,7 @@
 
 .insta-post__profile-link {
   font-weight: 600;
-  color: #000;
+  color: var(--text-color);
   font-size: 18px;
   text-decoration: none;
 }
@@ -48,6 +48,7 @@
   border: none;
   padding: 0 10px;
   font-size: 24px;
+  color: var(--text-color);
 }
 
 .insta-post__images {
@@ -73,7 +74,7 @@
 
 .insta-post__likes-text {
   font-weight: 600;
-  color: #000;
+  color: var(--text-color);
   font-size: 16px;
   display: flex;
   align-items: end;
@@ -81,7 +82,7 @@
 
    & > span {
     font-size: 14px;
-    color: #000000ec;
+    color: var(--text-color);
    }
 }
 
@@ -96,6 +97,6 @@
 .insta-post__caption-text {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  color: #000000c8;
+  color: var(--text-color);
   font-size: 14px;
 }
