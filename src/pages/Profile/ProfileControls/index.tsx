@@ -37,11 +37,11 @@ export const ProfilePosts: React.FC = () => {
         <TapeIcon />
         <p className="profile-controls__text">{translate('лента')}</p>
       </button>
-      <button className="profile-controls__button" type="button" disabled={false}>
+      <button className="profile-controls__button" type="button" disabled={false} style={{ cursor: 'auto' }}>
         <SaveIcon />
         <p className="profile-controls__text">{translate('сохраненное')}</p>
       </button>
-      <button className="profile-controls__button" type="button" disabled={false}>
+      <button className="profile-controls__button" type="button" disabled={false} style={{ cursor: 'auto' }}>
         <TaggedIcon />
         <p className="profile-controls__text">{translate('отметки')}</p>
       </button>
