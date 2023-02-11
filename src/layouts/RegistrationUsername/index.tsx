@@ -3,6 +3,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { sendUsername, auth, sendAgree } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { AxiosError } from 'axios';
 
 interface Props {
   session: string
@@ -29,6 +30,7 @@ export const RegistrationUsername: React.FC<Props> = ({
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setErrorMessage('');
     if (/^[\w](?!.*?\.{2})[\w.]{1,28}[\w]$/.test(username)) {
       try {
         setLoad(true);
@@ -40,12 +42,21 @@ export const RegistrationUsername: React.FC<Props> = ({
         navigate('/');
       } catch (error) {
         console.error(error);
+        if (error instanceof AxiosError) {
+          if (error?.response?.data.message === 'This username is taken') {
+            setErrorMessage('Это имя пользователя занято. Выберите другое');
+          } else if (error?.response?.data.message === 'Database error') {
+            setErrorMessage('Ошибка сервера. Попробуйте снова');
+          } else if (error?.response?.data.message === 'The session is expired') {
+            setErrorMessage('Сессия истекла, начните сначала');
+          }
+        }
       } finally {
         setLoad(false);
         setLoadMessage('Далее');
       }
     } else {
-      setErrorMessage('Имя пользователя должно содержать только цифры, буквы, точки и знаки подчеркивания');
+      setErrorMessage('Имя пользователя должно содержать только цифры, буквы, точки и знаки подчеркивания. Минимальная длина 3 символа');
     }
   };
 
