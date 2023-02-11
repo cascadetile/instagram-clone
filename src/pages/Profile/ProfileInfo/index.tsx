@@ -7,7 +7,7 @@ import './style.scss';
 import { ProfileEdit } from '../ProfileEdit';
 import { ProfileMetrics } from '../ProfileMetrics';
 
-const ProfileInfo: React.FC<InfoProps> = (props: InfoProps) => {
+export const ProfileInfo: React.FC<InfoProps> = (props) => {
   const { user } = props;
   const { profilePicture, username, bio } = user;
 

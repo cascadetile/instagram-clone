@@ -10,6 +10,7 @@ import { ProfileSettingsContainer } from '../../pages/Settings';
 import { Routers } from '../../router/routers';
 import { getPagePath } from '../../hooks/use-location';
 import { useMediaQueries } from '../../hooks/use-media-queries';
+import { Page404 } from '../../pages/Page404';
 
 export const App = () => {
   const isMobile = useMediaQueries('isMobile');
@@ -28,6 +29,7 @@ export const App = () => {
           <Route path={Routers.PROFILE} element={<ProfileContainer />} />
           <Route path={Routers.EXPLORE} element={<Explore />} />
           <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettingsContainer />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </div>

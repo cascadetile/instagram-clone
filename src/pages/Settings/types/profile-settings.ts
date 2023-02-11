@@ -1,4 +1,4 @@
-import { UserType } from '../../Profile/types/profile';
+import { IProfile } from '../../Profile/types';
 
 export interface IProfileSettings {
   bio: string;
@@ -7,7 +7,7 @@ export interface IProfileSettings {
   username: string;
   changeAvatar: (formdata: FormData) => void;
   profilePicture: string;
-  updateProfile: (body: Partial<UserType>) => void;
+  updateProfile: (body: Partial<IProfile>) => void;
 }
 
 export interface IResponseProfileSettings {

@@ -1,34 +1,37 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useLocation, Outlet } from 'react-router-dom';
-import ProfileInfo from './Info/Profile-info';
 import './style.scss';
-import { ProfilePosts } from './Posts/Profile-posts';
 import { ProfileHeader } from './ProfileHeader';
-import { UserType } from './types/profile';
+import { ProfileInfo } from './ProfileInfo';
 import { getUserThunk } from '../../store/profile-store';
 import { StoreType } from '../../store/types/store';
+import { IProfile } from './types';
 
 export const Profile: React.FC<{
   getUser: (username: string) => void,
-  profile: UserType
+  profile: IProfile
 }> = (props) => {
   const { state } = useLocation();
   const { username } = state;
   const { getUser, profile } = props;
 
   const {
+    profilePicture,
+    bio,
     followers,
     following,
     posts,
-    bio,
-    profilePicture,
   } = profile;
 
+  useEffect(() => {
+    getUser(username);
+  }, []);
+
   const infoProps = {
-    following,
     followers,
-    postsCounter: posts?.length,
+    following,
+    postsCounter: posts.length,
   };
 
   const userProps = {
@@ -37,16 +40,11 @@ export const Profile: React.FC<{
     bio,
   };
 
-  useEffect(() => {
-    getUser(username);
-  }, []);
-
   return (
     <div className="profile">
       <div className="profile__wrapper">
         <ProfileHeader username={username} />
         <ProfileInfo info={infoProps} user={userProps} />
-        <ProfilePosts />
         <Outlet />
       </div>
     </div>

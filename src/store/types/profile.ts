@@ -1,7 +1,7 @@
-import { UserType } from '../../pages/Profile/types/profile';
+import { IProfile } from '../../pages/Profile/types';
 
 export interface IProfileStore {
   myUsername: string;
   username: string;
-  profile: UserType
+  profile: IProfile
 }

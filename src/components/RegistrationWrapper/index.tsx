@@ -12,6 +12,7 @@ import { Routers } from '../../router/routers';
 import { IAction } from '../../store/types/store';
 import { toggleIsAuthAC } from '../../store/auth-store';
 import { IRegistrationWrapper } from './types/registration-wrapper';
+import { Page404 } from '../../pages/Page404';
 
 const RegistrationWrapper: React.FC<IRegistrationWrapper> = (props) => {
   const { toggleIsAuth } = props;
@@ -60,6 +61,7 @@ const RegistrationWrapper: React.FC<IRegistrationWrapper> = (props) => {
               )}
             />
           </Route>
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </div>

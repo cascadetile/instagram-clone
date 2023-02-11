@@ -1,10 +1,9 @@
 import { Dispatch } from 'redux';
-import { UserType } from '../pages/Profile/types/profile';
+import { IProfile, UserType, IPost } from '../pages/Profile/types';
 import { IAction, StoreType } from './types/store';
 import { translate } from '../translate/translate-func';
 import { changeAvatar, getProfile, changeProfile } from '../api';
 import { togglePreloaderAC } from './preloader-store';
-import { Post } from '../pages/Profile/types/posts';
 
 const SET_PROFILE = 'set_profile';
 const SET_MY_USERNAME = 'set_my_username';
@@ -18,7 +17,7 @@ const initialState = {
     bio: '',
     username: '',
     website: '',
-    posts: [] as Array<Post>,
+    posts: [] as Array<IPost>,
     fullName: '',
     profilePicture: '',
     following: 0,
@@ -35,7 +34,7 @@ export const profileStore = (state = initialState, action: IAction) => {
     case SET_PROFILE: {
       const stateCopy = { ...state };
 
-      stateCopy.profile = action.body as UserType;
+      stateCopy.profile = action.body as IProfile;
 
       return stateCopy;
     }
@@ -146,7 +145,7 @@ export const changeAvatarThunk = (
 };
 
 export const updateUserSettingsThunk = (
-  body: Partial<UserType>,
+  body: Partial<IProfile>,
 ) => (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
   const { auth } = getState();
   const { session } = auth;

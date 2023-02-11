@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserType } from '../pages/Profile/types/profile';
+import { IProfile } from '../pages/Profile/types';
 
 const baseURL = 'https://registration-service-dn3x.onrender.com';
 const profileBaseURL = 'https://profile-service.onrender.com';
@@ -111,7 +111,7 @@ export const changeAvatar = async (formData: FormData, session: string) => axios
   data: formData,
 });
 
-export const changeProfile = async (body: Partial<UserType>, session: string) => axios({
+export const changeProfile = async (body: Partial<IProfile>, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',

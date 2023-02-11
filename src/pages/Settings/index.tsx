@@ -74,7 +74,7 @@ const ProfileSettings: React.FC<IProfileSettings> = (props) => {
       ) : ''}
       <div className="profile-edit__body">
         <ul className="profile-edit__info">
-          <li className="profile-edit__item avatar">
+          <li className="profile-edit__item avatar-item">
             <Avatar avatar={avatarProps} />
             <div className="profile-edit__desc">
               <p className="profile-edit__username">{username}</p>
