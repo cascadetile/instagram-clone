@@ -11,6 +11,7 @@ const SET_BIO = 'set_bio';
 const SET_AVATAR = 'set_avatar';
 const SET_USERNAME = 'set_username';
 const SET_FULLNAME = 'set_fullname';
+const SET_WEBSITE = 'set_website';
 
 const initialState = {
   profile: {
@@ -66,6 +67,13 @@ export const profileStore = (state = initialState, action: IAction) => {
 
       return stateCopy;
     }
+    case SET_WEBSITE: {
+      const stateCopy = { ...state };
+
+      stateCopy.profile.website = action.body as string;
+
+      return stateCopy;
+    }
     case SET_FULLNAME: {
       const stateCopy = { ...state };
 
@@ -94,8 +102,14 @@ export const setUsernameAC = (username: string) => ({
   type: SET_USERNAME,
   body: username,
 });
+
 export const setFullnameAC = (username: string) => ({
   type: SET_FULLNAME,
+  body: username,
+});
+
+export const setWebsiteAC = (username: string) => ({
+  type: SET_WEBSITE,
   body: username,
 });
 
@@ -111,33 +125,37 @@ export const changeAvatarAC = (path: string) => ({
 
 export const getUserThunk = (
   username: string,
-) => (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
-  const { auth } = getState();
-  const { session } = auth;
-
-  dispatch(togglePreloaderAC(true));
-
-  getProfile(username, session).then((response) => {
-    dispatch(setProfileAC(response.data.profile));
-  }).catch(() => {
-    throw new Error('User_upload_error');
-  }).finally(() => {
-    dispatch(togglePreloaderAC(false));
-  });
-};
-
-export const changeAvatarThunk = (
-  formData: FormData,
-) => (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
+) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
   const { auth } = getState();
   const { session } = auth;
 
   try {
     dispatch(togglePreloaderAC(true));
-    changeAvatar(formData, session).then((response) => {
-      dispatch(changeAvatarAC(response.data.url));
-    });
-  } catch {
+
+    const response = await getProfile(username, session);
+
+    dispatch(setProfileAC(response.data.profile));
+  } catch (error) {
+    alert((error as { response: { data: { message: string } } }).response.data.message);
+    throw new Error('User_upload_error');
+  } finally {
+    dispatch(togglePreloaderAC(false));
+  }
+};
+
+export const changeAvatarThunk = (
+  formData: FormData,
+) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
+  const { auth } = getState();
+  const { session } = auth;
+
+  try {
+    dispatch(togglePreloaderAC(true));
+    const response = await changeAvatar(formData, session);
+
+    dispatch(changeAvatarAC(response.data.url));
+  } catch (error) {
+    alert((error as { response: { data: { message: string } } }).response.data.message);
     throw new Error('Upload_image_error');
   } finally {
     dispatch(togglePreloaderAC(false));
@@ -146,16 +164,16 @@ export const changeAvatarThunk = (
 
 export const updateUserSettingsThunk = (
   body: Partial<IProfile>,
-) => (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
+) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
   const { auth } = getState();
   const { session } = auth;
 
   try {
     dispatch(togglePreloaderAC(true));
-    changeProfile(body, session).then((response) => {
-      dispatch(setProfileAC(response.data.profile));
-    });
-  } catch {
+    const response = await changeProfile(body, session);
+    dispatch(setProfileAC(response.data.profile));
+  } catch (error) {
+    alert((error as { response: { data: { message: string } } }).response.data.message);
     throw new Error(translate('Update_profile_info_error'));
   } finally {
     dispatch(togglePreloaderAC(false));

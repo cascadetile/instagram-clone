@@ -8,7 +8,7 @@ import './settings.scss';
 import { useMediaQueries } from '../../hooks/use-media-queries';
 import { StoreType } from '../../store/types/store';
 import {
-  changeAvatarThunk, setBioAC, setUsernameAC, setFullnameAC, updateUserSettingsThunk,
+  changeAvatarThunk, setBioAC, setUsernameAC, setFullnameAC, updateUserSettingsThunk, setWebsiteAC,
 } from '../../store/profile-store';
 import { IProfileSettings } from './types/profile-settings';
 
@@ -53,6 +53,11 @@ const ProfileSettings: React.FC<IProfileSettings> = (props) => {
   const setBio = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = (e.nativeEvent.target! as HTMLTextAreaElement);
     dispatch(setBioAC(value));
+  };
+
+  const setWebsite = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = (e.nativeEvent.target! as HTMLInputElement);
+    dispatch(setWebsiteAC(value));
   };
 
   const saveSettings = () => {
@@ -100,6 +105,10 @@ const ProfileSettings: React.FC<IProfileSettings> = (props) => {
                 {`${translate('In_most_cases,_you_will_have_14_days_to_change_your_username_back_to')} ${username}`}
               </p>
             </div>
+          </li>
+          <li className="profile-edit__item">
+            <label className="profile-edit__label" htmlFor="website">Website</label>
+            <input value={website} onChange={setWebsite} className="profile-edit__input" type="text" id="website" />
           </li>
           <li className="profile-edit__item">
             <label className="profile-edit__label" htmlFor="bio">{translate('About_me')}</label>
