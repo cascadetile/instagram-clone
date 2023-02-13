@@ -1,4 +1,4 @@
-/* eslint-disable arrow-body-style */
+/* eslint-disable */
 import axios from 'axios';
 
 const baseURL = 'https://registration-service-dn3x.onrender.com';
@@ -42,7 +42,7 @@ const sendNameAndPassword = async (name: string, password: string, session: stri
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': session
+    'Authorization': session,
   },
   url: `${baseURL}/registration/name-and-password`,
   data: {

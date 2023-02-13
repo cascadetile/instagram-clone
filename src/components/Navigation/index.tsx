@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './style.scss';
@@ -12,6 +12,7 @@ import { SettingsLogo } from '../../assets/SettingsLogo';
 import { GitHubLogo } from '../../assets/GitHubLogo';
 import { SettingsMenu } from '../SettingsMenu';
 import { translate } from '../../translate/translate-func';
+import { useTheme } from '../../hooks/use-theme';
 
 interface INavigation {
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
@@ -19,6 +20,14 @@ interface INavigation {
 
 export const Navigation: React.FC<INavigation> = ({ setIsAuthorized }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
+    const defaultTheme = isDarkTheme ? 'dark' : 'light';
+    setTheme(defaultTheme);
+    localStorage['app-theme'] = theme;
+  }, []);
 
   return (
     <nav className="sidenav">

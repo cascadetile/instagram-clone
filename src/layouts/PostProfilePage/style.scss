@@ -21,7 +21,7 @@
     height: 18%;
     z-index: 1;
     mask-image: url(../../assets/img/posts.svg);
-    background-color: rgba(white, 0.8);
+    background-color: var(--button-background-color);
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: 100% 100%;

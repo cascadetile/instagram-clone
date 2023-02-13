@@ -1,9 +1,9 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import { sendEmail, sendOTP } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
-import { AxiosError } from 'axios';
 
 interface Props {
   email: string
@@ -44,9 +44,9 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
           } else if (error?.response?.data.message === `User with email ${email} is already registered`) {
             setErrorMessage(`Пользователь с почтой ${email} уже зарегистрирован`);
           } else if (error?.response?.data.message === 'OTP expired') {
-            setErrorMessage(`Код подтверждения истек, можно запросить новый`);
+            setErrorMessage('Код подтверждения истек, можно запросить новый');
           } else if (error?.response?.data.message === 'Wrong OTP') {
-            setErrorMessage(`Введен неверный код подтверждения`);
+            setErrorMessage('Введен неверный код подтверждения');
           }
         }
       } finally {
