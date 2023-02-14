@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './style.scss';
 
@@ -14,6 +14,7 @@ import { GitHubLogo } from '../../assets/GitHubLogo';
 import { SettignsMenuContainer } from '../SettingsMenu';
 import { translate } from '../../translate/translate-func';
 import { StoreType } from '../../store/types/store';
+import { useTheme } from '../../hooks/use-theme';
 
 interface INavigation {
   myUsername: string;
@@ -21,6 +22,14 @@ interface INavigation {
 
 const Navigation: React.FC<INavigation> = ({ myUsername }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
+    const defaultTheme = isDarkTheme ? 'dark' : 'light';
+    setTheme(defaultTheme);
+    localStorage['app-theme'] = theme;
+  }, []);
 
   return (
     <nav className="sidenav">
@@ -44,10 +53,10 @@ const Navigation: React.FC<INavigation> = ({ myUsername }) => {
         <MessagesLogo />
         <p className="sidenav__link-text">{translate('Messages')}</p>
       </Link>
-      <NavLink className="sidenav__link" to="/profile" state={{ username: myUsername }}>
+      <Link className="sidenav__link" to="/profile" state={{ username: myUsername }}>
         <ProfileLogo />
         <p className="sidenav__link-text">{translate('Profile')}</p>
-      </NavLink>
+      </Link>
       {openMenu ? <SettignsMenuContainer setOpenMenu={setOpenMenu} /> : ''}
       <button className="sidenav__link-button" type="button" onClick={() => setOpenMenu(!openMenu)}>
         <SettingsLogo />

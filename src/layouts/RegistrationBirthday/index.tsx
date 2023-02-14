@@ -4,9 +4,9 @@ import React, {
 } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import { sendBirthday } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
-import { AxiosError } from 'axios';
 
 interface Props {
   session: string

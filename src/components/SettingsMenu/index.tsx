@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toggleIsAuthAC } from '../../store/auth-store';
 import { IAction } from '../../store/types/store';
+import { useTheme } from '../../hooks/use-theme';
 import './style.scss';
 
 export interface ISettingsMenu {
@@ -10,25 +11,36 @@ export interface ISettingsMenu {
   toggleIsAuth: (isAuth: boolean) => void,
 }
 
-const SettingsMenu: React.FC<ISettingsMenu> = ({ setOpenMenu, toggleIsAuth }) => (
-  <menu className="settings__menu">
-    <ul className="settings__menu-list">
-      <li className="settings__menu-item">Switch Appearence</li>
-      <li className="settings__menu-item">Switch Language</li>
-      <li
-        className="settings__menu-item"
-        onClick={() => {
-          toggleIsAuth(false);
-          useNavigate()('/');
-        }}
-      >
-        Log Out
+export const SettingsMenu: React.FC<ISettingsMenu> = ({ setOpenMenu, toggleIsAuth }) => {
+  const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
 
-      </li>
-      <li className="settings__menu-item" onClick={() => setOpenMenu(false)}>Back</li>
-    </ul>
-  </menu>
-);
+  const handleThemeChange = () => {
+    if (theme === 'light') {
+      return setTheme('dark');
+    }
+    return setTheme('light');
+  };
+
+  return (
+    <menu className="settings__menu">
+      <ul className="settings__menu-list">
+        <li className="settings__menu-item" onClick={handleThemeChange}>Switch Appearence</li>
+        <li className="settings__menu-item">Switch Language</li>
+        <li
+          className="settings__menu-item"
+          onClick={() => {
+            toggleIsAuth(false);
+            navigate('/');
+          }}
+        >
+          Log Out
+        </li>
+        <li className="settings__menu-item" onClick={() => setOpenMenu(false)}>Back</li>
+      </ul>
+    </menu>
+  );
+};
 
 const MapDispatchToProps = (dispatch: Dispatch<IAction>) => ({
   toggleIsAuth: (isAuth: boolean) => dispatch(toggleIsAuthAC(isAuth)),
