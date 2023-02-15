@@ -9,7 +9,7 @@ import { translate } from '../../../translate/translate-func';
 
 import './style.scss';
 
-export const ProfilePosts: React.FC = () => {
+export const ProfileControls: React.FC = () => {
   const [isGridOpen, setIsGridOpen] = useState(true);
   const [isTapeOpen, setIsTapeOpen] = useState(false);
   const navigate = useNavigate();

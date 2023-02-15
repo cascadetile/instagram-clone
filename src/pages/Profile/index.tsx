@@ -7,21 +7,19 @@ import { ProfileInfo } from './ProfileInfo';
 import { getUserThunk } from '../../store/profile-store';
 import { StoreType } from '../../store/types/store';
 import { IProfile } from './types';
+import { ProfileControls } from './ProfileControls';
+import { ProfilePosts } from './Posts/Profile-posts';
 
 export const Profile: React.FC<{
-  getUser: (username: string) => void,
-  profile: IProfile
+  getUser: (username: string) => void;
+  profile: IProfile;
 }> = (props) => {
   const { state } = useLocation();
   const { username } = state;
   const { getUser, profile } = props;
 
   const {
-    profilePicture,
-    bio,
-    followers,
-    following,
-    posts,
+    profilePicture, bio, followers, following, posts,
   } = profile;
 
   useEffect(() => {
@@ -45,6 +43,8 @@ export const Profile: React.FC<{
       <div className="profile__wrapper">
         <ProfileHeader username={username} />
         <ProfileInfo info={infoProps} user={userProps} />
+        <ProfileControls />
+        <ProfilePosts posts={posts} />
         <Outlet />
       </div>
     </div>
@@ -59,4 +59,7 @@ const MapDispatchToProps = {
   getUser: getUserThunk,
 };
 
-export const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(Profile);
+export const ProfileContainer = connect(
+  MapStateToProps,
+  MapDispatchToProps,
+)(Profile);
