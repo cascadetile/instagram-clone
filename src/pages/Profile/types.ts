@@ -1,6 +1,5 @@
 export interface IProfileHeader {
   username: string,
-  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface IPost {
@@ -22,17 +21,21 @@ export interface IProfileNav {
 }
 
 export interface UserType {
-  user: {
-    following: number;
-    followers: number;
-    posts: Array<IPost>;
-    profilePicture: string;
-    bio: string,
-    username: string;
-    fullName: string;
-    website: string;
-  },
+  user: IProfile,
   setIsAuthorized?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export interface IProfile {
+  following: number;
+  followers: number;
+  posts: Array<IPost>;
+  profilePicture: string;
+  bio: string,
+  username: string;
+  fullName: string;
+  website: string;
+  fullname: string;
+  name: string;
 }
 
 export interface InfoProps {

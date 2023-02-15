@@ -1,20 +1,34 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import ProfileInfo from './ProfileInfo';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useLocation, Outlet } from 'react-router-dom';
 import './style.scss';
-import { ProfilePosts } from './ProfileControls';
 import { ProfileHeader } from './ProfileHeader';
-import { UserType } from './types';
+import { ProfileInfo } from './ProfileInfo';
+import { getUserThunk } from '../../store/profile-store';
+import { StoreType } from '../../store/types/store';
+import { IProfile } from './types';
+import { ProfileControls } from './ProfileControls';
+import { ProfilePosts } from './Posts/Profile-posts';
 
-export const Profile: React.FC<UserType> = (props: UserType) => {
-  const { user, setIsAuthorized } = props;
+export const Profile: React.FC<{
+  getUser: (username: string) => void;
+  profile: IProfile;
+}> = (props) => {
+  const { state } = useLocation();
+  const { username } = state;
+  const { getUser, profile } = props;
+
   const {
-    following, followers, posts, profilePicture, bio, username,
-  } = user;
+    profilePicture, bio, followers, following, posts,
+  } = profile;
+
+  useEffect(() => {
+    getUser(username);
+  }, []);
 
   const infoProps = {
-    following,
     followers,
+    following,
     postsCounter: posts.length,
   };
 
@@ -27,11 +41,25 @@ export const Profile: React.FC<UserType> = (props: UserType) => {
   return (
     <div className="profile">
       <div className="profile__wrapper">
-        <ProfileHeader username={username} setIsAuthorized={setIsAuthorized!} />
+        <ProfileHeader username={username} />
         <ProfileInfo info={infoProps} user={userProps} />
-        <ProfilePosts />
+        <ProfileControls />
+        <ProfilePosts posts={posts} />
         <Outlet />
       </div>
     </div>
   );
 };
+
+const MapStateToProps = (store: StoreType) => ({
+  profile: store.profile.profile,
+});
+
+const MapDispatchToProps = {
+  getUser: getUserThunk,
+};
+
+export const ProfileContainer = connect(
+  MapStateToProps,
+  MapDispatchToProps,
+)(Profile);

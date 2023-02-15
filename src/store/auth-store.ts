@@ -1,23 +1,23 @@
-import { IAction } from './types/store';
-
 const SET_TOKEN = 'set_token';
-const CHECK_AUTH = 'check_auth';
+const ENABLE_AUTH = 'enable_auth';
+const DISABLE_AUTH = 'disable_auth';
 
 const initialState = {
   isAuth: false,
-  auth_token: '',
+  session: '',
 };
 
-export const authStore = (state = initialState, action: IAction) => {
+export const authStore = (state = initialState, action: { type: string, body: unknown }) => {
   switch (action.type) {
     case SET_TOKEN: {
       const copyState = { ...state };
 
-      copyState.auth_token = action.body as string;
+      copyState.session = action.body as string;
 
       return copyState;
     }
-    case CHECK_AUTH: {
+    case ENABLE_AUTH:
+    case DISABLE_AUTH: {
       const copyState = { ...state };
 
       copyState.isAuth = action.body as boolean;
@@ -25,17 +25,17 @@ export const authStore = (state = initialState, action: IAction) => {
       return copyState;
     }
     default: {
-      return false;
+      return state;
     }
   }
 };
 
-export const setTokenAC = (auth_token: string) => ({
+export const setTokenAC = (session: string) => ({
   type: SET_TOKEN,
-  body: auth_token,
+  body: session,
 });
 
-export const checkAuthAC = (isAuth: boolean) => ({
-  type: CHECK_AUTH,
+export const toggleIsAuthAC = (isAuth: boolean) => ({
+  type: ENABLE_AUTH,
   body: isAuth,
 });

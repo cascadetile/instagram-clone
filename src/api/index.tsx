@@ -1,12 +1,14 @@
-/* eslint-disable */
 import axios from 'axios';
+import { IProfile } from '../pages/Profile/types';
 
 const baseURL = 'https://registration-service-dn3x.onrender.com';
+const profileBaseURL = 'https://profile-service.onrender.com';
 
-const auth = async (email: string, password: string) => axios({
+const auth = async (email: string, password: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    Authorization: session,
   },
   url: `${baseURL}/auth`,
   data: {
@@ -15,10 +17,11 @@ const auth = async (email: string, password: string) => axios({
   },
 });
 
-const sendEmail = async (email: string) => axios({
+const sendEmail = async (email: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    Authorization: session,
   },
   url: `${baseURL}/registration/email`,
   data: {
@@ -26,10 +29,11 @@ const sendEmail = async (email: string) => axios({
   },
 });
 
-const sendOTP = async (otp: string, email: string) => axios({
+const sendOTP = async (otp: string, email: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
+    Authorization: session,
   },
   url: `${baseURL}/registration/otp`,
   data: {
@@ -38,11 +42,15 @@ const sendOTP = async (otp: string, email: string) => axios({
   },
 });
 
-const sendNameAndPassword = async (name: string, password: string, session: string) => axios({
+const sendNameAndPassword = async (
+  name: string,
+  password: string,
+  session: string,
+) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': session,
+    Authorization: session,
   },
   url: `${baseURL}/registration/name-and-password`,
   data: {
@@ -55,7 +63,7 @@ const sendBirthday = async (birthday: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': session,
+    Authorization: session,
   },
   url: `${baseURL}/registration/birthday`,
   data: {
@@ -67,7 +75,7 @@ const sendUsername = async (username: string, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': session,
+    Authorization: session,
   },
   url: `${baseURL}/registration/username`,
   data: {
@@ -79,11 +87,47 @@ const sendAgree = async (session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': session,
+    Authorization: session,
   },
   url: `${baseURL}/registration/agree`,
 });
 
+const getProfile = async (profileId: string, session: string) => axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/profiles/${profileId}`,
+});
+
+export const changeAvatar = async (formData: FormData, session: string) => axios({
+  method: 'patch',
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/profile/picture`,
+  data: formData,
+});
+
+export const changeProfile = async (body: Partial<IProfile>, session: string) => axios({
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/profile/edit`,
+  data: body,
+});
+
 export {
-  auth, sendEmail, sendOTP, sendNameAndPassword, sendBirthday, sendUsername, sendAgree,
+  auth,
+  sendEmail,
+  sendOTP,
+  sendNameAndPassword,
+  sendBirthday,
+  sendUsername,
+  sendAgree,
+  getProfile,
 };

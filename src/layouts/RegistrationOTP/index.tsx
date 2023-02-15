@@ -1,16 +1,19 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { AxiosError } from 'axios';
 import { sendEmail, sendOTP } from '../../api';
 import { RegistarationHeader } from '../../components/RegistrationHeader';
+import { StoreType } from '../../store/types/store';
 
 interface Props {
   email: string
   setSession: React.Dispatch<React.SetStateAction<string>>
+  session: string;
 }
 
-export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
+export const RegistrationOTP: React.FC<Props> = ({ email, setSession, session }) => {
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
   const [loadMessage, setLoadMessage] = useState('Далее');
@@ -31,7 +34,7 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
         setErrorMessage('');
         setLoad(true);
         setLoadMessage('Данные обрабатываются');
-        const resp = await sendOTP(otp, email);
+        const resp = await sendOTP(otp, email, session);
         if (resp.data.session) {
           setSession(resp.data.session);
         }
@@ -58,7 +61,7 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
 
   const resendOTP = async () => {
     try {
-      await sendEmail(email);
+      await sendEmail(email, session);
     } catch (error) {
       console.error(error);
     }
@@ -106,4 +109,8 @@ export const RegistrationOTP: React.FC<Props> = ({ email, setSession }) => {
   );
 };
 
-export default RegistrationOTP;
+const MapStateToProps = (store: StoreType) => ({
+  session: store.auth.session,
+});
+
+export const RegistrationOTPContainer = connect(MapStateToProps, () => ({}))(RegistrationOTP);

@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
-import { App } from './App';
+import { Provider } from 'react-redux';
+import AppContainer from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store/store';
 
@@ -15,7 +16,9 @@ const rerenerEntireTree = () => {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <Provider store={store}>
+          <AppContainer />
+        </Provider>
       </BrowserRouter>
     </React.StrictMode>
   );

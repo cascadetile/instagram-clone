@@ -38,9 +38,9 @@
         flex-direction: column;
         margin-top: 15px;
 
-        &.avatar {
+        &.avatar-item {
             flex-direction: row;
-            gap: 15px
+            gap: 15px;
         }
     }
 
@@ -77,6 +77,7 @@
     &__desc {
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 }
 
@@ -105,7 +106,7 @@ textarea.profile-edit__input {
             flex-direction: row;
             margin-top: 25px;
 
-            &.avatar {
+            &.avatar-item {
                 margin-left: 150px;
             }
         }
@@ -122,6 +123,12 @@ textarea.profile-edit__input {
         &__send-btn {
             margin-left: 150px;
             margin-top: 25px;
+        }
+        
+        &__item {
+            &.avatar-item {
+                gap: 30px;
+            }
         }
     }
 }

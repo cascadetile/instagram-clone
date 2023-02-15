@@ -5,4 +5,10 @@ export enum Routers {
   PROFILE = '/profile',
   EXPLORE = '/explore',
   PROFILE_SETTINGS = '/profile-settings',
+  REGISTRATION = '/registration',
+  EMAIL = 'email',
+  OTP = 'otp',
+  NAME_AND_PASSWORD = 'name-and-password',
+  BIRTHDAY = 'birthday',
+  USERNAME = 'username',
 }
