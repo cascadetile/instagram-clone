@@ -31,6 +31,7 @@ export const SettingsMenu: React.FC<ISettingsMenu> = ({ setOpenMenu, toggleIsAut
           className="settings__menu-item"
           onClick={() => {
             toggleIsAuth(false);
+            setTheme('light');
             navigate('/');
           }}
         >

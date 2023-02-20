@@ -9,3 +9,7 @@ export const store = createStore(combineReducers({
   profile: profileStore,
   preloader: PreloaderStore,
 }), applyMiddleware(thunk));
+
+store.subscribe(() => {
+  localStorage['instagram-store'] = JSON.stringify(store.getState());
+});

@@ -4,7 +4,7 @@ export interface IProfileHeader {
 
 export interface IPost {
   id: number,
-  images: Array<string>,
+  image: Array<string>,
   likes: number,
   caption: string,
 }

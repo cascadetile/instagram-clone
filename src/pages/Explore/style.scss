@@ -1,0 +1,40 @@
+
+.explore__search {
+  position: relative;
+  width: 100%;
+  margin: 24px 0;
+  padding: 0 5px;
+
+  .search-loop {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+  }
+}
+
+.explore__search-input {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 0 25px;
+
+  &::placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #000;
+  }
+
+  &:active, &:focus {
+    outline: 0;
+    outline-offset: 0;
+    border: 1px solid var(--text-color);
+  }
+}
+
+.explore__posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

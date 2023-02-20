@@ -25,10 +25,14 @@ const Navigation: React.FC<INavigation> = ({ myUsername }) => {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
-    const defaultTheme = isDarkTheme ? 'dark' : 'light';
-    setTheme(defaultTheme);
-    localStorage['app-theme'] = theme;
+    if (localStorage['app-theme']) {
+      setTheme(localStorage['app-theme']);
+    } else {
+      const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = isDarkTheme ? 'dark' : 'light';
+      setTheme(defaultTheme);
+      localStorage['app-theme'] = theme;
+    }
   }, []);
 
   return (

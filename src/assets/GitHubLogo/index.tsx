@@ -1,10 +1,8 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable arrow-body-style */
 import React from 'react';
-import { useTheme } from '../../hooks/use-theme';
 
 export const GitHubLogo: React.FC = () => {
-  console.log(useTheme().theme);
   return (
     <svg
       className="logo logo-fill"
