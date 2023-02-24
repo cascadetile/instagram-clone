@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from '../../pages/Home';
 import { Messages } from '../../pages/Messages';
-import { CreatePost } from '../../pages/CreatePost';
+import { CreatePostContainer } from '../../pages/CreatePost';
 import { ProfileContainer } from '../../pages/Profile';
 import { Explore } from '../../pages/Explore';
 import { NavigationContainer } from '../Navigation';
@@ -25,7 +25,7 @@ export const App = () => {
         <Routes>
           <Route path={Routers.MAIN} element={<Home />} />
           <Route path={Routers.MESSAGES} element={<Messages />} />
-          <Route path={Routers.CREATE_POST} element={<CreatePost />} />
+          <Route path={Routers.CREATE_POST} element={<CreatePostContainer />} />
           <Route path={Routers.PROFILE} element={<ProfileContainer />} />
           <Route path={Routers.EXPLORE} element={<Explore />} />
           <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettingsContainer />} />

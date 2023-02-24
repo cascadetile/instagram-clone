@@ -2,7 +2,9 @@ import { Dispatch } from 'redux';
 import { IProfile, UserType, IPost } from '../pages/Profile/types';
 import { IAction, StoreType } from './types/store';
 import { translate } from '../translate/translate-func';
-import { changeAvatar, getProfile, changeProfile } from '../api';
+import {
+  changeAvatar, getProfile, changeProfile, publishPost,
+} from '../api';
 import { togglePreloaderAC } from './preloader-store';
 
 const SET_PROFILE = 'set_profile';
@@ -12,6 +14,7 @@ const SET_AVATAR = 'set_avatar';
 const SET_USERNAME = 'set_username';
 const SET_FULLNAME = 'set_fullname';
 const SET_WEBSITE = 'set_website';
+const ADD_POST = 'add_post';
 
 const initialState = {
   profile: {
@@ -123,6 +126,11 @@ export const changeAvatarAC = (path: string) => ({
   body: path,
 });
 
+export const publishPostAC = (post: IPost) => ({
+  type: ADD_POST,
+  body: post,
+});
+
 export const getUserThunk = (
   username: string,
 ) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
@@ -175,6 +183,24 @@ export const updateUserSettingsThunk = (
   } catch (error) {
     alert((error as { response: { data: { message: string } } }).response.data.message);
     throw new Error(translate('Update_profile_info_error'));
+  } finally {
+    dispatch(togglePreloaderAC(false));
+  }
+};
+
+export const publishPostThunk = (
+  body: Partial<IPost>,
+) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
+  const { auth } = getState();
+  const { session } = auth;
+
+  try {
+    dispatch(togglePreloaderAC(true));
+    const response = await publishPost(body, session);
+    dispatch(setProfileAC(response.data.profile));
+  } catch (error) {
+    alert((error as { response: { data: { message: string } } }).response.data.message);
+    throw new Error(translate('Add_post_error'));
   } finally {
     dispatch(togglePreloaderAC(false));
   }
