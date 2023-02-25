@@ -8,7 +8,6 @@ export const PostItem: React.FC<{ post: IPost }> = (props) => {
   const showPost = (postItem: IPost) => {
     console.log(postItem);
   };
-  console.log(post);
 
   return (
     <button

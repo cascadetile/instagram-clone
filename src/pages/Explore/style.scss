@@ -23,12 +23,13 @@
   border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 0 25px;
+  background: var(--background-color);
 
   &::placeholder {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 14px;
-    color: #000;
+    color: var(--text-color);
   }
 
   &:active, &:focus {

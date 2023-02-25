@@ -30,8 +30,8 @@ export const SettingsMenu: React.FC<ISettingsMenu> = ({ setOpenMenu, toggleIsAut
         <li
           className="settings__menu-item"
           onClick={() => {
+            document.documentElement.removeAttribute('data-theme');
             toggleIsAuth(false);
-            setTheme('light');
             navigate('/');
           }}
         >
