@@ -4,13 +4,14 @@ export interface IProfileHeader {
 
 export interface IPost {
   id: number,
-  images: Array<string>,
+  image: string,
   likes: number,
   caption: string,
 }
 
 export interface IPostsProps {
   posts: Array<IPost>,
+  openPost: IPost,
 }
 
 export interface IProfileNav {

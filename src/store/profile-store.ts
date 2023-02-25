@@ -2,8 +2,11 @@ import { Dispatch } from 'redux';
 import { IProfile, UserType, IPost } from '../pages/Profile/types';
 import { IAction, StoreType } from './types/store';
 import { translate } from '../translate/translate-func';
-import { changeAvatar, getProfile, changeProfile } from '../api';
+import {
+  changeAvatar, getProfile, changeProfile, publishPost,
+} from '../api';
 import { togglePreloaderAC } from './preloader-store';
+import { IErrorThunk } from './types/error';
 
 const SET_PROFILE = 'set_profile';
 const SET_MY_USERNAME = 'set_my_username';
@@ -12,13 +15,15 @@ const SET_AVATAR = 'set_avatar';
 const SET_USERNAME = 'set_username';
 const SET_FULLNAME = 'set_fullname';
 const SET_WEBSITE = 'set_website';
+const ADD_POST = 'add_post';
+const OPEN_POST = 'open_post';
 
 const initialState = {
   profile: {
     bio: '',
     username: '',
     website: '',
-    posts: [] as Array<IPost>,
+    posts: [] as Array<Partial<IPost>>,
     fullName: '',
     profilePicture: '',
     following: 0,
@@ -27,6 +32,7 @@ const initialState = {
   },
   myUsername: '',
   username: '',
+  openPost: null as unknown as IPost,
   bio: '',
 };
 
@@ -82,6 +88,28 @@ export const profileStore = (state = initialState, action: IAction) => {
 
       return stateCopy;
     }
+    case ADD_POST: {
+      const stateCopy = { ...state };
+      const formData = action.body as FormData;
+
+      const post = {
+        caption: formData.get('caption') as string,
+        image: formData.get('image') as string,
+      };
+
+      if (stateCopy.myUsername === stateCopy.profile.username) {
+        stateCopy.profile.posts.push(post);
+      }
+
+      return stateCopy;
+    }
+    case OPEN_POST: {
+      const stateCopy = { ...state };
+
+      stateCopy.openPost = action.body as IPost;
+
+      return stateCopy;
+    }
     default: {
       return state;
     }
@@ -123,6 +151,16 @@ export const changeAvatarAC = (path: string) => ({
   body: path,
 });
 
+export const publishPostAC = (post: FormData) => ({
+  type: ADD_POST,
+  body: post,
+});
+
+export const openPostAC = (post: IPost) => ({
+  type: OPEN_POST,
+  body: post,
+});
+
 export const getUserThunk = (
   username: string,
 ) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
@@ -155,7 +193,7 @@ export const changeAvatarThunk = (
 
     dispatch(changeAvatarAC(response.data.url));
   } catch (error) {
-    alert((error as { response: { data: { message: string } } }).response.data.message);
+    alert((error as IErrorThunk).response.data.message);
     throw new Error('Upload_image_error');
   } finally {
     dispatch(togglePreloaderAC(false));
@@ -173,8 +211,26 @@ export const updateUserSettingsThunk = (
     const response = await changeProfile(body, session);
     dispatch(setProfileAC(response.data.profile));
   } catch (error) {
-    alert((error as { response: { data: { message: string } } }).response.data.message);
+    alert((error as IErrorThunk).response.data.message);
     throw new Error(translate('Update_profile_info_error'));
+  } finally {
+    dispatch(togglePreloaderAC(false));
+  }
+};
+
+export const publishPostThunk = (
+  body: FormData,
+) => async (dispatch: Dispatch<IAction>, getState: () => StoreType) => {
+  const { auth } = getState();
+  const { session } = auth;
+
+  try {
+    dispatch(togglePreloaderAC(true));
+    await publishPost(body, session);
+    dispatch(publishPostAC(body));
+  } catch (error) {
+    alert((error as IErrorThunk).response.data.message);
+    throw new Error(translate('Add_post_error'));
   } finally {
     dispatch(togglePreloaderAC(false));
   }

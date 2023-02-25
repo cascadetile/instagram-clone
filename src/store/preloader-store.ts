@@ -6,7 +6,7 @@ const initialState = {
 
 const TOGGLE_PRELOADER = 'set_preloader';
 
-export const PreloaderStore = (state = initialState, action: IAction) => {
+export const preloaderStore = (state = initialState, action: IAction) => {
   switch (action.type) {
     case TOGGLE_PRELOADER: {
       const copyState = { ...state };

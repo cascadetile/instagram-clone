@@ -12,14 +12,14 @@ import './style.scss';
 export interface IPostDetailes {
   username: string,
   profilePicture: string,
-  images: Array<string>,
+  image: string,
   likes: number,
   caption: string,
 }
 
 export const Post: React.FC<IPostDetailes> = (props: IPostDetailes) => {
   const {
-    username, profilePicture, images, likes, caption,
+    username, profilePicture, image, likes, caption,
   } = props;
   const avatar = {
     src: profilePicture,
@@ -38,7 +38,7 @@ export const Post: React.FC<IPostDetailes> = (props: IPostDetailes) => {
           <button className="insta-post__header-link" type="button">...</button>
         </div>
         <div className="insta-post__images">
-          <ImageSlider images={images} />
+          <ImageSlider image={image} />
         </div>
         <div className="insta-post__controls">
           <button className="insta-post__controls-button" type="button"><LikeIcon /></button>

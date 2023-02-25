@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 
 interface IImageSlider {
-  images: Array<string>
+  image: string
 }
 
-export const ImageSlider: React.FC<IImageSlider> = ({ images }) => {
+export const ImageSlider: React.FC<IImageSlider> = ({ image }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [leftArrowDisable, setLeftArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(true);
@@ -29,7 +29,7 @@ export const ImageSlider: React.FC<IImageSlider> = ({ images }) => {
   }, [leftArrowDisable, currentSlide]);
 
   useEffect(() => {
-    if (currentSlide === images.length - 1) {
+    if (currentSlide === image.length - 1) {
       setRightArrowDisable(true);
     } else {
       setRightArrowDisable(false);
@@ -37,8 +37,8 @@ export const ImageSlider: React.FC<IImageSlider> = ({ images }) => {
   }, [rightArrowDisable, currentSlide]);
 
   const handleRightClick = () => {
-    if (currentSlide >= images.length - 1) {
-      setCurrentSlide(images.length - 1);
+    if (currentSlide >= image.length - 1) {
+      setCurrentSlide(image.length - 1);
     } else {
       setCurrentSlide(currentSlide + 1);
     }
@@ -58,13 +58,13 @@ export const ImageSlider: React.FC<IImageSlider> = ({ images }) => {
         <p className="button-arrow__text button-arrow__text-left">&#8249;</p>
       </button>
       <div className="image-slider__wrapper" style={{ transform: `translateX(-${currentSlide * width}px)` }}>
-        {images.map((image) => <div key={Math.random()} className="image-slider__slide" style={{ backgroundImage: `url(${image})` }} />)}
+        <div className="image-slider__slide" style={{ backgroundImage: `url(${image})` }} />
       </div>
       <button className="button-arrow button-arrow__right" type="button" onClick={handleRightClick} disabled={rightArrowDisable}>
         <p className="button-arrow__text button-arrow__text-right">&#8250;</p>
       </button>
       <ul className="image-slider__dots">
-        {images.map((image, index) => <li className="image-slider__dot" key={Math.random()} style={{ opacity: index === currentSlide ? 1 : 0.5 }} />)}
+        <li className="image-slider__dot" key={Math.random()} />
       </ul>
     </div>
   );

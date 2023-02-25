@@ -121,4 +121,24 @@ export const dictionary: IDictionary = {
     ru: 'ошибка при обновлении информации о профиле',
     en: 'update profile info error',
   },
+  upload_image: {
+    ru: 'загрузить изображение',
+    en: 'upload image',
+  },
+  take_a_photo: {
+    ru: 'сделать фото',
+    en: 'take a photo',
+  },
+  description: {
+    ru: 'описание',
+    en: 'description',
+  },
+  publish: {
+    ru: 'опубликовать',
+    en: 'publish',
+  },
+  add_post_error: {
+    ru: 'ошибка при добавлении поста',
+    en: 'add post error',
+  },
 };

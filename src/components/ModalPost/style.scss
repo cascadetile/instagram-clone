@@ -1,0 +1,16 @@
+@import '../../assets/scss/variables';
+
+.post-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    z-index: 100;
+
+    &.closed {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

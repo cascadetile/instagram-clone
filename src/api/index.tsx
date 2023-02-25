@@ -101,7 +101,7 @@ const getProfile = async (profileId: string, session: string) => axios({
   url: `${profileBaseURL}/profiles/${profileId}`,
 });
 
-export const changeAvatar = async (formData: FormData, session: string) => axios({
+const changeAvatar = async (formData: FormData, session: string) => axios({
   method: 'patch',
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -111,13 +111,23 @@ export const changeAvatar = async (formData: FormData, session: string) => axios
   data: formData,
 });
 
-export const changeProfile = async (body: Partial<IProfile>, session: string) => axios({
+const changeProfile = async (body: Partial<IProfile>, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'application/json',
     Authorization: session,
   },
   url: `${profileBaseURL}/profile/edit`,
+  data: body,
+});
+
+const publishPost = async (body: FormData, session: string) => axios({
+  method: 'post',
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/profile/post`,
   data: body,
 });
 
@@ -130,4 +140,7 @@ export {
   sendUsername,
   sendAgree,
   getProfile,
+  publishPost,
+  changeAvatar,
+  changeProfile,
 };

@@ -8,23 +8,23 @@ import { getUserThunk } from '../../store/profile-store';
 import { StoreType } from '../../store/types/store';
 import { IProfile } from './types';
 import { ProfileControls } from './ProfileControls';
-import { ProfilePosts } from './Posts/Profile-posts';
+import { ProfilePostsContainer } from './Posts/Profile-posts';
 
 export const Profile: React.FC<{
-  getUser: (username: string) => void;
+  getUser: (username: string) => Promise<unknown>;
   profile: IProfile;
 }> = (props) => {
   const { state } = useLocation();
   const { username } = state;
   const { getUser, profile } = props;
 
-  const {
-    profilePicture, bio, followers, following, posts,
-  } = profile;
-
   useEffect(() => {
     getUser(username);
   }, []);
+
+  const {
+    profilePicture, bio, followers, following, posts,
+  } = profile;
 
   const infoProps = {
     followers,
@@ -44,7 +44,7 @@ export const Profile: React.FC<{
         <ProfileHeader username={username} />
         <ProfileInfo info={infoProps} user={userProps} />
         <ProfileControls />
-        <ProfilePosts posts={posts} />
+        <ProfilePostsContainer posts={posts} />
         <Outlet />
       </div>
     </div>
