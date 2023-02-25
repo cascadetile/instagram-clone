@@ -121,6 +121,15 @@ export const changeProfile = async (body: Partial<IProfile>, session: string) =>
   data: body,
 });
 
+const getPosts = async (session: string) => axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/explore`,
+});
+
 export {
   auth,
   sendEmail,
@@ -130,4 +139,5 @@ export {
   sendUsername,
   sendAgree,
   getProfile,
+  getPosts,
 };
