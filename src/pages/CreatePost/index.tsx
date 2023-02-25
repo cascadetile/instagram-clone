@@ -1,50 +1,26 @@
-import React, { useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { ChangeEvent, useRef, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { translate } from '../../translate/translate-func';
-import './style.css';
+import './style.scss';
 import { publishPostThunk } from '../../store/profile-store';
-import { IPost } from '../Profile/types';
+import { StoreType } from '../../store/types/store';
+import { CreatePostProps } from './types/create-post';
+import { changeCaptionAC } from '../../store/create-post';
+import { ContextMenu } from '../../components/ContextMenu/context-menu';
+import { UploadImageMenu } from '../../components/UploadImage/upload-image';
 
-const CreatePost: React.FC<{ publish: (body: Partial<IPost>) => void }> = (
+const CreatePost: React.FC<CreatePostProps> = (
   props,
 ) => {
-  const { publish } = props;
-  const video = useRef(null);
-  const canvas = useRef(null);
+  const { publish, caption, setCaption } = props;
+
   const photo = useRef(null);
 
-  const takePhoto = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: false,
-      })
-      .then((stream) => {
-        const videoDom = video.current! as HTMLVideoElement;
+  const dispatch = useDispatch();
+  const [isOpen, toggleShowPictureMenu] = useState(false);
 
-        if (videoDom) {
-          videoDom.srcObject = stream;
-          videoDom.play();
-        }
-      });
-  };
-
-  const capture = () => {
-    const photoDom = photo.current! as HTMLImageElement;
-    const canvasDom = canvas.current! as HTMLCanvasElement;
-    const videoDom = video.current! as HTMLVideoElement;
-
-    if (canvasDom) {
-      const context = canvasDom.getContext('2d');
-
-      if (context) {
-        context.drawImage(videoDom, 0, 0, 400, 300);
-
-        if (photoDom) {
-          photoDom.src = canvasDom.toDataURL('image/png');
-        }
-      }
-    }
+  const showMenu = () => {
+    toggleShowPictureMenu(!isOpen);
   };
 
   const publishPost = async () => {
@@ -59,36 +35,36 @@ const CreatePost: React.FC<{ publish: (body: Partial<IPost>) => void }> = (
     const image = dt.files[0];
 
     const formData = new FormData();
-    formData.append('caption', image);
+    formData.append('image', image);
+    formData.append('caption', caption);
 
-    // publish(formData);
+    publish(formData);
+  };
+
+  const changeCaption = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.nativeEvent.target as HTMLTextAreaElement;
+    dispatch(setCaption(value));
   };
 
   return (
     <div className="create-post">
-      <div>
-        <div>
-          <button type="button" onClick={takePhoto}>
-            {translate('Take_a_photo')}
-          </button>
-          <video ref={video} src="" />
-          <canvas ref={canvas} />
-          <button type="button" onClick={capture}>
-            {translate('Capture')}
-          </button>
-          <img ref={photo} src="" alt="" />
-        </div>
-        <div>
-          <label htmlFor="image">{translate('Upload_image')}</label>
-          <input type="hidden" id="image" />
-        </div>
-      </div>
-      <div>
+      <div className="create-post__image">
         <textarea
           name="post"
           id="post"
+          value={caption}
+          onChange={changeCaption}
           placeholder={translate('Description')}
+          className="create-post__textarea"
         />
+        <span
+          className="create-image__btn"
+          onClick={showMenu}
+        >
+          <span className="create-btn__wrapper">
+            <ContextMenu isOpen={isOpen} menu={UploadImageMenu} />
+          </span>
+        </span>
       </div>
       <button type="button" onClick={publishPost}>
         {translate('Publish')}
@@ -97,11 +73,16 @@ const CreatePost: React.FC<{ publish: (body: Partial<IPost>) => void }> = (
   );
 };
 
-const MapDispatchToProps = () => ({
-  publish: publishPostThunk,
+const MapStateToProps = (state: StoreType) => ({
+  caption: state.createPost.caption,
 });
 
+const MapDispatchToProps = {
+  publish: publishPostThunk,
+  setCaption: changeCaptionAC,
+};
+
 export const CreatePostContainer = connect(
-  () => ({}),
+  MapStateToProps,
   MapDispatchToProps,
 )(CreatePost);

@@ -10,6 +10,11 @@
     position: relative;
     background: transparent;
     border: 0;
+
+    &.profile-page {
+      width: 33.3333%;
+      padding: 5px;
+    }
   }
 
   &__multy {

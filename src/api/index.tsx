@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProfile, IPost } from '../pages/Profile/types';
+import { IProfile } from '../pages/Profile/types';
 
 const baseURL = 'https://registration-service-dn3x.onrender.com';
 const profileBaseURL = 'https://profile-service.onrender.com';
@@ -121,13 +121,13 @@ const changeProfile = async (body: Partial<IProfile>, session: string) => axios(
   data: body,
 });
 
-const publishPost = async (body: Partial<IPost>, session: string) => axios({
+const publishPost = async (body: FormData, session: string) => axios({
   method: 'post',
   headers: {
     'Content-Type': 'multipart/form-data',
     Authorization: session,
   },
-  url: `${profileBaseURL}/create/details`,
+  url: `${profileBaseURL}/profile/post`,
   data: body,
 });
 

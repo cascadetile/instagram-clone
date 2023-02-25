@@ -1,0 +1,18 @@
+.context-menu {
+    opacity: 0;
+    display: block;
+    width: max-content;
+    position: absolute;
+    background-color: rgba(240, 240, 240);
+    right: 0;
+    top: calc(100% + 5px);
+    z-index: 20;
+    border-radius: 10px;
+    box-shadow: 4px 5px 5px 0 rgba(black, 0.1);
+    border: 1px solid lightgray;
+    overflow: hidden;
+
+    &.open {
+        opacity: 1;
+    }
+}
