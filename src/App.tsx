@@ -20,6 +20,7 @@ import { getPagePath } from './hooks/use-location';
 import { useMediaQueries } from './hooks/use-media-queries';
 import { Page404 } from './pages/Page404';
 import { PostPage } from './pages/PostPage';
+import { PostComments } from './pages/PostComments';
 
 export function App() {
   const pagePath = getPagePath();
@@ -46,7 +47,8 @@ export function App() {
         <div className="page-body page-body__login">
           <Routes>
             <Route path="/" element={<Authentification setIsAuthorized={setIsAuthorized} />} />
-            <Route path="/p" element={<PostPage />} />
+            <Route path="/p/:id" element={<PostPage />} />
+            <Route path="/p/:id/comments" element={<PostComments />} />
             <Route path="/registration" element={<Registration />}>
               <Route path="email" element={<RegistrationEmail setEmail={setEmail} />} />
               <Route path="otp" element={<RegistrationOTP email={email} setSession={setSession} />} />

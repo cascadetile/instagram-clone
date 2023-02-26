@@ -86,6 +86,63 @@ const sendAgree = async (session: string) => axios({
 
 const getPostByID = async (id: number) => axios(`https://profile-service.onrender.com/posts/${id}`);
 
+const addLike = async (postID: number, session: string) => axios({
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `https://profile-service.onrender.com/likes`,
+  data: {
+    postID,
+  },
+});
+
+const removeLike = async (postID: number, session: string) => axios({
+  method: 'delete',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `https://profile-service.onrender.com/likes`,
+  data: {
+    postID,
+  },
+});
+
+const getPhotoComments = async (photoID: number, session: string) => axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `http://127.0.0.1:3000/posts/${photoID}/comments`,
+});
+
+const addComment = async (postID: number, comment: string, session: string) => axios({
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `https://profile-service.onrender.com/comment`,
+  data: {
+    postID,
+    comment,
+  },
+});
+
 export {
-  auth, sendEmail, sendOTP, sendNameAndPassword, sendBirthday, sendUsername, sendAgree, getPostByID,
+  auth,
+  sendEmail,
+  sendOTP,
+  sendNameAndPassword,
+  sendBirthday,
+  sendUsername,
+  sendAgree,
+  getPostByID,
+  addLike,
+  removeLike,
+  getPhotoComments,
+  addComment,
 };
