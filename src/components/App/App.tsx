@@ -4,13 +4,16 @@ import { Home } from '../../pages/Home';
 import { Messages } from '../../pages/Messages';
 import { CreatePostContainer } from '../../pages/CreatePost';
 import { ProfileContainer } from '../../pages/Profile';
-import { Explore } from '../../pages/Explore';
 import { NavigationContainer } from '../Navigation';
 import { ProfileSettingsContainer } from '../../pages/Settings';
 import { Routers } from '../../router/routers';
 import { getPagePath } from '../../hooks/use-location';
 import { useMediaQueries } from '../../hooks/use-media-queries';
 import { Page404 } from '../../pages/Page404';
+import { ExplorePosts } from '../../pages/Explore/ExplorePosts';
+import { ExploreSearch } from '../../pages/Explore/ExploreSearch';
+import { ProfileExplore } from '../../layouts/ProfileExplore';
+import { ProfilePosts } from '../../pages/Profile/Posts/Profile-posts';
 
 export const App = () => {
   const isMobile = useMediaQueries('isMobile');
@@ -26,8 +29,12 @@ export const App = () => {
           <Route path={Routers.MAIN} element={<Home />} />
           <Route path={Routers.MESSAGES} element={<Messages />} />
           <Route path={Routers.CREATE_POST} element={<CreatePostContainer />} />
-          <Route path={Routers.PROFILE} element={<ProfileContainer />} />
-          <Route path={Routers.EXPLORE} element={<Explore />} />
+          <Route path={Routers.PROFILE} element={<ProfileContainer />}>
+            <Route path={Routers.PROFILE} element={<ProfilePosts />} />
+            <Route path={Routers.PROFILE_EXPLORE} element={<ProfileExplore />} />
+          </Route>
+          <Route path={Routers.EXPLORE} element={<ExplorePosts />} />
+          <Route path={Routers.EXPLORE_SEARCH} element={<ExploreSearch />} />
           <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettingsContainer />} />
           <Route path="*" element={<Page404 />} />
         </Routes>

@@ -11,4 +11,6 @@ export enum Routers {
   NAME_AND_PASSWORD = 'name-and-password',
   BIRTHDAY = 'birthday',
   USERNAME = 'username',
+  EXPLORE_SEARCH = '/explore/search',
+  PROFILE_EXPLORE = 'explore',
 }

@@ -140,6 +140,15 @@ const publishPost = async (body: FormData, session: string) => axios({
   data: body,
 });
 
+const getProfiles = async (session: string) => axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/profiles`,
+});
+
 export {
   auth,
   sendEmail,
@@ -153,4 +162,5 @@ export {
   publishPost,
   changeAvatar,
   changeProfile,
+  getProfiles,
 };

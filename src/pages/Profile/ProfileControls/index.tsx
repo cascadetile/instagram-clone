@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GridIcon } from '../../../assets/GridIcon';
 import { SaveIcon } from '../../../assets/SaveIcon';
 import { TaggedIcon } from '../../../assets/TaggedIcon';
@@ -13,6 +13,17 @@ export const ProfileControls: React.FC = () => {
   const [isGridOpen, setIsGridOpen] = useState(true);
   const [isTapeOpen, setIsTapeOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.pathname.includes('explore')) {
+      setIsGridOpen(true);
+      setIsTapeOpen(false);
+    } else {
+      setIsGridOpen(false);
+      setIsTapeOpen(true);
+    }
+  }, [location]);
 
   const handleControlsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const name = e.currentTarget.className;
@@ -29,11 +40,11 @@ export const ProfileControls: React.FC = () => {
 
   return (
     <div className="profile-controls">
-      <button className="profile-controls__button grid" type="button" disabled={isGridOpen} onClick={(e) => handleControlsClick(e)}>
+      <button className="profile-controls__button grid" type="button" disabled={isGridOpen} onClick={handleControlsClick}>
         <GridIcon />
         <p className="profile-controls__text">{translate('публикации')}</p>
       </button>
-      <button className="profile-controls__button tape" type="button" disabled={isTapeOpen} onClick={(e) => handleControlsClick(e)}>
+      <button className="profile-controls__button tape" type="button" disabled={isTapeOpen} onClick={handleControlsClick}>
         <TapeIcon />
         <p className="profile-controls__text">{translate('лента')}</p>
       </button>
