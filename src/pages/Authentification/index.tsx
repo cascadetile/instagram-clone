@@ -23,6 +23,8 @@ export const Authentification: React.FC<IAuthentification> = (props: IAuthentifi
   } = props;
   const navigate = useNavigate();
 
+  localStorage['app-theme'] = 'light';
+
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const [isPasswordVisible, setPasswordVisibility] = useState(false);

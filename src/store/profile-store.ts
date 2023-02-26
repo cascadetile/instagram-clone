@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { useNavigate } from 'react-router-dom';
 import { IProfile, UserType, IPost } from '../pages/Profile/types';
 import { IAction, StoreType } from './types/store';
 import { translate } from '../translate/translate-func';
@@ -6,6 +7,7 @@ import {
   changeAvatar, getProfile, changeProfile, publishPost,
 } from '../api';
 import { togglePreloaderAC } from './preloader-store';
+import { toggleIsAuthAC } from './auth-store';
 import { IErrorThunk } from './types/error';
 
 const SET_PROFILE = 'set_profile';
@@ -18,7 +20,7 @@ const SET_WEBSITE = 'set_website';
 const ADD_POST = 'add_post';
 const OPEN_POST = 'open_post';
 
-const initialState = {
+const initialState = localStorage['instagram-store'] ? JSON.parse(localStorage['instagram-store']).profile : {
   profile: {
     bio: '',
     username: '',
@@ -175,6 +177,8 @@ export const getUserThunk = (
     dispatch(setProfileAC(response.data.profile));
   } catch (error) {
     alert((error as { response: { data: { message: string } } }).response.data.message);
+    dispatch(toggleIsAuthAC(false));
+    useNavigate()('/');
     throw new Error('User_upload_error');
   } finally {
     dispatch(togglePreloaderAC(false));
