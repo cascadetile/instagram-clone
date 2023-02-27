@@ -1,35 +1,42 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import './style.scss';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileInfo } from './ProfileInfo';
 import { getUserThunk } from '../../store/profile-store';
 import { StoreType } from '../../store/types/store';
 import { ProfileControls } from './ProfileControls';
+import { ProfilePostsContainer } from './Posts/Profile-posts';
+import { IProfile } from './types';
 
 export const Profile: React.FC<{
   getUser: (username: string) => Promise<unknown>;
+  profile: IProfile;
 }> = (props) => {
-  const {
-    myUsername: username,
-    profile = {
-      profilePicture: '',
-      bio: '',
-      followers: 0,
-      following: 0,
-      posts: [{}],
-    },
-  } = JSON.parse(localStorage['instagram-store']).profile;
-  const { getUser } = props;
+  const { state } = useLocation();
+  const { username } = state;
+  const { getUser, profile } = props;
 
   useEffect(() => {
     getUser(username);
   }, []);
 
-  const {
-    profilePicture, bio, followers, following, posts,
-  } = profile;
+  let profilePicture = '';
+  let bio = '';
+  let followers = 0;
+  let following = 0;
+  let posts = [{
+    id: 0, likes: 0, image: '', caption: '',
+  }];
+
+  if (profile) {
+    profilePicture = profile.profilePicture;
+    bio = profile.bio;
+    followers = profile.followers;
+    following = profile.following;
+    posts = profile.posts;
+  }
 
   const infoProps = {
     followers,
@@ -49,6 +56,7 @@ export const Profile: React.FC<{
         <ProfileHeader username={username} />
         <ProfileInfo info={infoProps} user={userProps} />
         <ProfileControls />
+        <ProfilePostsContainer posts={posts} />
         <Outlet />
       </div>
     </div>

@@ -1,18 +1,25 @@
 import React from 'react';
-import { IPost } from '../types';
+import { connect } from 'react-redux';
+import { IPostsProps } from '../types';
 import { PostItemContainer } from '../../../layouts/PostProfilePage';
 import './style.scss';
+import { StoreType } from '../../../store/types/store';
+// import { ModalPost } from '../../../components/ModalPost/Modal-post';
 
-export const ProfilePosts: React.FC = () => {
-  const { profile } = JSON.parse(localStorage['instagram-store']).profile;
-  const { posts } = profile;
-  const postsItems = posts.map((post: IPost) => <PostItemContainer key={post.id} post={post} />);
+const ProfilePosts: React.FC<IPostsProps> = (props: IPostsProps) => {
+  const { posts } = props;
+  const postsItems = posts.map((post) => <PostItemContainer key={post.id} post={post} />);
 
   return (
     <ul className="profile__posts">
       {postsItems}
+      {/* <ModalPost post={openPost} /> */}
     </ul>
   );
 };
 
-export default ProfilePosts;
+const MapStateToProps = (state: StoreType) => ({
+  openPost: state.profile.openPost,
+});
+
+export const ProfilePostsContainer = connect(MapStateToProps, {})(ProfilePosts);
