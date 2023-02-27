@@ -65,6 +65,7 @@ export const Profile: React.FC<{
 
 const MapStateToProps = (store: StoreType) => ({
   profile: store.profile.profile,
+  isLoading: store.preloader.isLoading,
 });
 
 const MapDispatchToProps = {

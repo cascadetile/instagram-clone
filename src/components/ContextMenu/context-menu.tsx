@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-export const ContextMenu: React.FC<{ isOpen: boolean, menu: React.FC }> = (props) => {
+export const ContextMenu: React.FC<{ isOpen: boolean, menu: React.FC }> = React.memo((props) => {
   const { isOpen, menu: Menu } = props;
 
   return (
@@ -9,4 +9,4 @@ export const ContextMenu: React.FC<{ isOpen: boolean, menu: React.FC }> = (props
       <Menu />
     </ul>
   );
-};
+});

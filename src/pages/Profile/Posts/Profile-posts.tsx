@@ -1,19 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IPostsProps } from '../types';
+import { IPost, IPostsProps } from '../types';
+import { StoreType } from '../../../store/types/store';
 import { PostItemContainer } from '../../../layouts/PostProfilePage';
 import './style.scss';
-import { StoreType } from '../../../store/types/store';
-// import { ModalPost } from '../../../components/ModalPost/Modal-post';
 
 const ProfilePosts: React.FC<IPostsProps> = (props: IPostsProps) => {
   const { posts } = props;
-  const postsItems = posts.map((post) => <PostItemContainer key={post.id} post={post} />);
+
+  const postsItems = posts.map((post: IPost) => <PostItemContainer key={post.id} post={post} />);
 
   return (
     <ul className="profile__posts">
       {postsItems}
-      {/* <ModalPost post={openPost} /> */}
     </ul>
   );
 };

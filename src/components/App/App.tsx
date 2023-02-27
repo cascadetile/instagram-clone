@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Home } from '../../pages/Home';
 import { Messages } from '../../pages/Messages';
 import { CreatePostContainer } from '../../pages/CreatePost';
@@ -13,8 +14,9 @@ import { Page404 } from '../../pages/Page404';
 import { ExplorePosts } from '../../pages/ExplorePosts';
 import { ExploreSearch } from '../../pages/ExploreSearch';
 import { Explore } from '../../pages/Explore';
+import { StoreType } from '../../store/types/store';
 
-export const App = () => {
+const App = () => {
   const isMobile = useMediaQueries('isMobile');
   const pagePath = getPagePath();
 
@@ -40,3 +42,9 @@ export const App = () => {
     </div>
   );
 };
+
+const MapStateToProps = (state: StoreType) => ({
+  isLoading: state.preloader.isLoading,
+});
+
+export const AppWrapperContainer = connect(MapStateToProps, {})(App);

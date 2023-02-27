@@ -1,3 +1,7 @@
+import { toggleContextMenuAC } from '../store/context-menu-store';
+
 export interface IApp {
-  isAuth: boolean
+  isAuth: boolean,
+  isOpenContextMenu: boolean,
+  toggleContextMenu: typeof toggleContextMenuAC,
 }
