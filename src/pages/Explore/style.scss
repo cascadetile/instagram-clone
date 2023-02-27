@@ -28,16 +28,10 @@
   border-radius: 5px;
   padding: 0 25px;
   background: var(--background-color);
+  color: var(--text-color);
 
   &[data-active='true'] {
     grid-column: 1 / 3;
-  }
-
-  &::placeholder {
-    font-family: "Open Sans", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    color: var(--text-color);
   }
 
   &:active, &:focus {

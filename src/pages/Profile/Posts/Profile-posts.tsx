@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { IPost } from '../types';
+import { StoreType } from '../../../store/types/store';
 import { PostItemContainer } from '../../../layouts/PostProfilePage';
 import './style.scss';
 
@@ -15,4 +17,8 @@ export const ProfilePosts: React.FC = () => {
   );
 };
 
-export default ProfilePosts;
+const MapStateToProps = (state: StoreType) => ({
+  openPost: state.profile.openPost,
+});
+
+export const ProfilePostsContainer = connect(MapStateToProps, {})(ProfilePosts);
