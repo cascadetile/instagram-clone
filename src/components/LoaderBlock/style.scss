@@ -1,0 +1,24 @@
+.explore__posts-loader {
+  position: absolute;
+  top: 45%;
+  left: 55%;
+    
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000, #000) content-box;
+  mask: repeating-conic-gradient(#0000 0deg,
+    #000 1deg 16deg,
+    #0000 17deg 24deg),
+    radial-gradient(farthest-side,#0000 58%,
+    #000 40%);
+  mask-composite: intersect;
+  animation: spin 1s infinite steps(15);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

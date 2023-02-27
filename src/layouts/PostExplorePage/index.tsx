@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
 export interface IExplorePost {
-  url: string,
+  id: number,
+  imageUrl: string,
 }
 
-export const PostExplorePage: React.FC<IExplorePost> = ({ url }) => {
+export const PostExplorePage: React.FC<IExplorePost> = ({ id, imageUrl }) => {
   const postRef = useRef(null);
+  const navigate = useNavigate();
   const [heigth, setHeight] = useState(0);
 
   useEffect(() => {
@@ -14,7 +17,12 @@ export const PostExplorePage: React.FC<IExplorePost> = ({ url }) => {
   }, [window.innerWidth]);
 
   return (
-    <div className="explore__post" ref={postRef} style={{ height: `${heigth}px`, backgroundImage: `url(${url})` }} />
+    <div
+      className="explore__post"
+      ref={postRef}
+      onClick={() => navigate(`/post/${id}`)}
+      style={{ height: `${heigth}px`, backgroundImage: `url(${imageUrl})` }}
+    />
   );
 };
 

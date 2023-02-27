@@ -1,40 +1,50 @@
-/* eslint-disable arrow-body-style */
 import React, { useEffect, useState } from 'react';
-import { getPosts } from '../../api';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { SearchLoopIcon } from '../../assets/SearchLoopIcon';
-import { PostExplorePage } from '../../layouts/PostExplorePage';
-import { store } from '../../store/store';
 import { translate } from '../../translate/translate-func';
 import './style.scss';
 
-export interface IPostsData {
-  id: number,
-  imageUrl: string,
-}
-
 export const Explore: React.FC = () => {
-  const [posts, setPosts] = useState([{ id: 0, imageUrl: '' }]);
-  const [fetching, setFetching] = useState(true);
+  const [activeInput, setActiveInput] = useState(false);
+  const [changeValue, setChangeValue] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (fetching) {
-      getPosts(store.getState().auth.session)
-        .then((res) => setPosts(res.data.posts))
-        .finally(() => setFetching(false));
+    if (location.pathname.includes('search')) {
+      setActiveInput(true);
     }
-  }, [fetching]);
+  }, [location]);
 
   return (
     <div className="explore">
       <div className="explore__search">
-        <input className="explore__search-input" type="text" placeholder={translate('Поиск')} />
+        <input
+          className="explore__search-input"
+          type="text"
+          placeholder={translate('Поиск')}
+          data-active={!activeInput}
+          disabled={loading}
+          onClick={
+            () => {
+              navigate('/explore/search');
+              setActiveInput(true);
+            }
+          }
+          onChange={
+            (e) => {
+              setValue(e.target.value);
+              setChangeValue(true);
+              setLoading(true);
+            }
+          }
+        />
         <SearchLoopIcon name="search-loop" fn={() => 2} />
+        {activeInput ? <button className="explore__search-button" type="button" onClick={() => { navigate('/explore'); setActiveInput(false); }}>{translate('Отмена')}</button> : ''}
       </div>
-      <div className="explore__posts">
-        {posts.length > 1 ? posts.map((post) => {
-          return <PostExplorePage key={post.id} url={post.imageUrl} />;
-        }) : <div className="explore__posts-loader" />}
-      </div>
+      <Outlet context={[loading, setLoading, { value }, changeValue, setChangeValue]} />
     </div>
   );
 };

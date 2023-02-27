@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './style.scss';
 
@@ -23,6 +23,7 @@ interface INavigation {
 const Navigation: React.FC<INavigation> = ({ myUsername }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
 
   useEffect(() => {
     if (localStorage['app-theme']) {
@@ -36,10 +37,17 @@ const Navigation: React.FC<INavigation> = ({ myUsername }) => {
   }, []);
 
   useEffect(() => {
-    const address = window.location.pathname.slice(1);
-    const activeLink = document.querySelector(`.sidenav__link-${address}`);
-    activeLink!.setAttribute('data-active', 'true');
-  }, []);
+    const addresses = ['', 'explore', 'post', 'messages', 'profile'];
+    const address = window.location.pathname.split('/')[1];
+    const links = document.querySelectorAll('.sidenav__link');
+    links.forEach((link) => {
+      link.removeAttribute('data-active');
+    });
+    if (addresses.includes(address)) {
+      const activeLink = document.querySelector(`.sidenav__link-${address}`);
+      activeLink!.setAttribute('data-active', 'true');
+    }
+  }, [location]);
 
   const changeActiveLink = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     const links = document.querySelectorAll('.sidenav__link');
