@@ -20,7 +20,7 @@ export const PostExplorePage: React.FC<IExplorePost> = ({ id, imageUrl }) => {
     <div
       className="explore__post"
       ref={postRef}
-      onClick={() => navigate(`/post/${id}`)}
+      onClick={() => navigate(`/p/${id}`)}
       style={{ height: `${heigth}px`, backgroundImage: `url(${imageUrl})` }}
     />
   );

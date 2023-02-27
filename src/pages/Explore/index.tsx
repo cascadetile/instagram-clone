@@ -26,7 +26,6 @@ export const Explore: React.FC = () => {
           type="text"
           placeholder={translate('Поиск')}
           data-active={!activeInput}
-          disabled={loading}
           onClick={
             () => {
               navigate('/explore/search');
