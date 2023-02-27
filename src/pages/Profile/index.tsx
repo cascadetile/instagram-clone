@@ -22,9 +22,21 @@ export const Profile: React.FC<{
     getUser(username);
   }, []);
 
-  const {
-    followers, following, posts, profilePicture, bio,
-  } = profile;
+  let profilePicture = '';
+  let bio = '';
+  let followers = 0;
+  let following = 0;
+  let posts = [{
+    id: 0, likes: 0, image: '', caption: '',
+  }];
+
+  if (profile) {
+    profilePicture = profile.profilePicture;
+    bio = profile.bio;
+    followers = profile.followers;
+    following = profile.following;
+    posts = profile.posts;
+  }
 
   const infoProps = {
     followers,
@@ -53,6 +65,7 @@ export const Profile: React.FC<{
 
 const MapStateToProps = (store: StoreType) => ({
   profile: store.profile.profile,
+  isLoading: store.preloader.isLoading,
 });
 
 const MapDispatchToProps = {
