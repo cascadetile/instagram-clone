@@ -11,17 +11,17 @@ import './style.scss';
 
 export const ProfileControls: React.FC = () => {
   const [isGridOpen, setIsGridOpen] = useState(true);
-  const [isTapeOpen, setIsTapeOpen] = useState(false);
+  // const [isTapeOpen, setIsTapeOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     if (!location.pathname.includes('explore')) {
       setIsGridOpen(true);
-      setIsTapeOpen(false);
+      // setIsTapeOpen(false);
     } else {
       setIsGridOpen(false);
-      setIsTapeOpen(true);
+      // setIsTapeOpen(true);
     }
   }, [location]);
 
@@ -29,11 +29,11 @@ export const ProfileControls: React.FC = () => {
     const name = e.currentTarget.className;
     if (name.includes('grid')) {
       setIsGridOpen(true);
-      setIsTapeOpen(false);
+      // setIsTapeOpen(false);
       navigate('/profile');
     } else {
       setIsGridOpen(false);
-      setIsTapeOpen(true);
+      // setIsTapeOpen(true);
       navigate('/profile/explore');
     }
   };
@@ -44,7 +44,7 @@ export const ProfileControls: React.FC = () => {
         <GridIcon />
         <p className="profile-controls__text">{translate('публикации')}</p>
       </button>
-      <button className="profile-controls__button tape" type="button" disabled={isTapeOpen} onClick={handleControlsClick}>
+      <button className="profile-controls__button tape" type="button" disabled={false} style={{ cursor: 'auto' }}>
         <TapeIcon />
         <p className="profile-controls__text">{translate('лента')}</p>
       </button>

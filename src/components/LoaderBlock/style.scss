@@ -7,7 +7,7 @@
   aspect-ratio: 1;
   border-radius: 50%;
   padding: 1px;
-  background: conic-gradient(#0000, #000) content-box;
+  background: conic-gradient(var(--text-color), var(--background-color)) content-box;
   mask: repeating-conic-gradient(#0000 0deg,
     #000 1deg 16deg,
     #0000 17deg 24deg),
