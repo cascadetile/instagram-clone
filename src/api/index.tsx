@@ -121,6 +121,15 @@ const changeProfile = async (body: Partial<IProfile>, session: string) => axios(
   data: body,
 });
 
+const getPosts = async (session: string) => axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/explore`,
+});
+
 const publishPost = async (body: FormData, session: string) => axios({
   method: 'post',
   headers: {
@@ -129,6 +138,15 @@ const publishPost = async (body: FormData, session: string) => axios({
   },
   url: `${profileBaseURL}/profile/post`,
   data: body,
+});
+
+const getProfiles = async (session: string) => axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: session,
+  },
+  url: `${profileBaseURL}/profiles`,
 });
 
 export {
@@ -140,7 +158,9 @@ export {
   sendUsername,
   sendAgree,
   getProfile,
+  getPosts,
   publishPost,
   changeAvatar,
   changeProfile,
+  getProfiles,
 };

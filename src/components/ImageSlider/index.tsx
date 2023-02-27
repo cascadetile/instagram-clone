@@ -29,7 +29,7 @@ export const ImageSlider: React.FC<IImageSlider> = ({ image }) => {
   }, [leftArrowDisable, currentSlide]);
 
   useEffect(() => {
-    if (currentSlide === image.length - 1) {
+    if (currentSlide <= image.length - 1) {
       setRightArrowDisable(true);
     } else {
       setRightArrowDisable(false);
@@ -37,7 +37,7 @@ export const ImageSlider: React.FC<IImageSlider> = ({ image }) => {
   }, [rightArrowDisable, currentSlide]);
 
   const handleRightClick = () => {
-    if (currentSlide >= image.length - 1) {
+    if (currentSlide > image.length - 1) {
       setCurrentSlide(image.length - 1);
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -45,7 +45,7 @@ export const ImageSlider: React.FC<IImageSlider> = ({ image }) => {
   };
 
   const handleLeftClick = () => {
-    if (currentSlide <= 0) {
+    if (currentSlide < 0) {
       setCurrentSlide(0);
     } else {
       setCurrentSlide(currentSlide - 1);

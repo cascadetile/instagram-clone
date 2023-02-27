@@ -1,0 +1,13 @@
+.explore-search__text {
+  padding: 50px 0;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  opacity: 0.5;
+  color: var(--text-color);
+
+  &[data-active='true'] {
+    display: none;
+  }
+}

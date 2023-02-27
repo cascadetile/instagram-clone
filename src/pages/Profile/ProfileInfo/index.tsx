@@ -3,7 +3,6 @@ import React from 'react';
 import Avatar from '../../../components/Avatar';
 import { InfoProps } from '../types';
 import './style.scss';
-// import { translate } from '../../../translate/translate-func';
 import { ProfileEdit } from '../ProfileEdit';
 import { ProfileMetrics } from '../ProfileMetrics';
 

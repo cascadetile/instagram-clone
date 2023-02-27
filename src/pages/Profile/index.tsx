@@ -1,22 +1,27 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useLocation, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import './style.scss';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileInfo } from './ProfileInfo';
 import { getUserThunk } from '../../store/profile-store';
 import { StoreType } from '../../store/types/store';
-import { IProfile } from './types';
 import { ProfileControls } from './ProfileControls';
-import { ProfilePostsContainer } from './Posts/Profile-posts';
 
 export const Profile: React.FC<{
   getUser: (username: string) => Promise<unknown>;
-  profile: IProfile;
 }> = (props) => {
-  const { state } = useLocation();
-  const { username } = state;
-  const { getUser, profile } = props;
+  const {
+    myUsername: username,
+    profile = {
+      profilePicture: '',
+      bio: '',
+      followers: 0,
+      following: 0,
+      posts: [{}],
+    },
+  } = JSON.parse(localStorage['instagram-store']).profile;
+  const { getUser } = props;
 
   useEffect(() => {
     getUser(username);
@@ -44,7 +49,6 @@ export const Profile: React.FC<{
         <ProfileHeader username={username} />
         <ProfileInfo info={infoProps} user={userProps} />
         <ProfileControls />
-        <ProfilePostsContainer posts={posts} />
         <Outlet />
       </div>
     </div>

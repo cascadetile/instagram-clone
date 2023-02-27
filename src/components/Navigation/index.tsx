@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './style.scss';
 
@@ -23,13 +23,39 @@ interface INavigation {
 const Navigation: React.FC<INavigation> = ({ myUsername }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
 
   useEffect(() => {
-    const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
-    const defaultTheme = isDarkTheme ? 'dark' : 'light';
-    setTheme(defaultTheme);
-    localStorage['app-theme'] = theme;
+    if (localStorage['app-theme']) {
+      setTheme(localStorage['app-theme']);
+    } else {
+      const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = isDarkTheme ? 'dark' : 'light';
+      setTheme(defaultTheme);
+      localStorage['app-theme'] = theme;
+    }
   }, []);
+
+  useEffect(() => {
+    const addresses = ['', 'explore', 'post', 'messages', 'profile'];
+    const address = window.location.pathname.split('/')[1];
+    const links = document.querySelectorAll('.sidenav__link');
+    links.forEach((link) => {
+      link.removeAttribute('data-active');
+    });
+    if (addresses.includes(address)) {
+      const activeLink = document.querySelector(`.sidenav__link-${address}`);
+      activeLink!.setAttribute('data-active', 'true');
+    }
+  }, [location]);
+
+  const changeActiveLink = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const links = document.querySelectorAll('.sidenav__link');
+    links.forEach((link) => {
+      link.removeAttribute('data-active');
+    });
+    e.currentTarget.setAttribute('data-active', 'true');
+  };
 
   return (
     <nav className="sidenav">
@@ -37,23 +63,23 @@ const Navigation: React.FC<INavigation> = ({ myUsername }) => {
         <GitHubLogo />
         <p className="sidenav__link-text">{translate('Repository')}</p>
       </Link>
-      <Link className="sidenav__link" to="/">
+      <Link className="sidenav__link sidenav__link-" data-active="false" to="/" onClick={changeActiveLink}>
         <HomeLogo />
         <p className="sidenav__link-text">{translate('Home')}</p>
       </Link>
-      <Link className="sidenav__link" to="/explore">
+      <Link className="sidenav__link sidenav__link-explore" data-active="false" to="/explore" onClick={changeActiveLink}>
         <ExploreLogo />
         <p className="sidenav__link-text">{translate('Explore')}</p>
       </Link>
-      <Link className="sidenav__link" to="/create-post">
+      <Link className="sidenav__link sidenav__link-create-post" data-active="false" to="/create-post" onClick={changeActiveLink}>
         <CreatePostLogo />
         <p className="sidenav__link-text">{translate('Create_post')}</p>
       </Link>
-      <Link className="sidenav__link" to="/messages">
+      <Link className="sidenav__link sidenav__link-messages" data-active="false" to="/messages" onClick={changeActiveLink}>
         <MessagesLogo />
         <p className="sidenav__link-text">{translate('Messages')}</p>
       </Link>
-      <Link className="sidenav__link" to="/profile" state={{ username: myUsername }}>
+      <Link className="sidenav__link sidenav__link-profile" data-active="false" to="/profile" onClick={changeActiveLink} state={{ username: myUsername }}>
         <ProfileLogo />
         <p className="sidenav__link-text">{translate('Profile')}</p>
       </Link>

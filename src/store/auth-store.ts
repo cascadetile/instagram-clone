@@ -3,8 +3,8 @@ const ENABLE_AUTH = 'enable_auth';
 const DISABLE_AUTH = 'disable_auth';
 
 const initialState = {
-  isAuth: false,
-  session: '',
+  isAuth: localStorage['instagram-store'] ? JSON.parse(localStorage['instagram-store']).auth.isAuth : false,
+  session: localStorage['instagram-store'] ? JSON.parse(localStorage['instagram-store']).auth.session : '',
 };
 
 export const authStore = (state = initialState, action: { type: string, body: unknown }) => {
