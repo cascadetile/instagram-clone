@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Home } from '../../pages/Home';
 import { Messages } from '../../pages/Messages';
 import { CreatePostContainer } from '../../pages/CreatePost';
@@ -13,8 +14,11 @@ import { Page404 } from '../../pages/Page404';
 import { ExplorePosts } from '../../pages/ExplorePosts';
 import { ExploreSearch } from '../../pages/ExploreSearch';
 import { Explore } from '../../pages/Explore';
+import { SearchLoopIcon } from '../../assets/SearchLoopIcon';
+import { StoreType } from '../../store/types/store';
 
-export const App = () => {
+const App = (props: { isLoading: boolean }) => {
+  const { isLoading } = props;
   const isMobile = useMediaQueries('isMobile');
   const pagePath = getPagePath();
 
@@ -24,19 +28,29 @@ export const App = () => {
     <div className={`page ${isProfileSettingsPage}`}>
       <NavigationContainer />
       <div className="page-body">
-        <Routes>
-          <Route path={Routers.MAIN} element={<Home />} />
-          <Route path={Routers.MESSAGES} element={<Messages />} />
-          <Route path={Routers.CREATE_POST} element={<CreatePostContainer />} />
-          <Route path={Routers.PROFILE} element={<ProfileContainer />} />
-          <Route path={Routers.EXPLORE} element={<Explore />}>
-            <Route path={Routers.EXPLORE} element={<ExplorePosts />} />
-            <Route path={Routers.EXPLORE_SEARCH} element={<ExploreSearch />} />
-          </Route>
-          <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettingsContainer />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
+        {
+          isLoading ? <SearchLoopIcon fn={() => false} name="preloader" /> : (
+            <Routes>
+              <Route path={Routers.MAIN} element={<Home />} />
+              <Route path={Routers.MESSAGES} element={<Messages />} />
+              <Route path={Routers.CREATE_POST} element={<CreatePostContainer />} />
+              <Route path={Routers.PROFILE} element={<ProfileContainer />} />
+              <Route path={Routers.EXPLORE} element={<Explore />}>
+                <Route path={Routers.EXPLORE} element={<ExplorePosts />} />
+                <Route path={Routers.EXPLORE_SEARCH} element={<ExploreSearch />} />
+              </Route>
+              <Route path={Routers.PROFILE_SETTINGS} element={<ProfileSettingsContainer />} />
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          )
+        }
       </div>
     </div>
   );
 };
+
+const MapStateToProps = (state: StoreType) => ({
+  isLoading: state.preloader.isLoading,
+});
+
+export const AppWrapperContainer = connect(MapStateToProps, {})(App);
