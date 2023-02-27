@@ -15,7 +15,3 @@ export const store = createStore(combineReducers({
   takePhoto: takePhotoStore,
   contextMenu: contextMenuStore,
 }), applyMiddleware(thunk));
-
-store.subscribe(() => {
-  localStorage['instagram-store'] = JSON.stringify(store.getState());
-});
