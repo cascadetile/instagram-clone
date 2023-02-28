@@ -33,7 +33,7 @@ export const Post: React.FC<IPostDetailes> = (props: IPostDetailes) => {
           <div className="insta-post__header-wrapper">
             <Avatar avatar={avatar} />
             {/* TODO: сделать ссылку на аккаунт человека */}
-            <Link className="insta-post__profile-link" to="/profile">{username}</Link>
+            <Link className="insta-post__profile-link" to={`/profile/${username}`}>{username}</Link>
           </div>
           <button className="insta-post__header-link" type="button">...</button>
         </div>
@@ -53,7 +53,7 @@ export const Post: React.FC<IPostDetailes> = (props: IPostDetailes) => {
         </div>
         <div className="insta-post__caption">
           {/* TODO: сделать ссылку на аккаунт человека */}
-          <Link className="insta-post__profile-link" to="/profile">{username}</Link>
+          <Link className="insta-post__profile-link" to={`/profile/${username}`}>{username}</Link>
           <pre className="insta-post__caption-text">{caption}</pre>
         </div>
         {/* TODO: добавить возможность оставлять комментарии */}

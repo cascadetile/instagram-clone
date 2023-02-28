@@ -55,6 +55,10 @@ export const Home: React.FC = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.style.overflow = `${availableModalOpen || greetingModalOpen ? "hidden" : "auto"}`;
+  }, [availableModalOpen, greetingModalOpen]);
+
   return (
     <div className="home">
       <div className="home__stories">

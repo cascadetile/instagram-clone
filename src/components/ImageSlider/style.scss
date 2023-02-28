@@ -5,66 +5,6 @@
   overflow: hidden;
 }
 
-.button-arrow {
-  position: absolute;
-  top: calc(50% - 15px);
-  z-index: 2;
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #fff;
-  opacity: 0.5;
-
-  &:disabled {
-    display: none;
-  }
-
-  &.button-arrow__left {
-    left: 10px;
-  }
-
-  &.button-arrow__right {
-    right: 10px;
-  }
-}
-
-.image-slider__dots {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 5px;
-  display: flex;
-  flex-flow: row wrap;
-  gap: 5px;
-  justify-content: center;
-}
-
-.image-slider__dot {
-  width: 5px;
-  height: 5px;
-  background: #fff;
-  border-radius: 50%;
-}
-
-.button-arrow__text {
-  position: absolute;
-  top: -10px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 32px;
-  color: #000;
-  opacity: 0.9;
-
-  &.button-arrow__text-left {
-    left: 9.5px;
-  }
-
-  &.button-arrow__text-right {
-    right: 9.5px;
-  }
-}
-
 .image-slider__wrapper {
   display: flex;
   flex-flow: row wrap;

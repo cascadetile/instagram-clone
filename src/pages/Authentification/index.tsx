@@ -100,6 +100,9 @@ export const Authentification: React.FC<IAuthentification> = (props: IAuthentifi
           <p>Нет акккаунта?</p>
           <Link className="auth__login-link" to="/registration/email">Зарегистрируйся</Link>
         </div>
+        <div className="aut__login-block">
+          <p style={{ color: 'gray', marginTop: '10px', textAlign: 'center' }}>Если вы только что зарегестрировались, то пожалуйста введите вашу почту и пароль </p>
+        </div>
       </div>
     </div>
   );

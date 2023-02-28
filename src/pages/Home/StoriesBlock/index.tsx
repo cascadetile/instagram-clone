@@ -47,6 +47,7 @@ export const StoriesGreetingBlock: React.FC<Stroies> = ({
         </ul>
         <img className="storie-block__image" src="https://media.tenor.com/bXIzx6izXTQAAAAi/cute.gif" alt="" />
         <p className="storie-block__text-last">{translate('Будем очень рады если вам понравится наша работа))')}</p>
+        <a href="https://rs.school/js/"><img width={100} height={80} src="https://rs.school/images/rs_school_js.svg" alt="" /></a>
       </div>
     </div>
   );
@@ -84,6 +85,12 @@ export const StoriesAvailableBlock: React.FC<Stroies> = ({
           </li>
           <li className="storie-block__text-li">
             {translate('Просмотр публикаций')}
+          </li>
+          <li className="storie-block__text-li">
+            {translate('Просмотр пользователей')}
+          </li>
+          <li className="storie-block__text-li">
+            {translate('Создание публикации')}
           </li>
           {/* TODO: заполнить после реализации */}
         </ul>

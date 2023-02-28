@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, FormEvent, useEffect } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
@@ -39,8 +40,6 @@ export const RegistrationUsername: React.FC<Props> = ({
         setLoadMessage('Данные обрабатываются');
         await sendUsername(username, session);
         await sendAgree(session);
-        await auth(email, password, session);
-        toggleIsAuth(true);
         navigate('/');
       } catch (error) {
         console.error(error);

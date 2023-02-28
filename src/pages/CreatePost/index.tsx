@@ -83,14 +83,6 @@ const CreatePost: React.FC<CreatePostProps> = (
 
   const [isUploaded, setIsUploaded] = useState(false);
 
-  useEffect(() => {
-    const photoDom = photoRefDom.current! as HTMLImageElement;
-    const url = photoDom?.src;
-    if(window.location.href !== url) {
-      setIsUploaded(true);
-    }
-  });
-
   return (
     <div className="create-post">
       <div className="create-post__uploaded">
@@ -119,6 +111,12 @@ const CreatePost: React.FC<CreatePostProps> = (
         {translate('Publish')}
       </button>
       <TakePhotoContainer isOpen={photoOpened} />
+      <p className="create-post__rules">* порядок действий: <br />
+      <br />- загружаете картинку (главное нажать сохранить, саму фотографию можно будет увидеть только в профиле после нажатия кнопки опубликовать)
+      <br />- по желанию добавляете описание
+      <br />- нажимаете опубликовать
+      <br />- переходите в профиль и убеждаетесь в том, что картинка загружена
+      </p>
     </div>
   );
 };
