@@ -64,3 +64,18 @@
     font-size: 12px;
   }
 }
+
+.posts__container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.posts__container-header {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  padding: 10px 0;
+  text-transform: lowercase;
+  color: var(--text-color);
+}
