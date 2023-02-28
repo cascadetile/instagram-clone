@@ -3,6 +3,7 @@ export enum Routers {
   MESSAGES = '/messages',
   CREATE_POST = '/create-post',
   PROFILE = '/profile',
+  PROFILES = '/profile/:profileId',
   EXPLORE = '/explore',
   PROFILE_SETTINGS = '/profile-settings',
   REGISTRATION = '/registration',

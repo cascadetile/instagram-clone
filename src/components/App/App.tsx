@@ -15,6 +15,7 @@ import { ExplorePosts } from '../../pages/ExplorePosts';
 import { ExploreSearch } from '../../pages/ExploreSearch';
 import { Explore } from '../../pages/Explore';
 import { StoreType } from '../../store/types/store';
+import { Profiles } from '../../pages/Profiles';
 
 const App = () => {
   const isMobile = useMediaQueries('isMobile');
@@ -31,6 +32,7 @@ const App = () => {
           <Route path={Routers.MESSAGES} element={<Messages />} />
           <Route path={Routers.CREATE_POST} element={<CreatePostContainer />} />
           <Route path={Routers.PROFILE} element={<ProfileContainer />} />
+          <Route path={Routers.PROFILES} element={<Profiles />} />
           <Route path={Routers.EXPLORE} element={<Explore />}>
             <Route path={Routers.EXPLORE} element={<ExplorePosts />} />
             <Route path={Routers.EXPLORE_SEARCH} element={<ExploreSearch />} />

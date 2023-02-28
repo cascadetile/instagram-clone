@@ -28,6 +28,16 @@
     color: var(--text-color);
 }
 
+.profile__subscribe-btn {
+    padding: 3px 10px;
+    background: #0095f6;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+}
+
 @media screen and (max-width: $tablet) {
     .profile__edit {
         &.header {
