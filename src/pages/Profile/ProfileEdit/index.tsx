@@ -9,7 +9,7 @@ export const ProfileEdit: React.FC<Partial<IProfileNav>> = (props: Partial<IProf
   const { navProps } = props;
   const addedClass = navProps?.addedClass;
   const username = navProps?.username;
-  const isUser = username === store.getState().profile.username;
+  const isUser = username === store.getState().profile.myUsername;
 
   return (
     <div className={`profile__edit${` ${addedClass || ''}`}`}>

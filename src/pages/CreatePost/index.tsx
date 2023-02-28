@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {
   ChangeEvent, useEffect, useState, useRef,
 } from 'react';
@@ -72,6 +73,7 @@ const CreatePost: React.FC<CreatePostProps> = (
         (input as unknown as HTMLInputElement).value = '';
       }
     }
+    setIsUploaded(false);
   };
 
   const changeCaption = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -79,8 +81,21 @@ const CreatePost: React.FC<CreatePostProps> = (
     dispatch(setCaption(value));
   };
 
+  const [isUploaded, setIsUploaded] = useState(false);
+
+  useEffect(() => {
+    const photoDom = photoRefDom.current! as HTMLImageElement;
+    const url = photoDom?.src;
+    if(window.location.href !== url) {
+      setIsUploaded(true);
+    }
+  });
+
   return (
     <div className="create-post">
+      <div className="create-post__uploaded">
+      <p>{isUploaded ? translate('изображение успешно загружено') : translate('загрузите изображение')}</p>
+      </div>
       <div className="create-post__image">
         <textarea
           ref={textarea}
